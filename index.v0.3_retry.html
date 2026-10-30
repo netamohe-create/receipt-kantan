@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>レセプトかんたん入力 v0.3｜架空データ専用</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#203147;background:#f5f7fb;font-size:16px;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px}button{font:inherit;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #357fd0;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.43}button,select{touch-action:manipulation}.app{max-width:1210px;margin:0 auto;padding:24px 24px 64px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:20px}.top h1{font-size:clamp(22px,2.6vw,31px);margin:4px 0 6px;letter-spacing:-.03em}.top p{color:#617187;font-size:13px;margin:0}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#46637d}.pill{background:#fff1cf;color:#856018;border:1px solid #f2dc9c;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}.notice{background:#fff6e6;border:1px solid #f1d69b;color:#654c1a;padding:13px 16px;border-radius:13px;line-height:1.65;font-size:13px;margin-bottom:18px}.layout{display:grid;grid-template-columns:312px minmax(0,1fr);gap:17px}.card{background:#fff;border:1px solid #e1e8f0;box-shadow:0 3px 20px rgba(26,53,87,.045);border-radius:17px}.sidebar{padding:17px}.hline{display:flex;align-items:center;justify-content:space-between;gap:12px}.section-label{font-weight:800;font-size:14px}.monthbar{display:flex;align-items:center;gap:8px;margin:12px 0 17px}.monthbar strong{flex:1;text-align:center;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}.iconbtn{background:#f3f6fa;border:1px solid #dfe7f0;color:#315c82;border-radius:10px;height:42px;min-width:42px;font-size:22px}.iconbtn:disabled{opacity:.28}.subtle{color:#6e8094;font-size:12px;line-height:1.55}.sidebar .section-label{margin-bottom:6px}.patients{display:grid;gap:9px;margin:13px 0 14px}.patient{border:1px solid #e1e8f0;background:#fff;border-radius:12px;padding:13px;text-align:left;width:100%;color:#26364b}.patient.active{background:#ecf4ff;border:2px solid #3981cd;padding:12px}.p-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.p-name{font-weight:800}.p-note{font-size:12px;color:#63758a;margin-top:6px}.status{font-size:11px;padding:4px 8px;border-radius:100px;background:#f0f2f5;color:#647082;font-weight:750;white-space:nowrap}.status.done{background:#e5f6eb;color:#267647}.status.part{background:#fff1d9;color:#936100}.mini-total{border-top:1px solid #e7edf4;padding-top:15px;margin-top:14px}.mini-total strong{display:block;font-size:21px;margin:4px 0}.savestatus{border:1px solid #dce8f3;background:#f2f7fd;color:#275c88;padding:10px 11px;border-radius:10px;font-size:12px;font-weight:700;line-height:1.6;margin-top:10px}.savestatus.fail{color:#9b2929;background:#fff0ed;border-color:#e9bcb7}.savestatus.warn{color:#845c16;background:#fff9e9;border-color:#eed9ae}.reset{font-size:12px;border:0;background:none;color:#446f9e;text-decoration:underline;padding:12px 0 0}.workspace{padding:22px 25px}.personhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid #e5eaf1;padding-bottom:17px;margin-bottom:17px}.personhead h2{font-size:25px;margin:0 0 5px}.personhead p{margin:0;color:#617187;font-size:13px}.btag{background:#eef3fb;color:#44627e;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700}.tabs{display:flex;background:#f1f4f8;padding:5px;border-radius:12px;margin-bottom:18px;gap:4px}.tab{border:0;flex:1;border-radius:9px;padding:11px 9px;background:transparent;color:#62738a;font-weight:800;font-size:14px;min-height:44px}.tab.active{background:#fff;color:#175d9b;box-shadow:0 1px 5px #ccd7e5}.sectionhead{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:9px}.sectionhead h3{font-size:18px;margin:0}.count{color:#1b5f9e;font-size:21px;font-weight:850;font-variant-numeric:tabular-nums}.desc{font-size:13px;color:#65768a;line-height:1.65;margin:0 0 15px}.weekhead,.dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.weekhead{margin:12px 0 7px}.weekhead span{text-align:center;font-size:12px;color:#647489;font-weight:700}.weekhead span:first-child{color:#c56c65}.weekhead span:last-child{color:#5283c2}.date{aspect-ratio:1.15;min-height:51px;border:1px solid #e3e9f0;border-radius:11px;background:#f9fbfd;color:#34465a;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;font-size:15px;gap:3px;font-weight:650}.date:active{transform:scale(.97)}.date.selected{background:#e3efff;border:2px solid #4b8bcf;color:#175996}.date.extra{background:#e6f6ec;border-color:#3da76b;color:#246947}.date.removed{border:1px dashed #dfad58;color:#ae7d2a;background:#fffbf3}.date.off{border:0;background:transparent;pointer-events:none}.date .mark{font-size:9px;line-height:1;min-height:10px;font-weight:800}.date.selected .mark{color:#2979bd}.date.extra .mark{color:#248056}.date.removed .mark{color:#a67b36}.legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin:14px 0 5px;font-size:12px;color:#647489}.dot{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:5px;background:#dcecff;border:1px solid #4b8bcf}.dot.extra{background:#e6f6ec;border-color:#3da76b}.dot.removed{background:#fff7e4;border:1px dashed #dfad58}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{border:1px solid #cddae8;border-radius:11px;padding:11px 16px;min-height:45px;background:white;color:#265d91;font-weight:800;font-size:14px}.btn.primary{background:#256ca9;color:#fff;border-color:#256ca9}.btn.full{width:100%}.btn.light{background:#eff5fc}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0 18px}.metric{background:#f5f8fc;border:1px solid #e6edf5;border-radius:12px;padding:13px 12px}.metric label{font-size:12px;color:#6b788a;display:block}.metric strong{font-size:20px;display:block;margin-top:4px;font-variant-numeric:tabular-nums}.calc{border:1px solid #dfe8f1;border-radius:13px;overflow:hidden;margin:13px 0}.calcrow{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 15px;border-bottom:1px solid #e9edf3;font-size:14px}.calcrow:last-child{border:0}.calcrow b{font-variant-numeric:tabular-nums;white-space:nowrap}.calcrow.total{background:#edf5ff;font-weight:800}.calcrow.total b{font-size:24px;color:#14588f}.alert{background:#fff8e9;border:1px solid #f2ddad;border-radius:11px;padding:12px 13px;color:#7d5d24;font-size:12px;line-height:1.7;margin:12px 0 17px}.checks{display:grid;gap:11px}.checkrow{display:flex;gap:11px;align-items:flex-start;border:1px solid #e3eaf2;border-radius:12px;padding:13px;background:#fff;cursor:pointer;font-size:14px;font-weight:650;line-height:1.55}.checkrow input{width:20px;height:20px;accent-color:#256ca9;flex:none;margin:0;margin-top:1px}.checkrow small{display:block;color:#738094;font-weight:400;margin-top:2px}.ok{background:#eaf7ef;color:#236c42;border-radius:11px;padding:12px;font-size:13px;margin-top:14px;font-weight:750}.notok{background:#f5f7fa;color:#687b8f;border-radius:11px;padding:12px;font-size:13px;margin-top:14px}.bottom{border-top:1px solid #e7edf4;margin-top:23px;padding-top:18px}.smallprint{margin-top:18px;color:#677a8c;font-size:12px;line-height:1.7}.foot{margin-top:20px;text-align:center;color:#8190a0;font-size:12px}.screenhide{display:none!important}@media(max-width:850px){.app{padding:17px 15px 36px}.layout{grid-template-columns:1fr}.sidebar{padding:15px}.patients{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.patient{padding:11px}.patient.active{padding:10px}.p-top{display:block}.status{display:inline-block;margin-top:6px}.p-note{line-height:1.5}.mini-total{display:none}.workspace{padding:18px}.personhead h2{font-size:23px}}@media(max-width:480px){.top{margin-bottom:13px}.top h1{font-size:22px}.pill{font-size:10px;padding:6px 8px}.sidebar{padding:13px}.patient{padding:9px}.patient.active{padding:8px}.p-name{font-size:14px}.p-note{font-size:11px}.status{font-size:10px}.workspace{padding:15px 13px}.date{min-height:40px;aspect-ratio:1.03;border-radius:9px}.weekhead,.dates{gap:4px}.date .mark{font-size:8px}.summary{gap:7px}.metric{padding:9px 8px}.metric label{font-size:10px}.metric strong{font-size:17px}.calcrow{font-size:13px;padding:12px}.notice{font-size:12px;padding:11px}.desc{font-size:12px}}
+
+/* v0.3: A4 test sheet, never a legal form */
+.tabs .tab{font-size:13px;line-height:1.3}
+.paper-scroll{max-width:100%;overflow:auto;margin-top:16px;padding:8px 0;background:#eef2f5;border:1px solid #dee4eb;border-radius:12px}
+.paper{font-family:"Hiragino Mincho ProN","Yu Mincho","Hiragino Kaku Gothic ProN",Meiryo,serif;font-size:9px;color:#151515;background:#fff;box-sizing:border-box;width:210mm;min-height:297mm;max-width:none;padding:8mm 7.5mm 7mm;position:relative;line-height:1.2;margin:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.paper *{box-sizing:border-box}
+.print-only{display:none}
+.paper-watermark{position:absolute;left:4%;top:39%;width:92%;text-align:center;transform:rotate(-28deg);font-size:48px;letter-spacing:.11em;font-weight:900;color:rgba(162,37,37,.18);z-index:10;pointer-events:none;white-space:nowrap}
+.paper-head{position:relative;text-align:center;height:15mm;padding-top:2mm}
+.paper-head .form-label{position:absolute;right:0;top:0;font-size:8px}
+.paper h2{margin:0;font-size:14px;letter-spacing:.08em}
+.paper-head .form-sub{font-size:9px;margin-top:3px}
+.paper .demo-strip{border:1px solid #333;background:#fff1eb;color:#a32f22;text-align:center;font-weight:800;padding:2.5px;font-size:10px}
+.paper .block-table{border:1px solid #333;border-bottom:0}
+.paper .prow{display:flex;min-height:8.2mm;border-bottom:1px solid #333}
+.paper .pcell{border-right:1px solid #333;padding:2px 4px;flex:1;min-width:0;overflow:hidden}
+.paper .pcell:last-child{border-right:0}
+.paper .label{font-size:8px;font-weight:700;letter-spacing:.01em}
+.paper .data{margin:3px 0 0;font-size:9px}
+.paper .muted{color:#777}
+.paper .small{font-size:7.6px}
+.paper .sectionbar{border:1px solid #333;border-top:0;padding:2px 5px;font-weight:800;background:#f2f2f2;font-size:8.6px}
+.paper .costrow{display:grid;grid-template-columns:37mm 1fr 14mm 15mm 28mm;min-height:6.9mm;border-bottom:1px solid #333}
+.paper .costrow>div{padding:3px 4px;border-right:1px solid #333;overflow:hidden}
+.paper .costrow>div:last-child{border-right:0;text-align:right}
+.paper .costrow strong{font-size:8.6px}
+.paper .costhead{font-weight:800;background:#f8f8f8}
+.paper .day-grid{display:grid;grid-template-columns:21mm repeat(31,minmax(0,1fr));border-left:1px solid #333;border-top:1px solid #333}
+.paper .day-grid>span{border-right:1px solid #333;border-bottom:1px solid #333;min-width:0;min-height:5.2mm;display:flex;align-items:center;justify-content:center;font-size:7px}
+.paper .day-grid>span:first-child{font-size:7px;font-weight:800}
+.paper .day-grid .on{font-weight:900;color:#111}
+.paper .footnote{font-size:7px;line-height:1.55;padding:2px 1px}
+.paper .stampblank{height:9mm}
+.paper .sectiongap{height:1mm}
+.paper .print-area-title{font-size:8px;font-weight:800;margin:2px 0}
+.paper .mock-line{display:inline-block;border-bottom:1px solid #333;min-width:70px;min-height:12px}
+.paper .form-footer{font-size:7.3px;text-align:center;margin-top:4px;border-top:1px solid #aaa;padding-top:4px;font-weight:800;color:#8e2525}
+@media(max-width:600px){.tab{padding:9px 3px;font-size:11px!important}.paper-scroll{padding:0}}
+@page{size:A4 portrait;margin:0}
+@media print{
+html,body{padding:0!important;margin:0!important;background:white!important;width:210mm!important;height:297mm!important}
+.app{display:none!important}
+.print-only{display:block!important}
+.paper{margin:0!important;padding:8mm 7.5mm 7mm!important;width:210mm!important;height:297mm!important;min-height:0!important;max-height:297mm!important;overflow:hidden!important;box-shadow:none!important;border:0!important;break-inside:avoid!important;page-break-inside:avoid!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="eyebrow">MASSAGE CLAIMS · PROTOTYPE</div><h1>療養費申請 入力サンプル</h1><p>iPad向け 試作品 v0.3 ／ 架空データ専用</p></div><span class="pill">⚠ 試作・提出不可</span></header>
+<div class="notice"><b>これは画面と操作の確認用です。</b> 実在する患者さんの情報は入力しないでください。<b>架空データのみ</b>ブラウザー内に自動保存しますが、Safariのデータ削除等で消えることがあります。<b>暗号化・バックアップなし。実在する患者情報は絶対に入力しないでください。</b> A4帳票の印刷・PDF保存を試せますが、正式な申請書ではありません。実際の患者情報を入力せず、提出しないでください。</div>
+<div class="layout">
+<aside class="card sidebar" aria-label="患者選択と対象月">
+<div class="section-label">対象年月 <span style="color:#8a98a8;font-size:11px;font-weight:500">（2026年7〜12月のデモ）</span></div>
+<div class="monthbar"><button class="iconbtn" id="prevMonth" aria-label="前の月">‹</button><strong id="monthText">2026年11月</strong><button class="iconbtn" id="nextMonth" aria-label="次の月">›</button></div>
+<div class="hline"><div class="section-label">患者一覧</div><span class="subtle">架空の3人</span></div>
+<div id="patientList" class="patients"></div>
+<div id="saveStatus" class="savestatus" role="status" aria-live="polite">保存状態を確認中…</div>
+<div class="mini-total"><div class="subtle">選択月の施術予定（3人合計）</div><strong id="allCount">—</strong><div class="subtle">確認済みの人数：<span id="allComplete">—</span></div></div>
+<button class="reset" type="button" id="reset">すべて初期状態に戻す</button>
+</aside>
+<main class="card workspace">
+<div class="personhead"><div><h2 id="patientTitle">患者A</h2><p id="patientCaption"></p></div><span class="btag">訪問施術料1</span></div>
+<div class="tabs" role="tablist" aria-label="入力画面切替"><button class="tab active" id="tabCalendar" role="tab" aria-selected="true" aria-controls="calendarPanel">① 施術日カレンダー</button><button class="tab" id="tabReview" role="tab" aria-selected="false" aria-controls="reviewPanel">② 料金・確認</button><button class="tab" id="tabPrint" role="tab" aria-selected="false" aria-controls="printPanel">③ 帳票・PDF</button></div>
+<section id="calendarPanel" role="tabpanel" aria-labelledby="tabCalendar">
+<div class="sectionhead"><h3>施術日の選択</h3><span class="count" id="selectedCount">— 回</span></div>
+<p class="desc" id="scheduleDesc"></p>
+<div class="weekhead" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+<div class="dates" id="calendar" aria-label="施術日のカレンダー"></div>
+<div class="legend"><span><i class="dot"></i>選択中</span><span><i class="dot extra"></i>追加した日</span><span><i class="dot removed"></i>予定から外した日</span></div>
+<div class="actions"><button class="btn" type="button" id="restoreDates">曜日の予定に戻す</button><button class="btn" type="button" id="clearDates">すべて解除</button><button class="btn primary" type="button" id="goReview">料金・確認へ →</button></div>
+<p class="smallprint">定期訪問曜日をもとに、月初めに予定日を表示します。日付をタップして追加・取消できます。この時点では「実際に施術した日」として確定されません。</p>
+</section>
+<section id="reviewPanel" role="tabpanel" aria-labelledby="tabReview" class="screenhide">
+<div class="sectionhead"><h3>料金の試算</h3><span class="count" id="reviewCount">— 回</span></div>
+<p class="desc">選択した日付をもとにした参考計算です。自己負担金・保険請求額は計算しません。</p>
+<div class="summary"><div class="metric"><label>局所数</label><strong id="siteCount">—</strong></div><div class="metric"><label>通常単価</label><strong id="unitPrice">—</strong></div><div class="metric"><label>選択回数</label><strong id="visitCount">—</strong></div></div>
+<div class="calc"><div class="calcrow"><span>1〜15回目の料金</span><b id="normalLine">—</b></div><div class="calcrow"><span>16回目以降の料金（50%）</span><b id="halfLine">—</b></div><div class="calcrow total"><span>参考合計</span><b id="grandTotal">—</b></div></div>
+<div class="alert"><b>必ずお読みください</b><br>厚生労働省の2026年7月適用の訪問施術料1の基本料金を使用した限定的な試算です。特別地域・追加施術・各種加算・保険負担割合・同意の適否・その他の算定条件は未実装です。<b>この金額でレセプトを作成・提出しないでください。</b></div>
+<h3 style="font-size:17px;margin:22px 0 12px">3項目をまとめて確認</h3>
+<div class="checks"><label class="checkrow"><input type="checkbox" id="checkActual"><span>施術日・回数は実績と一致しています<small>予定から変更した日付も含めて確認</small></span></label><label class="checkrow"><input type="checkbox" id="checkInsurance"><span>保険情報・負担割合を確認しました<small>試作品には実際の保険情報は登録されていません</small></span></label><label class="checkrow"><input type="checkbox" id="checkConsent"><span>医師の同意内容・部位を確認しました<small>試作品には実際の同意情報は登録されていません</small></span></label></div>
+<div id="reviewStatus" class="notok" aria-live="polite"></div>
+<div class="actions"><button class="btn" type="button" id="backCalendar">← カレンダーに戻る</button></div>
+<div class="bottom"><button class="btn primary full" type="button" id="goPrint">A4帳票の確認へ →</button><p class="smallprint">チェックは画面の動作確認専用です。実際の保険資格や医師同意の確認を代行するものではありません。</p></div>
+</section>
+<section id="printPanel" role="tabpanel" aria-labelledby="tabPrint" class="screenhide">
+  <div class="sectionhead"><h3>A4申請書・試験用プレビュー</h3></div>
+  <p class="desc">組合配布の様式第5号の2の<b>主な欄</b>を参考にした独自の試験用レイアウトです。<b>正式様式そのものではありません。</b> 保険・同意・署名等は未入力です。</p>
+  <div id="printGate" class="alert" aria-live="polite"></div>
+  <div class="actions"><button class="btn primary" id="printBtn" type="button" disabled>印刷画面を開く（PDFとして保存）</button><button class="btn" id="backReview" type="button">← 確認画面へ</button></div>
+  <p class="smallprint">iPadの印刷画面でプレビューを開き、「共有」から「ファイルに保存」を選ぶとPDFとして保存できます。表示方法はiPadOSのバージョンによって異なります。<b>PDFも試験用・提出不可です。</b></p>
+  <div id="previewSlot" class="paper-scroll" aria-label="試験用帳票プレビュー"></div>
+</section>
+</main>
+</div>
+<div class="foot">v0.3 · 架空データのみSafari内に保存 · 外部通信なし · 帳票は試験用・提出不可</div>
+</div>
+<div id="printPaper" class="paper print-only" aria-label="印刷用試験帳票"></div>
+<script>
+'use strict';
+(function(){
+const DATA=[{id:'A',label:'患者A',days:[1,4],sites:5},{id:'B',label:'患者B',days:[2,5],sites:3},{id:'C',label:'患者C',days:[3],sites:2}];
+const PRICES=[0,2770,3240,3710,4180,4650];
+const DOW=['日','月','火','水','木','金','土'];
+const MIN=2026*12+6,MAX=2026*12+11;
+const STORE_KEY='receipt-kantan-demo-v03';
+const OLD_STORE_KEY='receipt-kantan-demo-v02';
+let storage=null,storageLocked=false,saveMessage='';
+let year=2026,month=10,selectedId='A',screen='calendar';
+let records=Object.create(null);
+const el=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('ja-JP').format(n)+'円';
+const monthKey=()=>year+'-'+String(month+1).padStart(2,'0');
+const key=id=>monthKey()+':'+id;
+const daysInMonth=()=>new Date(year,month+1,0).getDate();
+function schedule(patient){const out=[];for(let d=1;d<=daysInMonth();d++){if(patient.days.includes(new Date(year,month,d).getDay()))out.push(d)}return out}
+function record(patient){const k=key(patient.id);if(!records[k])records[k]={days:schedule(patient),checks:[false,false,false]};return records[k]}
+function setSaveStatus(message,kind=''){const e=el('saveStatus');e.textContent=message;e.className='savestatus'+(kind?' '+kind:'')}
+function validSaved(v){
+ if(!v||typeof v!=='object'||![2,3].includes(v.version)||!v.records||typeof v.records!=='object'||Array.isArray(v.records))return false;
+ if(!Number.isInteger(v.year)||v.year!==2026||!Number.isInteger(v.month)||v.month<6||v.month>11||!DATA.some(p=>p.id===v.selectedId))return false;
+ const entries=Object.entries(v.records);if(entries.length>18)return false;
+ for(const [k,r] of entries){const m=/^2026-(0[7-9]|1[0-2]):([ABC])$/.exec(k);if(!m||!r||!Array.isArray(r.days)||!Array.isArray(r.checks)||r.checks.length!==3)return false;
+ const nd=new Date(2026,Number(m[1]),0).getDate();if(r.days.length>nd||new Set(r.days).size!==r.days.length||r.days.some(d=>!Number.isInteger(d)||d<1||d>nd)||r.checks.some(c=>typeof c!=='boolean'))return false;
+ }return true;
+}
+function initializeStorage(){
+ try{
+   storage=window.localStorage;const test=STORE_KEY+'-test';storage.setItem(test,'1');if(storage.getItem(test)!=='1')throw Error('write verification failed');storage.removeItem(test);
+   const raw=storage.getItem(STORE_KEY);
+   if(raw!==null){let obj;try{obj=JSON.parse(raw)}catch(_){obj=null}
+     if(!validSaved(obj)){storageLocked=true;setSaveStatus('保存データを読み取れません。上書きを停止しました。架空データなら「すべて初期状態に戻す」で再開できます。','fail');return}
+     records=Object.assign(Object.create(null),obj.records);year=obj.year;month=obj.month;selectedId=obj.selectedId;
+     setSaveStatus('✓ 前回の架空データを復元しました（このSafari内のみ）。');return;
+   }
+   const legacy=storage.getItem(OLD_STORE_KEY);
+   if(legacy!==null){let old;try{old=JSON.parse(legacy)}catch(_){old=null}
+     if(old&&old.version===2&&validSaved(old)){
+       records=Object.assign(Object.create(null),old.records);
+       for(const r of Object.values(records)){r.checks=[false,false,false]}
+       year=old.year;month=old.month;selectedId=old.selectedId;
+       saveDemo();setSaveStatus('✓ Ver.0.2の架空データを引き継ぎました。確認チェックは解除しました。');return;
+     }
+   }
+   setSaveStatus('未保存：操作を変更するとこのSafari内に自動保存します。','warn');
+ }catch(e){storage=null;setSaveStatus('保存機能が使えません。変更は画面を閉じると消えます。','fail')}
+}
+function saveDemo(){
+ if(storageLocked){setSaveStatus('保存データの問題により、上書きを停止しています。','fail');return}
+ if(!storage){setSaveStatus('保存できません：Safariの保存機能が利用できません。','fail');return}
+ try{
+   const payload=JSON.stringify({version:3,year,month,selectedId,records});
+   storage.setItem(STORE_KEY,payload);
+   if(storage.getItem(STORE_KEY)!==payload)throw Error('verify failed');
+   const now=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+   setSaveStatus('✓ 保存済み '+now+'（このSafari内のみ・バックアップなし）');
+ }catch(e){setSaveStatus('保存失敗：変更は消える可能性があります。Safariの保存設定・空き容量を確認してください。','fail')}
+}
+function patient(){return DATA.find(p=>p.id===selectedId)}
+function allChecked(r){return r.checks.every(Boolean)&&r.days.length>0}
+function renderSidebar(){el('monthText').textContent=year+'年'+(month+1)+'月';el('prevMonth').disabled=year*12+month<=MIN;el('nextMonth').disabled=year*12+month>=MAX;
+const list=el('patientList');list.replaceChildren();let count=0,complete=0;
+for(const p of DATA){const r=record(p);count+=r.days.length;if(allChecked(r))complete++;const b=document.createElement('button');b.type='button';b.className='patient'+(p.id===selectedId?' active':'');b.setAttribute('aria-pressed',String(p.id===selectedId));const stat=allChecked(r)?'確認済み':r.checks.some(Boolean)?'一部確認':'未確認';const cls=allChecked(r)?' done':r.checks.some(Boolean)?' part':'';b.innerHTML='<div class="p-top"><span class="p-name">'+p.label+'</span><span class="status'+cls+'">'+stat+'</span></div><div class="p-note">'+p.days.map(d=>DOW[d]+'曜').join('・')+' ／ '+p.sites+'局所 ／ '+r.days.length+'回</div>';b.addEventListener('click',()=>{selectedId=p.id;screen='calendar';saveDemo();render()});list.appendChild(b)}
+el('allCount').textContent=count+'回';el('allComplete').textContent=complete+' / 3人';}
+function makeDay(day,scheduled,selected){const b=document.createElement('button');b.type='button';b.className='date';const isSchedule=scheduled.includes(day),isSelected=selected.includes(day);if(isSelected)b.classList.add(isSchedule?'selected':'extra');else if(isSchedule)b.classList.add('removed');b.setAttribute('aria-label',month+1+'月'+day+'日 '+(isSelected?'選択中・タップで解除':'未選択・タップで追加'));b.setAttribute('aria-pressed',String(isSelected));const label=isSelected?(isSchedule?'✓':'追加'):(isSchedule?'除外':'');b.innerHTML='<span>'+day+'</span><span class="mark">'+label+'</span>';b.addEventListener('click',()=>{const r=record(patient());r.days=isSelected?r.days.filter(n=>n!==day):[...r.days,day].sort((a,b)=>a-b);r.checks=[false,false,false];saveDemo();render()});return b}
+function renderCalendar(p,r){const scheduleDays=schedule(p);const grid=el('calendar');grid.replaceChildren();const first=new Date(year,month,1).getDay();const total=daysInMonth();const cells=Math.ceil((first+total)/7)*7;for(let i=0;i<cells;i++){const d=i-first+1;if(d<1||d>total){const blank=document.createElement('span');blank.className='date off';blank.setAttribute('aria-hidden','true');grid.appendChild(blank)}else grid.appendChild(makeDay(d,scheduleDays,r.days))}
+el('scheduleDesc').textContent='定期予定：'+p.days.map(d=>DOW[d]+'曜日').join('・')+'。青色が選択中、緑色は追加日、点線は予定から外した日です。';el('selectedCount').textContent=r.days.length+'回';}
+function renderReview(p,r){const count=r.days.length;const base=PRICES[p.sites];const full=Math.min(count,15),half=Math.max(0,count-15);el('reviewCount').textContent=count+'回';el('siteCount').textContent=p.sites+'局所';el('unitPrice').textContent=money(base);el('visitCount').textContent=count+'回';el('normalLine').textContent=money(base)+' × '+full+'回 = '+money(base*full);el('halfLine').textContent=money(base/2)+' × '+half+'回 = '+money(base*half/2);el('grandTotal').textContent=money(base*full+base*half/2);['checkActual','checkInsurance','checkConsent'].forEach((id,i)=>{el(id).checked=r.checks[i]});const status=el('reviewStatus');const ok=allChecked(r);status.className=ok?'ok':'notok';status.textContent=ok?'✓ 3項目のチェックが揃いました（架空データによる操作確認のみ）。':count===0?'施術日が選択されていません。カレンダーで日付を選んでください。':'未確認の項目があります。3項目の確認は試作品内だけの動作です。';}
+
+function printEligibility(p,r){
+ if(p.id!=='A')return 'Ver.0.3の帳票出力は患者A（架空）の1人分だけです。';
+ if(r.days.length===0)return '施術日が選択されていません。';
+ if(r.days.length>15)return '月16回以上は追加の算定条件・書類確認が必要なため、Ver.0.3の帳票出力を停止しています。';
+ if(!r.checks.every(Boolean))return '料金・確認画面の3項目をすべてチェックしてください（架空データの操作試験のみ）。';
+ return '';
+}
+// The HTML is generated solely from fixed dummy labels and internally validated numbers;
+// user-entered real patient data is never accepted in this prototype.
+function createPrintHtml(p,r){
+ const nd=daysInMonth(),dateCount=r.days.length,unit=PRICES[p.sites],subtotal=dateCount*unit;
+ const era=year-2018;const first=(String(era)+'年'+(month+1)+'月');
+ const fmt=n=>new Intl.NumberFormat('ja-JP').format(n);
+ const row=(name,unitText,qty,amount,note='')=>`<div class="costrow"><div><strong>${name}</strong></div><div class="small">${note}</div><div style="text-align:right">${unitText}</div><div style="text-align:right">${qty}</div><div>${amount}</div></div>`;
+ const scheduled=r.days.map(n=>Number(n));
+ let grid='<span>施術日（訪問①）</span>';
+ for(let d=1;d<=31;d++)grid+=`<span>${d<=nd?d:'—'}</span>`;
+ grid+='<span>施術区分</span>';
+ for(let d=1;d<=31;d++)grid+=`<span class="${scheduled.includes(d)?'on':''}">${scheduled.includes(d)?'①':''}</span>`;
+ const sites=['躯幹','右上肢','左上肢','右下肢','左下肢'];
+ let siteRows='<span>同意部位（仮）</span>';
+ siteRows+=sites.map((name,i)=>`${name}：${i<p.sites?'○':'―'}`).join('　');
+ const title=`${year}年${month+1}月分`;
+ return `<div class="paper-watermark">試験用・提出不可</div>
+ <div class="paper-head"><span class="form-label">様式第5号の2【参考レイアウト・非公式】</span><h2>療 養 費 支 給 申 請 書</h2><div class="form-sub">（${title}）　あんま・マッサージ用</div></div>
+ <div class="demo-strip">架空データ専用／未記入欄あり／正式な申請書ではありません</div>
+ <div class="block-table">
+ <div class="prow"><div class="pcell" style="flex:2"><span class="label">公費負担者番号</span><div class="data muted">未入力</div></div><div class="pcell" style="flex:2"><span class="label">公費受給者番号</span><div class="data muted">未入力</div></div><div class="pcell"><span class="label">保険者番号</span><div class="data muted">未入力</div></div><div class="pcell"><span class="label">給付割合</span><div class="data muted">未確認</div></div></div>
+ <div class="prow"><div class="pcell"><span class="label">被保険者資格の記号番号</span><div class="data muted">未入力</div></div><div class="pcell"><span class="label">療養を受けた者</span><div class="data"><b>${p.label}（架空）</b>　生年月日：未入力</div></div><div class="pcell"><span class="label">傷病名・発病年月日</span><div class="data muted">未入力</div></div></div>
+ <div class="prow"><div class="pcell"><span class="label">初療年月日</span><div class="data muted">未入力</div></div><div class="pcell" style="flex:2"><span class="label">施術期間</span><div class="data">令和${era}年${month+1}月1日〜${nd}日（選択月の範囲・仮表示）</div></div><div class="pcell"><span class="label">実日数</span><div class="data">${dateCount}日（試験値）</div></div><div class="pcell"><span class="label">請求区分</span><div class="data muted">未確定</div></div></div>
+ <div class="prow"><div class="pcell" style="flex:3"><span class="label">傷病名及び症状</span><div class="data muted">未入力</div></div><div class="pcell" style="flex:2"><span class="label">施術した場所・往療又は訪問の理由</span><div class="data muted">未入力</div></div></div>
+ </div>
+ <div class="sectionbar">施 術 内 容 欄　｜　訪問施術料1・局所数固定の試験計算</div>
+ <div class="block-table">
+ <div class="prow" style="min-height:7mm"><div class="pcell"><span class="label">${siteRows}</span></div><div class="pcell" style="flex:0 0 34mm"><span class="label">施術回数：${dateCount}回</span></div></div>
+ <div class="costrow costhead"><div>項目</div><div>備考</div><div>単価</div><div>回数</div><div>参考金額</div></div>
+ ${row('通所','—','—','—','未対応')}
+ ${row('訪問施術料１',fmt(unit)+'円',dateCount+'回',fmt(subtotal)+'円',p.sites+'局所・基本料金のみ')}
+ ${row('訪問施術料２','—','—','—','未対応')}
+ ${row('訪問施術料３','—','—','—','未対応')}
+ ${row('温罨法・電気光線器具','—','—','—','未対応')}
+ ${row('変形徒手矯正術','—','—','—','未対応')}
+ ${row('特別地域加算・往療料','—','—','—','未対応')}
+ ${row('施術報告書交付料','—','—','—','未対応')}
+ ${row('明細書発行加算','—','—','—','未対応')}
+ ${row('基本料金の試算','',dateCount+'回',fmt(subtotal)+'円','合計・請求額として確定しない')}
+ ${row('一部負担金','—','—','未計算','保険負担割合未入力')}
+ ${row('請求額','—','—','未計算','正式請求には使用不可')}
+ </div>
+ <div class="sectionbar">施 術 日（数字は日付、①は訪問施術料1の選択日）</div>
+ <div class="day-grid">${grid}</div>
+ <div class="sectionbar">施 術 証 明 欄（未入力）</div>
+ <div class="block-table"><div class="prow" style="min-height:16mm"><div class="pcell" style="flex:2"><span class="label">上記のとおり施術を行い、その費用を領収しました。</span><div class="data muted">施術管理者・登録記号番号：未入力</div><div class="data muted">年月日：未入力</div></div><div class="pcell" style="flex:2"><span class="label">施術所所在地・名称・電話</span><div class="data muted">未入力</div></div></div></div>
+ <div class="sectionbar">申 請 欄・受領委任欄（署名等は空欄）</div>
+ <div class="block-table"><div class="prow" style="min-height:15mm"><div class="pcell" style="flex:2"><span class="label">申請者（被保険者）氏名・住所</span><div class="stampblank"></div></div><div class="pcell"><span class="label">申請年月日</span><div class="data muted">未入力</div></div><div class="pcell"><span class="label">代理人・委任</span><div class="data muted">未入力</div></div></div></div>
+ <div class="sectionbar">支 払 機 関 欄・同 意 記 録（未入力）</div>
+ <div class="block-table"><div class="prow" style="min-height:12mm"><div class="pcell"><span class="label">支払区分／金融機関名／口座</span><div class="data muted">未入力（組合配布の実情報は転記していません）</div></div><div class="pcell"><span class="label">同意医師・住所・同意年月日・傷病名・要加療期間</span><div class="data muted">未入力</div></div></div></div>
+ <div class="form-footer">試作 Ver.0.3｜患者Aのみ・訪問施術料1・月15回以下｜負担金・請求額未計算｜提出・署名取得・患者情報入力には使用しないでください</div>`;
+}
+function renderPrintPanel(p,r){
+ const reason=printEligibility(p,r),gate=el('printGate'),allowed=!reason;
+ gate.textContent=allowed?'✓ 架空データでの操作条件を満たしました。A4の試験用帳票を表示できます。正式な請求書ではありません。':reason;
+ gate.className=allowed?'ok':'alert';
+ el('printBtn').disabled=!allowed;
+ if(allowed){const content=createPrintHtml(p,r);el('previewSlot').innerHTML='<div class="paper">'+content+'</div>';el('printPaper').innerHTML=content}
+ else{el('previewSlot').innerHTML='<p style="padding:18px;color:#667788">確認条件を満たすと帳票がここに表示されます。</p>';el('printPaper').replaceChildren()}
+}
+function render(){const p=patient(),r=record(p);renderSidebar();el('patientTitle').textContent=p.label;el('patientCaption').textContent=year+'年'+(month+1)+'月分 ／ 定期訪問：'+p.days.map(d=>DOW[d]+'曜').join('・');for(const x of ['calendar','review','print']){const id=x==='calendar'?'Calendar':x==='review'?'Review':'Print';el('tab'+id).classList.toggle('active',screen===x);el('tab'+id).setAttribute('aria-selected',String(screen===x));el(x==='print'?'printPanel':x+'Panel').classList.toggle('screenhide',screen!==x)}renderCalendar(p,r);renderReview(p,r);renderPrintPanel(p,r)}
+function changeMonth(delta){const next=year*12+month+delta;if(next<MIN||next>MAX)return;year=Math.floor(next/12);month=next%12;screen='calendar';saveDemo();render()}
+function setScreen(value){screen=value;render()}
+el('prevMonth').addEventListener('click',()=>changeMonth(-1));el('nextMonth').addEventListener('click',()=>changeMonth(1));el('tabCalendar').addEventListener('click',()=>setScreen('calendar'));el('tabReview').addEventListener('click',()=>setScreen('review'));el('tabPrint').addEventListener('click',()=>setScreen('print'));el('goReview').addEventListener('click',()=>setScreen('review'));el('backCalendar').addEventListener('click',()=>setScreen('calendar'));el('goPrint').addEventListener('click',()=>setScreen('print'));el('backReview').addEventListener('click',()=>setScreen('review'));
+el('restoreDates').addEventListener('click',()=>{const r=record(patient());r.days=schedule(patient());r.checks=[false,false,false];saveDemo();render()});el('clearDates').addEventListener('click',()=>{const r=record(patient());r.days=[];r.checks=[false,false,false];saveDemo();render()});
+['checkActual','checkInsurance','checkConsent'].forEach((id,i)=>el(id).addEventListener('change',e=>{const r=record(patient());r.checks[i]=e.target.checked;saveDemo();render()}));
+el('reset').addEventListener('click',()=>{
+ if(!confirm('このSafariに保存された架空データを削除し、すべて初期状態に戻しますか？'))return;
+ if(storage){try{storage.removeItem(STORE_KEY);if(storage.getItem(STORE_KEY)!==null)throw Error('delete failed')}catch(e){setSaveStatus('保存データを削除できませんでした。再試行してください。','fail');return}}
+ storageLocked=false;records=Object.create(null);year=2026;month=10;selectedId='A';screen='calendar';
+ if(storage)saveDemo();else setSaveStatus('保存機能が使えません。画面内のみ初期化しました。','fail');render();
+});
+el('printBtn').addEventListener('click',()=>{const p=patient(),r=record(p);if(printEligibility(p,r)){renderPrintPanel(p,r);return}renderPrintPanel(p,r);window.print()});
+initializeStorage();render();
+})();
+</script>
+</body>
+</html>

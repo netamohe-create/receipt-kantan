@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src blob:; frame-src blob:">
+<title>レセプトかんたん入力 v0.8.2｜架空データ専用</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#203147;background:#f5f7fb;font-size:16px;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px}button{font:inherit;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #357fd0;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.43}button,select{touch-action:manipulation}.app{max-width:1210px;margin:0 auto;padding:24px 24px 64px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:20px}.top h1{font-size:clamp(22px,2.6vw,31px);margin:4px 0 6px;letter-spacing:-.03em}.top p{color:#617187;font-size:13px;margin:0}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#46637d}.pill{background:#fff1cf;color:#856018;border:1px solid #f2dc9c;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}.notice{background:#fff6e6;border:1px solid #f1d69b;color:#654c1a;padding:13px 16px;border-radius:13px;line-height:1.65;font-size:13px;margin-bottom:18px}.layout{display:grid;grid-template-columns:312px minmax(0,1fr);gap:17px}.card{background:#fff;border:1px solid #e1e8f0;box-shadow:0 3px 20px rgba(26,53,87,.045);border-radius:17px}.sidebar{padding:17px}.hline{display:flex;align-items:center;justify-content:space-between;gap:12px}.section-label{font-weight:800;font-size:14px}.monthbar{display:flex;align-items:center;gap:8px;margin:12px 0 17px}.monthbar strong{flex:1;text-align:center;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}.iconbtn{background:#f3f6fa;border:1px solid #dfe7f0;color:#315c82;border-radius:10px;height:42px;min-width:42px;font-size:22px}.iconbtn:disabled{opacity:.28}.subtle{color:#6e8094;font-size:12px;line-height:1.55}.sidebar .section-label{margin-bottom:6px}.patients{display:grid;gap:9px;margin:13px 0 14px}.patient{border:1px solid #e1e8f0;background:#fff;border-radius:12px;padding:13px;text-align:left;width:100%;color:#26364b}.patient.active{background:#ecf4ff;border:2px solid #3981cd;padding:12px}.p-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.p-name{font-weight:800}.p-note{font-size:12px;color:#63758a;margin-top:6px}.status{font-size:11px;padding:4px 8px;border-radius:100px;background:#f0f2f5;color:#647082;font-weight:750;white-space:nowrap}.status.done{background:#e5f6eb;color:#267647}.status.part{background:#fff1d9;color:#936100}.mini-total{border-top:1px solid #e7edf4;padding-top:15px;margin-top:14px}.mini-total strong{display:block;font-size:21px;margin:4px 0}.savestatus{border:1px solid #dce8f3;background:#f2f7fd;color:#275c88;padding:10px 11px;border-radius:10px;font-size:12px;font-weight:700;line-height:1.6;margin-top:10px}.savestatus.fail{color:#9b2929;background:#fff0ed;border-color:#e9bcb7}.savestatus.warn{color:#845c16;background:#fff9e9;border-color:#eed9ae}.reset{font-size:12px;border:0;background:none;color:#446f9e;text-decoration:underline;padding:12px 0 0}.workspace{padding:22px 25px}.personhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid #e5eaf1;padding-bottom:17px;margin-bottom:17px}.personhead h2{font-size:25px;margin:0 0 5px}.personhead p{margin:0;color:#617187;font-size:13px}.btag{background:#eef3fb;color:#44627e;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700}.tabs{display:flex;flex-wrap:wrap;background:#f1f4f8;padding:5px;border-radius:12px;margin-bottom:18px;gap:4px}.tab{border:0;flex:1 1 22%;border-radius:9px;padding:11px 9px;background:transparent;color:#62738a;font-weight:800;font-size:14px;min-height:44px}.tab.active{background:#fff;color:#175d9b;box-shadow:0 1px 5px #ccd7e5}.sectionhead{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:9px}.sectionhead h3{font-size:18px;margin:0}.count{color:#1b5f9e;font-size:21px;font-weight:850;font-variant-numeric:tabular-nums}.desc{font-size:13px;color:#65768a;line-height:1.65;margin:0 0 15px}.weekhead,.dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.weekhead{margin:12px 0 7px}.weekhead span{text-align:center;font-size:12px;color:#647489;font-weight:700}.weekhead span:first-child{color:#c56c65}.weekhead span:last-child{color:#5283c2}.date{aspect-ratio:1.15;min-height:51px;border:1px solid #e3e9f0;border-radius:11px;background:#f9fbfd;color:#34465a;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;font-size:15px;gap:3px;font-weight:650}.date:active{transform:scale(.97)}.date.selected{background:#e3efff;border:2px solid #4b8bcf;color:#175996}.date.extra{background:#e6f6ec;border-color:#3da76b;color:#246947}.date.removed{border:1px dashed #dfad58;color:#ae7d2a;background:#fffbf3}.date.off{border:0;background:transparent;pointer-events:none}.date .mark{font-size:9px;line-height:1;min-height:10px;font-weight:800}.date.selected .mark{color:#2979bd}.date.extra .mark{color:#248056}.date.removed .mark{color:#a67b36}.legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin:14px 0 5px;font-size:12px;color:#647489}.dot{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:5px;background:#dcecff;border:1px solid #4b8bcf}.dot.extra{background:#e6f6ec;border-color:#3da76b}.dot.removed{background:#fff7e4;border:1px dashed #dfad58}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{border:1px solid #cddae8;border-radius:11px;padding:11px 16px;min-height:45px;background:white;color:#265d91;font-weight:800;font-size:14px}.btn.primary{background:#256ca9;color:#fff;border-color:#256ca9}.btn.full{width:100%}.btn.light{background:#eff5fc}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0 18px}.metric{background:#f5f8fc;border:1px solid #e6edf5;border-radius:12px;padding:13px 12px}.metric label{font-size:12px;color:#6b788a;display:block}.metric strong{font-size:20px;display:block;margin-top:4px;font-variant-numeric:tabular-nums}.calc{border:1px solid #dfe8f1;border-radius:13px;overflow:hidden;margin:13px 0}.calcrow{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 15px;border-bottom:1px solid #e9edf3;font-size:14px}.calcrow:last-child{border:0}.calcrow b{font-variant-numeric:tabular-nums;white-space:nowrap}.calcrow.total{background:#edf5ff;font-weight:800}.calcrow.total b{font-size:24px;color:#14588f}.alert{background:#fff8e9;border:1px solid #f2ddad;border-radius:11px;padding:12px 13px;color:#7d5d24;font-size:12px;line-height:1.7;margin:12px 0 17px}.checks{display:grid;gap:11px}.checkrow{display:flex;gap:11px;align-items:flex-start;border:1px solid #e3eaf2;border-radius:12px;padding:13px;background:#fff;cursor:pointer;font-size:14px;font-weight:650;line-height:1.55}.checkrow input{width:20px;height:20px;accent-color:#256ca9;flex:none;margin:0;margin-top:1px}.checkrow small{display:block;color:#738094;font-weight:400;margin-top:2px}.ok{background:#eaf7ef;color:#236c42;border-radius:11px;padding:12px;font-size:13px;margin-top:14px;font-weight:750}.notok{background:#f5f7fa;color:#687b8f;border-radius:11px;padding:12px;font-size:13px;margin-top:14px}.bottom{border-top:1px solid #e7edf4;margin-top:23px;padding-top:18px}.smallprint{margin-top:18px;color:#677a8c;font-size:12px;line-height:1.7}.foot{margin-top:20px;text-align:center;color:#8190a0;font-size:12px}.screenhide{display:none!important}@media(max-width:850px){.app{padding:17px 15px 36px}.layout{grid-template-columns:1fr}.sidebar{padding:15px}.patients{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.patient{padding:11px}.patient.active{padding:10px}.p-top{display:block}.status{display:inline-block;margin-top:6px}.p-note{line-height:1.5}.mini-total{display:none}.workspace{padding:18px}.personhead h2{font-size:23px}}@media(max-width:480px){.top{margin-bottom:13px}.top h1{font-size:22px}.pill{font-size:10px;padding:6px 8px}.sidebar{padding:13px}.patient{padding:9px}.patient.active{padding:8px}.p-name{font-size:14px}.p-note{font-size:11px}.status{font-size:10px}.workspace{padding:15px 13px}.date{min-height:40px;aspect-ratio:1.03;border-radius:9px}.weekhead,.dates{gap:4px}.date .mark{font-size:8px}.summary{gap:7px}.metric{padding:9px 8px}.metric label{font-size:10px}.metric strong{font-size:17px}.calcrow{font-size:13px;padding:12px}.notice{font-size:12px;padding:11px}.desc{font-size:12px}}
+
+/* v0.8.2 input additions: consented sites and treatment records */
+.sites-fieldset{border:1px solid #dfe8f1;border-radius:12px;padding:13px 13px 15px;margin:13px 0}
+.sites-fieldset legend{font-weight:800;font-size:14px;color:#274967;padding:0 5px}
+.site-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.site-grid label{display:flex;gap:8px;align-items:center;font-size:14px}
+.site-grid input{width:19px;height:19px;accent-color:#256ca9;flex:none}
+.profile-field textarea{font:inherit;width:100%;min-width:0;padding:10px 11px;border:1px solid #cbd9e8;border-radius:10px;background:#fff;color:#203147;line-height:1.5;resize:vertical;min-height:66px}
+.preview-two-lines{border:1px solid #dce6f0;background:#f6f9fc;border-radius:12px;padding:13px;margin:12px 0 18px;font-size:13px;line-height:1.65}
+.preview-two-lines b{display:block;margin-bottom:6px;color:#356382}.preview-two-lines div{overflow-wrap:anywhere}
+/* v0.3: A4 test sheet, never a legal form */
+.tabs .tab{font-size:13px;line-height:1.3}
+.paper-scroll{max-width:100%;overflow:auto;margin-top:16px;padding:8px 0;background:#eef2f5;border:1px solid #dee4eb;border-radius:12px}
+.paper{font-family:"Hiragino Mincho ProN","Yu Mincho","Hiragino Kaku Gothic ProN",Meiryo,serif;font-size:9px;color:#151515;background:#fff;box-sizing:border-box;width:210mm;min-height:297mm;max-width:none;padding:8mm 7.5mm 7mm;position:relative;line-height:1.2;margin:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.paper *{box-sizing:border-box}
+.print-only{display:none}
+.paper-watermark{position:absolute;left:4%;top:39%;width:92%;text-align:center;transform:rotate(-28deg);font-size:48px;letter-spacing:.11em;font-weight:900;color:rgba(162,37,37,.18);z-index:10;pointer-events:none;white-space:nowrap}
+.paper-head{position:relative;text-align:center;height:15mm;padding-top:2mm}
+.paper-head .form-label{position:absolute;right:0;top:0;font-size:8px}
+.paper h2{margin:0;font-size:14px;letter-spacing:.08em}
+.paper-head .form-sub{font-size:9px;margin-top:3px}
+.paper .demo-strip{border:1px solid #333;background:#fff1eb;color:#a32f22;text-align:center;font-weight:800;padding:2.5px;font-size:10px}
+.paper .block-table{border:1px solid #333;border-bottom:0}
+.paper .prow{display:flex;min-height:8.2mm;border-bottom:1px solid #333}
+.paper .pcell{border-right:1px solid #333;padding:2px 4px;flex:1;min-width:0;overflow:hidden}
+.paper .pcell:last-child{border-right:0}
+.paper .label{font-size:8px;font-weight:700;letter-spacing:.01em}
+.paper .data{margin:3px 0 0;font-size:9px}
+.paper .muted{color:#777}
+.paper .small{font-size:7.6px}
+.paper .sectionbar{border:1px solid #333;border-top:0;padding:2px 5px;font-weight:800;background:#f2f2f2;font-size:8.6px}
+.paper .costrow{display:grid;grid-template-columns:37mm 1fr 14mm 15mm 28mm;min-height:6.9mm;border-bottom:1px solid #333}
+.paper .costrow>div{padding:3px 4px;border-right:1px solid #333;overflow:hidden}
+.paper .costrow>div:last-child{border-right:0;text-align:right}
+.paper .costrow strong{font-size:8.6px}
+.paper .costhead{font-weight:800;background:#f8f8f8}
+.paper .day-grid{display:grid;grid-template-columns:21mm repeat(31,minmax(0,1fr));border-left:1px solid #333;border-top:1px solid #333}
+.paper .day-grid>span{border-right:1px solid #333;border-bottom:1px solid #333;min-width:0;min-height:5.2mm;display:flex;align-items:center;justify-content:center;font-size:7px}
+.paper .day-grid>span:first-child{font-size:7px;font-weight:800}
+.paper .day-grid .on{font-weight:900;color:#111}
+.paper .footnote{font-size:7px;line-height:1.55;padding:2px 1px}
+.paper .stampblank{height:9mm}
+.paper .sectiongap{height:1mm}
+.paper .print-area-title{font-size:8px;font-weight:800;margin:2px 0}
+.paper .mock-line{display:inline-block;border-bottom:1px solid #333;min-width:70px;min-height:12px}
+.paper .form-footer{font-size:7.3px;text-align:center;margin-top:4px;border-top:1px solid #aaa;padding-top:4px;font-weight:800;color:#8e2525}
+@media(max-width:600px){.tab{padding:9px 3px;font-size:11px!important}.paper-scroll{padding:0}}
+@page{size:A4 portrait;margin:0}
+@media print{
+html,body{padding:0!important;margin:0!important;background:white!important;width:210mm!important;height:297mm!important}
+.app{display:none!important}
+.print-only{display:block!important}
+.paper{margin:0!important;padding:8mm 7.5mm 7mm!important;width:210mm!important;height:297mm!important;min-height:0!important;max-height:297mm!important;overflow:hidden!important;box-shadow:none!important;border:0!important;break-inside:avoid!important;page-break-inside:avoid!important}
+}
+
+/* Ver.0.4: image-backed, A4-accurate print-form preview */
+.sheet-canvas{display:block;width:100%;height:auto;background:white;box-shadow:0 2px 10px #0002}
+.pdf-links{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.pdf-links[hidden]{display:none!important}
+.pdf-links .btn{text-decoration:none;display:inline-flex;justify-content:center;align-items:center}
+.paper-scroll{padding:10px;background:#e8edf3;overflow:hidden}
+@media(max-width:600px){.pdf-links .btn{flex:1 1 100%}}
+
+/* v0.5: ローカルPDF選択と生成結果の表示 */
+.local-upload{border:1px solid #c7d8ec;background:#f7fbff;padding:15px;border-radius:12px;margin:16px 0}.local-upload label{display:block;margin-bottom:9px}.local-upload input{font-size:15px;width:100%;max-width:100%;padding:10px;background:white;border:1px solid #bfccd9;border-radius:8px}.local-upload .savestatus{margin-top:10px}.pdf-preview{width:100%;height:680px;border:0;background:white}.pdf-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.paper-scroll{margin-top:14px;border:1px solid #dbe4ef;border-radius:10px;overflow:hidden}@media(max-width:640px){.pdf-preview{height:420px}}
+
+/* v0.6: Japanese demo profile field entry */
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:15px}
+.profile-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:750;color:#3a516a}
+.profile-field input{width:100%;min-width:0;border:1px solid #bfcedd;border-radius:10px;font-size:17px;padding:12px;background:white;color:#203147;min-height:46px;font-family:inherit}
+.profile-field.wide{grid-column:1/-1}
+.profile-state{margin-top:12px}
+.insurance-heading{margin:19px 0 6px;font-size:16px;border-top:1px solid #e4ebf3;padding-top:15px}
+.profile-field select{width:100%;min-width:0;border:1px solid #bfcedd;border-radius:10px;font-size:16px;padding:11px;background:#fff;color:#203147;min-height:46px;font-family:inherit}
+@media(max-width:520px){.profile-grid{grid-template-columns:1fr}.profile-field.wide{grid-column:auto}.tabs .tab{flex:1 1 45%;font-size:12px;padding:10px 6px}}
+.shared-disease{border:1px solid #dfe8f1;border-radius:12px;background:#f6f9fc;padding:13px;font-size:13px;color:#46617c;line-height:1.6}.shared-disease-value{font-weight:700;color:#203147;overflow-wrap:anywhere;margin-top:5px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="eyebrow">MASSAGE CLAIMS · PROTOTYPE</div><h1>療養費申請 入力サンプル</h1><p>iPad向け 試作品 v0.8.2 ／ 架空データ専用</p></div><span class="pill">⚠ 試作・提出不可</span></header>
+<div class="notice"><b>これは画面と操作の確認用です。</b> <b>患者名・保険番号など実在する方の情報は入力しないでください。</b> 施術日と確認チェックだけをこのSafari内に保存します。<b>暗号化・バックアップなし。実在する患者情報は絶対に入力しないでください。</b> 元の帳票PDFをiPadから選び、架空の氏名・生年月日・保険情報も転記できます。正式な申請書ではありません。実際の患者情報を入力せず、提出しないでください。</div>
+<div class="layout">
+<aside class="card sidebar" aria-label="患者選択と対象月">
+<div class="section-label">対象年月 <span style="color:#8a98a8;font-size:11px;font-weight:500">（2026年7〜12月のデモ）</span></div>
+<div class="monthbar"><button class="iconbtn" id="prevMonth" aria-label="前の月">‹</button><strong id="monthText">2026年11月</strong><button class="iconbtn" id="nextMonth" aria-label="次の月">›</button></div>
+<div class="hline"><div class="section-label">患者一覧</div><span class="subtle">架空の3人</span></div>
+<div id="patientList" class="patients"></div>
+<div id="saveStatus" class="savestatus" role="status" aria-live="polite">保存状態を確認中…</div>
+<div class="mini-total"><div class="subtle">選択月の施術予定（3人合計）</div><strong id="allCount">—</strong><div class="subtle">確認済みの人数：<span id="allComplete">—</span></div></div>
+<button class="reset" type="button" id="reset">すべて初期状態に戻す</button>
+</aside>
+<main class="card workspace">
+<div class="personhead"><div><h2 id="patientTitle">患者A</h2><p id="patientCaption"></p></div><span class="btag">訪問施術料1</span></div>
+<div class="tabs" role="tablist" aria-label="入力画面切替"><button class="tab active" id="tabCalendar" role="tab" aria-selected="true" aria-controls="calendarPanel">① 施術日カレンダー</button><button class="tab" id="tabReview" role="tab" aria-selected="false" aria-controls="reviewPanel">② 料金・確認</button><button class="tab" id="tabProfile" role="tab" aria-selected="false" aria-controls="profilePanel">③ 架空患者・保険</button><button class="tab" id="tabPrint" role="tab" aria-selected="false" aria-controls="printPanel">④ 帳票・PDF</button></div>
+<section id="calendarPanel" role="tabpanel" aria-labelledby="tabCalendar">
+<div class="sectionhead"><h3>施術日の選択</h3><span class="count" id="selectedCount">— 回</span></div>
+<p class="desc" id="scheduleDesc"></p>
+<div class="weekhead" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+<div class="dates" id="calendar" aria-label="施術日のカレンダー"></div>
+<div class="legend"><span><i class="dot"></i>選択中</span><span><i class="dot extra"></i>追加した日</span><span><i class="dot removed"></i>予定から外した日</span></div>
+<div class="actions"><button class="btn" type="button" id="restoreDates">曜日の予定に戻す</button><button class="btn" type="button" id="clearDates">すべて解除</button><button class="btn primary" type="button" id="goReview">料金・確認へ →</button></div>
+<p class="smallprint">定期訪問曜日をもとに、月初めに予定日を表示します。日付をタップして追加・取消できます。この時点では「実際に施術した日」として確定されません。</p>
+</section>
+<section id="reviewPanel" role="tabpanel" aria-labelledby="tabReview" class="screenhide">
+<div class="sectionhead"><h3>料金の試算</h3><span class="count" id="reviewCount">— 回</span></div>
+<p class="desc">選択した日付をもとにした参考計算です。自己負担金・保険請求額は計算しません。</p>
+<div class="summary"><div class="metric"><label>局所数</label><strong id="siteCount">—</strong></div><div class="metric"><label>通常単価</label><strong id="unitPrice">—</strong></div><div class="metric"><label>選択回数</label><strong id="visitCount">—</strong></div></div>
+<div class="calc"><div class="calcrow"><span>1〜15回目の料金</span><b id="normalLine">—</b></div><div class="calcrow"><span>16回目以降の料金（50%）</span><b id="halfLine">—</b></div><div class="calcrow total"><span>参考合計</span><b id="grandTotal">—</b></div></div>
+<div class="alert"><b>必ずお読みください</b><br>厚生労働省の2026年7月適用の訪問施術料1の基本料金を使用した限定的な試算です。特別地域・追加施術・各種加算・負担金・同意の適否・月途中の部位変更などは未実装です。<b>この金額でレセプトを作成・提出しないでください。</b></div>
+<h3 style="font-size:17px;margin:22px 0 12px">3項目をまとめて確認</h3>
+<div class="checks"><label class="checkrow"><input type="checkbox" id="checkActual"><span>施術日・回数は実績と一致しています<small>予定から変更した日付も含めて確認</small></span></label><label class="checkrow"><input type="checkbox" id="checkInsurance"><span>保険情報・負担割合を確認しました<small>架空の保険情報を確認してください。資格照会ではありません</small></span></label><label class="checkrow"><input type="checkbox" id="checkConsent"><span>医師の同意内容・部位を確認しました<small>入力した架空の同意・施術情報と、実績を確認してください</small></span></label></div>
+<div id="reviewStatus" class="notok" aria-live="polite"></div>
+<div class="actions"><button class="btn" type="button" id="backCalendar">← カレンダーに戻る</button></div>
+<div class="bottom"><button class="btn primary full" type="button" id="goPrint">A4帳票の確認へ →</button><p class="smallprint">チェックは画面の動作確認専用です。実際の保険資格や医師同意の確認を代行するものではありません。</p></div>
+</section>
+<section id="profilePanel" role="tabpanel" aria-labelledby="tabProfile" class="screenhide">
+  <div class="sectionhead"><h3>架空患者・保険情報</h3><span class="pill">架空データだけ</span></div>
+  <p class="desc">氏名・保険情報・同意部位・傷病名・初療日・医師同意情報のPDF転記試験です。<b>実在の患者氏名・保険者番号・被保険者番号は絶対に入力しないでください。</b> これらの項目は保存されず、ページを開き直すと架空の初期値に戻ります。</p>
+  <div class="alert"><b>印字テストについて</b>：この試作版では名前の長さに合わせて印字を小さくします。日本語の字形をiPadの画面内で背景透明の画像にしてからPDFに重ねます。文字以外の部分は透明なため、元の罫線を隠しません。</div>
+  <div class="profile-grid">
+    <label class="profile-field wide">架空の氏名（漢字・かな）<input type="text" id="profileName" maxlength="32" placeholder="例：山田 さくら" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field wide">フリガナ（全角カタカナ）<input type="text" id="profileKana" maxlength="40" placeholder="例：ヤマダ サクラ" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field">生年月日（西暦で選択）<input type="date" id="profileBirth" min="1912-07-30" max="2026-12-31" autocomplete="off"></label>
+  </div>
+  <h4 class="insurance-heading">保険情報（架空・後期高齢者医療の試験）</h4>
+  <div class="profile-grid">
+    <label class="profile-field">保険者番号（8桁・先頭の0も入力）<input id="insurerNumber" type="text" inputmode="numeric" maxlength="8" placeholder="例：00000001" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field">被保険者番号（8桁）<input id="insuredNumber" type="text" inputmode="numeric" maxlength="8" placeholder="例：00001234" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field wide">被保険者記号（任意・英数字／ハイフン）<input id="insuredSymbol" type="text" maxlength="8" placeholder="例：AB12（通常は空欄）" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+    <label class="profile-field wide">自己負担割合（架空の試験用）
+      <select id="burdenRate"><option value="1">1割（試験上の給付9割）</option><option value="2">2割（試験上の給付8割）</option><option value="3">3割（給付7割：この帳票では出力不可）</option></select>
+    </label>
+  </div>
+  <div id="insuranceState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <p class="subtle">元の帳票には「給付割合 8・9・10」が印刷されています。1割・2割の例では該当数字を囲み、3割は対応欄がないためPDF生成を止めます。保険の資格や請求割合が正しいかを判定する機能ではありません。自己負担金・請求額も計算しません。</p>
+  <h4 class="insurance-heading">施術・医師同意（架空の検証用）</h4>
+  <p class="desc">組合の記載方法に合わせ、「傷病名」と「症状＋施術部位」を2段で印字します。同意部位は5つから選択。<b>選択日すべてで同意部位を毎回施術した</b>という今回の試験条件で回数を連動します。</p>
+  <fieldset class="sites-fieldset">
+    <legend>医師が同意した部位</legend>
+    <div class="site-grid">
+      <label><input type="checkbox" data-consent-site="躯幹"> 躯幹</label>
+      <label><input type="checkbox" data-consent-site="右上肢"> 右上肢</label>
+      <label><input type="checkbox" data-consent-site="左上肢"> 左上肢</label>
+      <label><input type="checkbox" data-consent-site="右下肢"> 右下肢</label>
+      <label><input type="checkbox" data-consent-site="左下肢"> 左下肢</label>
+    </div>
+  </fieldset>
+  <div id="siteCounts" class="savestatus profile-state" aria-live="polite"></div>
+  <div class="profile-grid">
+    <label class="profile-field wide">傷病名（共通入力・医師の同意記録にも転記）<textarea id="treatmentDiseases" rows="2" maxlength="95" placeholder="例：両変形性膝関節症　変形性脊椎症" autocomplete="off" spellcheck="false"></textarea></label>
+    <label class="profile-field wide">症状（架空の試験用）<textarea id="treatmentSymptoms" rows="2" maxlength="55" placeholder="例：筋麻痺・筋萎縮" autocomplete="off" spellcheck="false"></textarea></label>
+    <label class="profile-field">初療年月日（西暦で入力）<input id="firstTreatment" type="date" min="1912-07-30" max="2026-12-31" autocomplete="off"></label>
+  </div>
+  <div class="preview-two-lines" aria-label="帳票印字プレビュー">
+    <b>傷病名及び症状欄の印字プレビュー</b>
+    <div id="treatmentPreviewDisease"></div>
+    <div id="treatmentPreviewSymptoms"></div>
+  </div>
+  <h4 class="insurance-heading">医師の同意記録（架空・傷病名は共通）</h4>
+  <div class="profile-grid">
+    <label class="profile-field">同意医師氏名<input id="consentDoctor" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="例：架空 花子"></label>
+    <label class="profile-field wide">医師の住所<input id="consentAddress" type="text" maxlength="70" autocomplete="off" spellcheck="false" placeholder="例：架空市一丁目1番"></label>
+    <label class="profile-field">同意年月日（西暦）<input id="consentDate" type="date" min="1912-07-30" max="2026-12-31" autocomplete="off"></label>
+    <div class="profile-field wide shared-disease"><b>同意記録の傷病名</b><div>上の「傷病名」欄から自動転記します（再入力不要）。</div><div id="doctorDiseasePreview" class="shared-disease-value" aria-live="polite"></div></div>
+    <label class="profile-field">要加療期間（同意書に記載がある場合）<input id="consentPeriod" type="text" maxlength="28" autocomplete="off" spellcheck="false" placeholder="例：6か月"></label>
+  </div>
+  <div id="treatmentState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <p class="smallprint">同意日だけで有効性を自動判定しません。月途中の同意・部位変更や、部位ごとの施術回数が異なる場合はこの試作PDFを作成できません。入力した氏名・傷病名・医師情報等は自動保存しません。</p>
+  <div id="profileState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <div class="actions"><button class="btn" type="button" id="resetProfile">この人の架空情報を初期値に戻す</button><button class="btn primary" type="button" id="profileToPrint">帳票・PDFへ →</button></div>
+  <p class="smallprint">氏名・保険情報・同意・傷病名などを変更すると、3項目の確認チェックはすべて解除されます。PDF出力は患者A（架空）のみ対応します。</p>
+</section>
+<section id="printPanel" role="tabpanel" aria-labelledby="tabPrint" class="screenhide">
+  <div class="sectionhead"><h3>A4申請書・元PDFへの直接記入</h3><span class="pill">Ver.0.8.2 試験用</span></div>
+  <p class="desc">組合から受け取った<strong>元の申請書PDF</strong>をiPadの「ファイル」から選んでください。元の罫線や支払機関情報を<strong>削除・画像化せず</strong>、架空の氏名・保険番号・施術日・同意部位・部位別回数・傷病名・初療年月日・医師同意情報・参考金額を重ねたPDFを作ります。</p>
+  <div class="alert"><b>必ず守ってください</b>：この試作品は、以前いただいた<strong>特定の見本PDF</strong>だけを読み込めます。実患者情報が入った別のPDFは読み込ませないでください。選んだPDFはGitHubへアップロードされず、Safari内でのみ処理します。<b>「PDFファイル自体」をGitHubに登録しないでください。</b></div>
+  <div class="local-upload">
+    <label for="templateFile"><b>① 元の申請書PDFを選ぶ</b></label>
+    <input id="templateFile" type="file" accept=".pdf,application/pdf">
+    <div id="templateStatus" class="savestatus" role="status" aria-live="polite">まだ選択されていません（選んだPDFは端末内だけで処理します）</div>
+    <p class="smallprint">アプリを開き直した場合、PDFは再選択してください。PDFの中身はSafariの自動保存対象に含めません。</p>
+  </div>
+  <div id="printGate" class="alert" aria-live="polite"></div>
+  <div class="actions"><button class="btn primary" id="printBtn" type="button" disabled>② A4 PDFを生成する</button><button class="btn" id="backReview" type="button">← 確認画面へ</button></div>
+  <div id="pdfLinks" class="pdf-links" hidden><a id="pdfOpen" class="btn primary" target="_blank" rel="noopener">生成したPDFを開く</a><a id="pdfSave" class="btn" download="receipt-test-v082.pdf">PDFファイルを保存</a></div>
+  <div id="pdfError" class="alert screenhide" role="status" aria-live="polite"></div>
+  <div class="ok" id="previewSlot" hidden>✓ PDFを生成しました。「生成したPDFを開く」で内容を確認し、必要ならiPadの「ファイル」に保存してください。</div>
+  <p class="smallprint">PDFに「TEST ONLY」の表示を加えます。日本語文字は背景が透明な文字画像として描画します。<b>正式提出不可・参考計算のみ</b>です。保険・医師同意情報は架空の試験入力に限ります。資格・同意の有効性確認や自己負担金・正式請求額の計算は未実装です。</p>
+</section>
+</main>
+</div>
+<div class="foot">v0.8.2 · 架空データのみ · 元PDFは端末内で読み込み · 外部送信なし · 提出不可</div>
+</div>
+
+<script>
+'use strict';
+(function(){
+const DATA=[{id:'A',label:'患者A',days:[1,4]},{id:'B',label:'患者B',days:[2,5]},{id:'C',label:'患者C',days:[3]}];
+const PRICES=[0,2770,3240,3710,4180,4650];
+const SITE_NAMES=['躯幹','右上肢','左上肢','右下肢','左下肢'];
+const DEMO_DEFAULTS={
+ A:{name:'山田 さくら',kana:'ヤマダ サクラ',birth:'1951-04-12',insurerNumber:'00000001',insuredNumber:'00001234',insuredSymbol:'',burdenRate:'1',sites:['躯幹','右上肢','左上肢','右下肢','左下肢'],diseases:'両変形性膝関節症　変形性脊椎症　腰痛症',symptoms:'筋麻痺・筋萎縮',firstTreatment:'2015-11-02',doctor:'架空 花子',doctorAddress:'架空市一丁目1番',consentDate:'2026-09-01',consentPeriod:'6か月'},
+ B:{name:'田中 みどり',kana:'タナカ ミドリ',birth:'1948-08-21',insurerNumber:'00000002',insuredNumber:'00005678',insuredSymbol:'',burdenRate:'2',sites:['躯幹','右上肢','左上肢'],diseases:'架空の傷病名',symptoms:'筋麻痺',firstTreatment:'2024-06-03',doctor:'架空 太郎',doctorAddress:'架空市中央一丁目',consentDate:'2026-09-01',consentPeriod:'6か月'},
+ C:{name:'佐藤 はるか',kana:'サトウ ハルカ',birth:'1950-01-31',insurerNumber:'00000003',insuredNumber:'00009012',insuredSymbol:'AB12',burdenRate:'1',sites:['躯幹','右下肢'],diseases:'架空の傷病名',symptoms:'関節拘縮',firstTreatment:'2025-04-10',doctor:'架空 一郎',doctorAddress:'架空市三丁目',consentDate:'2026-09-01',consentPeriod:'6か月'}
+};
+const cloneDemo=p=>({...p,sites:[...p.sites]});
+const profiles=Object.fromEntries(Object.entries(DEMO_DEFAULTS).map(([id,p])=>[id,cloneDemo(p)]));
+const DOW=['日','月','火','水','木','金','土'];
+const MIN=2026*12+6,MAX=2026*12+11;
+const STORE_KEY='receipt-kantan-demo-v08'; // 旧版から施術日だけ移行。個人情報は保存しない
+const OLD_STORE_KEY='receipt-kantan-demo-v07';
+const OLDEST_STORE_KEY='receipt-kantan-demo-v04';
+let storage=null,storageLocked=false,saveMessage='';
+let year=2026,month=10,selectedId='A',screen='calendar';
+let records=Object.create(null);
+const el=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('ja-JP').format(n)+'円';
+const monthKey=()=>year+'-'+String(month+1).padStart(2,'0');
+const key=id=>monthKey()+':'+id;
+const daysInMonth=()=>new Date(year,month+1,0).getDate();
+function schedule(patient){const out=[];for(let d=1;d<=daysInMonth();d++){if(patient.days.includes(new Date(year,month,d).getDay()))out.push(d)}return out}
+function record(patient){const k=key(patient.id);if(!records[k])records[k]={days:schedule(patient),checks:[false,false,false]};return records[k]}
+function setSaveStatus(message,kind=''){const e=el('saveStatus');e.textContent=message;e.className='savestatus'+(kind?' '+kind:'')}
+function validSaved(v){
+ if(!v||typeof v!=='object'||![2,3,4,7,8].includes(v.version)||!v.records||typeof v.records!=='object'||Array.isArray(v.records))return false;
+ if(!Number.isInteger(v.year)||v.year!==2026||!Number.isInteger(v.month)||v.month<6||v.month>11||!DATA.some(p=>p.id===v.selectedId))return false;
+ const entries=Object.entries(v.records);if(entries.length>18)return false;
+ for(const [k,r] of entries){const m=/^2026-(0[7-9]|1[0-2]):([ABC])$/.exec(k);if(!m||!r||!Array.isArray(r.days)||!Array.isArray(r.checks)||r.checks.length!==3)return false;
+ const nd=new Date(2026,Number(m[1]),0).getDate();if(r.days.length>nd||new Set(r.days).size!==r.days.length||r.days.some(d=>!Number.isInteger(d)||d<1||d>nd)||r.checks.some(c=>typeof c!=='boolean'))return false;
+ }return true;
+}
+function initializeStorage(){
+ try{
+   storage=window.localStorage;const test=STORE_KEY+'-test';storage.setItem(test,'1');if(storage.getItem(test)!=='1')throw Error('write verification failed');storage.removeItem(test);
+   const raw=storage.getItem(STORE_KEY);
+   if(raw!==null){let obj;try{obj=JSON.parse(raw)}catch(_){obj=null}
+     if(!validSaved(obj)){storageLocked=true;setSaveStatus('保存データを読み取れません。上書きを停止しました。架空データなら「すべて初期状態に戻す」で再開できます。','fail');return}
+     records=Object.assign(Object.create(null),obj.records);for(const r of Object.values(records))r.checks=[false,false,false];year=obj.year;month=obj.month;selectedId=obj.selectedId;
+     setSaveStatus('✓ 前回の架空の施術日を復元しました。患者・同意の情報は保存せず、確認チェックは再確認のため解除しています。');return;
+   }
+   const legacy=storage.getItem(OLD_STORE_KEY)??storage.getItem(OLDEST_STORE_KEY);
+   if(legacy!==null){let old;try{old=JSON.parse(legacy)}catch(_){old=null}
+     if(old&&validSaved(old)){
+       records=Object.assign(Object.create(null),old.records);
+       for(const r of Object.values(records)){r.checks=[false,false,false]}
+       year=old.year;month=old.month;selectedId=old.selectedId;
+       saveDemo();setSaveStatus('✓ 以前の架空の施術日を引き継ぎました。保険情報を追加したため確認チェックは解除しました。');return;
+     }
+   }
+   setSaveStatus('未保存：操作を変更するとこのSafari内に自動保存します。','warn');
+ }catch(e){storage=null;setSaveStatus('保存機能が使えません。変更は画面を閉じると消えます。','fail')}
+}
+function saveDemo(){
+ if(storageLocked){setSaveStatus('保存データの問題により、上書きを停止しています。','fail');return}
+ if(!storage){setSaveStatus('保存できません：Safariの保存機能が利用できません。','fail');return}
+ try{
+   const payload=JSON.stringify({version:8,year,month,selectedId,records});
+   storage.setItem(STORE_KEY,payload);
+   if(storage.getItem(STORE_KEY)!==payload)throw Error('verify failed');
+   const now=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+   setSaveStatus('✓ 保存済み '+now+'（このSafari内のみ・バックアップなし）');
+ }catch(e){setSaveStatus('保存失敗：変更は消える可能性があります。Safariの保存設定・空き容量を確認してください。','fail')}
+}
+function patient(){return DATA.find(p=>p.id===selectedId)}
+function allChecked(r){return r.checks.every(Boolean)&&r.days.length>0}
+function renderSidebar(){el('monthText').textContent=year+'年'+(month+1)+'月';el('prevMonth').disabled=year*12+month<=MIN;el('nextMonth').disabled=year*12+month>=MAX;
+const list=el('patientList');list.replaceChildren();let count=0,complete=0;
+for(const p of DATA){const r=record(p);count+=r.days.length;if(allChecked(r))complete++;const b=document.createElement('button');b.type='button';b.className='patient'+(p.id===selectedId?' active':'');b.setAttribute('aria-pressed',String(p.id===selectedId));const stat=allChecked(r)?'確認済み':r.checks.some(Boolean)?'一部確認':'未確認';const cls=allChecked(r)?' done':r.checks.some(Boolean)?' part':'';b.innerHTML='<div class="p-top"><span class="p-name">'+p.label+'</span><span class="status'+cls+'">'+stat+'</span></div><div class="p-note">'+p.days.map(d=>DOW[d]+'曜').join('・')+' ／ '+personDetails(p).sites.length+'局所 ／ '+r.days.length+'回</div>';b.addEventListener('click',()=>{selectedId=p.id;screen='calendar';saveDemo();render()});list.appendChild(b)}
+el('allCount').textContent=count+'回';el('allComplete').textContent=complete+' / 3人';}
+function makeDay(day,scheduled,selected){const b=document.createElement('button');b.type='button';b.className='date';const isSchedule=scheduled.includes(day),isSelected=selected.includes(day);if(isSelected)b.classList.add(isSchedule?'selected':'extra');else if(isSchedule)b.classList.add('removed');b.setAttribute('aria-label',month+1+'月'+day+'日 '+(isSelected?'選択中・タップで解除':'未選択・タップで追加'));b.setAttribute('aria-pressed',String(isSelected));const label=isSelected?(isSchedule?'✓':'追加'):(isSchedule?'除外':'');b.innerHTML='<span>'+day+'</span><span class="mark">'+label+'</span>';b.addEventListener('click',()=>{const r=record(patient());r.days=isSelected?r.days.filter(n=>n!==day):[...r.days,day].sort((a,b)=>a-b);r.checks=[false,false,false];saveDemo();render()});return b}
+function renderCalendar(p,r){const scheduleDays=schedule(p);const grid=el('calendar');grid.replaceChildren();const first=new Date(year,month,1).getDay();const total=daysInMonth();const cells=Math.ceil((first+total)/7)*7;for(let i=0;i<cells;i++){const d=i-first+1;if(d<1||d>total){const blank=document.createElement('span');blank.className='date off';blank.setAttribute('aria-hidden','true');grid.appendChild(blank)}else grid.appendChild(makeDay(d,scheduleDays,r.days))}
+el('scheduleDesc').textContent='定期予定：'+p.days.map(d=>DOW[d]+'曜日').join('・')+'。青色が選択中、緑色は追加日、点線は予定から外した日です。';el('selectedCount').textContent=r.days.length+'回';}
+function renderReview(p,r){const count=r.days.length;const base=PRICES[personDetails(p).sites.length];const full=Math.min(count,15),half=Math.max(0,count-15);el('reviewCount').textContent=count+'回';el('siteCount').textContent=personDetails(p).sites.length+'局所';el('unitPrice').textContent=money(base);el('visitCount').textContent=count+'回';el('normalLine').textContent=money(base)+' × '+full+'回 = '+money(base*full);el('halfLine').textContent=money(base/2)+' × '+half+'回 = '+money(base*half/2);el('grandTotal').textContent=money(base*full+base*half/2);['checkActual','checkInsurance','checkConsent'].forEach((id,i)=>{el(id).checked=r.checks[i]});const status=el('reviewStatus');const ok=allChecked(r);status.className=ok?'ok':'notok';status.textContent=ok?'✓ 3項目のチェックが揃いました（架空データによる操作確認のみ）。':count===0?'施術日が選択されていません。カレンダーで日付を選んでください。':'未確認の項目があります。3項目の確認は試作品内だけの動作です。';}
+
+// Only in-memory demonstration profiles; never saved to localStorage.
+function personDetails(p){return profiles[p.id]}
+function japaneseEra(dateString){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(dateString))return null;
+ const [y,m,d]=dateString.split('-').map(Number);
+ const probe=new Date(y,m-1,d);if(probe.getFullYear()!==y||probe.getMonth()!==m-1||probe.getDate()!==d)return null;
+ const eras=[{start:'2019-05-01',value:'令',name:'令和',base:2018,center:178.5},{start:'1989-01-08',value:'平',name:'平成',base:1988,center:161.5},{start:'1926-12-25',value:'昭',name:'昭和',base:1925,center:144.5},{start:'1912-07-30',value:'大',name:'大正',base:1911,center:127.5}];
+ const era=eras.find(x=>dateString>=x.start);if(!era||dateString>'2026-12-31')return null;
+ return {...era,year:y-era.base,month:m,day:d};
+}
+function validateProfile(p){
+ const info=personDetails(p),name=info.name.trim(),kana=info.kana.trim();
+ if(!name||!kana)return '氏名とフリガナを入力してください。';
+ if(/[\x00-\x1f<>]/.test(name+kana))return '使用できない文字が含まれています。';
+ if([...name].length>32||[...kana].length>40)return '名前が長すぎます。';
+ if(!/^[ァ-ヶー・ 　]+$/.test(kana))return 'フリガナは全角カタカナで入力してください。';
+ if(!japaneseEra(info.birth))return '生年月日を正しく入力してください（大正元年以降）。';
+ return '';
+}
+function validateInsurance(p){
+ const info=personDetails(p);
+ if(!/^[0-9]{8}$/.test(info.insurerNumber))return '保険者番号は半角数字8桁で入力してください。先頭の0も必要です。';
+ if(!/^[0-9]{8}$/.test(info.insuredNumber))return '被保険者番号は半角数字8桁で入力してください。';
+ if(!/^[A-Z0-9-]{0,8}$/.test(info.insuredSymbol))return '被保険者記号は英大文字・数字・ハイフンの8文字以内で入力してください。';
+ if(!['1','2','3'].includes(info.burdenRate))return '自己負担割合を選択してください。';
+ if(info.burdenRate==='3')return '3割負担は、この帳票の給付割合欄に「7」がないため、試験用PDFを生成できません。';
+ return '';
+}
+// Do not infer treatment or validity from diagnosis. This is a fixed-scope demo only.
+function dateValid(v){return /^\d{4}-\d{2}-\d{2}$/.test(v)&&!!japaneseEra(v)}
+function singleLine(value,max){const t=String(value||'').trim();return t&&[...t].length<=max&&!/[\x00-\x1f<>]/.test(t)}
+function illnessPreview(info){return ['【傷病名】'+info.diseases.trim(),'【症状】'+info.symptoms.trim()+'　'+SITE_NAMES.filter(s=>info.sites.includes(s)).join('・')]}
+function validateTreatment(p,r){
+ const x=personDetails(p);
+ if(!Array.isArray(x.sites)||!x.sites.length||x.sites.length>5||new Set(x.sites).size!==x.sites.length||x.sites.some(z=>!SITE_NAMES.includes(z)))return '同意部位を1〜5部位から選択してください。';
+ if(!singleLine(x.diseases,95)||!singleLine(x.symptoms,55))return '傷病名と症状を入力してください（改行・制御文字は使用できません）。';
+ if(!dateValid(x.firstTreatment)||!dateValid(x.consentDate))return '初療年月日・医師の同意年月日を正しく入力してください。';
+ if(!singleLine(x.doctor,24)||!singleLine(x.doctorAddress,70))return '医師氏名と住所を入力してください。';
+ if(x.consentPeriod&&!singleLine(x.consentPeriod,28))return '要加療期間の文字を確認してください。';
+ if(r.days.length){const serviceDay=year+'-'+String(month+1).padStart(2,'0')+'-'+String(r.days[0]).padStart(2,'0');
+  if(x.firstTreatment>serviceDay)return '初療年月日が施術日より後です。';
+  if(x.consentDate>serviceDay)return 'この試作版は月途中の同意開始・変更に対応していません。同意日と施術日を確認してください。';
+  if(japaneseEra(x.consentDate).name!=='令和')return '医師同意日は、この帳票に印刷された「令和」の年月日だけを試験表示できます。';
+ }
+ return '';
+}
+function renderTreatment(p,r){
+ const x=personDetails(p);
+ document.querySelectorAll('[data-consent-site]').forEach(node=>{node.checked=x.sites.includes(node.dataset.consentSite)});
+ const lines=illnessPreview(x);
+ el('treatmentPreviewDisease').textContent=lines[0];el('treatmentPreviewSymptoms').textContent=lines[1];el('doctorDiseasePreview').textContent=x.diseases.trim()||'未入力';
+ el('siteCounts').textContent='選択：'+x.sites.length+'局所　／　'+r.days.length+'回／局所（'+(r.checks[0]?'施術実績を確認済み':'施術予定・未確認')+'）';
+ el('siteCounts').className='savestatus profile-state'+(!x.sites.length?' fail':'');
+ const err=validateTreatment(p,r);el('treatmentState').textContent=err?'施術・同意情報：'+err:'✓ 架空の部位・傷病名・初療日・医師情報の形式を確認しました。同意の有効性までは判断していません。';
+ el('treatmentState').className='savestatus profile-state'+(err?' fail':'');
+}
+function renderProfileStatus(p){
+ const info=personDetails(p);
+ const err=validateProfile(p),insErr=validateInsurance(p),state=el('profileState'),insState=el('insuranceState');
+ state.textContent=err?'患者の入力内容を確認してください：'+err:'✓ 架空の氏名・フリガナ・生年月日の形式を確認しました。';
+ state.className='savestatus profile-state'+(err?' fail':'');
+ insState.textContent=insErr?'保険情報の確認：'+insErr:'✓ 架空の保険番号の桁数・形式を確認しました（給付'+(10-Number(info.burdenRate))+'割）。資格の真偽は確認できません。';
+ insState.className='savestatus profile-state'+(insErr?' fail':'');
+ renderTreatment(p,record(p));
+}
+function renderProfile(p){
+ const info=personDetails(p);
+ for(const [field,id] of [['name','profileName'],['kana','profileKana'],['birth','profileBirth'],['insurerNumber','insurerNumber'],['insuredNumber','insuredNumber'],['insuredSymbol','insuredSymbol'],['burdenRate','burdenRate'],['diseases','treatmentDiseases'],['symptoms','treatmentSymptoms'],['firstTreatment','firstTreatment'],['doctor','consentDoctor'],['doctorAddress','consentAddress'],['consentDate','consentDate'],['consentPeriod','consentPeriod']])el(id).value=info[field];
+ renderProfileStatus(p);
+}
+function updateProfile(){
+ const p=patient(),info=profiles[p.id];
+ for(const [field,id] of [['name','profileName'],['kana','profileKana'],['birth','profileBirth'],['insurerNumber','insurerNumber'],['insuredNumber','insuredNumber'],['insuredSymbol','insuredSymbol'],['burdenRate','burdenRate'],['diseases','treatmentDiseases'],['symptoms','treatmentSymptoms'],['firstTreatment','firstTreatment'],['doctor','consentDoctor'],['doctorAddress','consentAddress'],['consentDate','consentDate'],['consentPeriod','consentPeriod']])info[field]=el(id).value;
+ // Insurance details are strictly in-memory. Persist only confirmation-reset and dates.
+ info.sites=SITE_NAMES.filter(z=>document.querySelector(`[data-consent-site="${z}"]`)?.checked);
+ const r=record(p);r.checks=[false,false,false];saveDemo();clearGeneratedPdf();
+ renderProfileStatus(p);renderSidebar();renderReview(p,r);renderPrintPanel(p,r);
+}
+function printEligibility(p,r){
+ if(p.id!=='A')return 'Ver.0.8.2の帳票出力は患者A（架空）の1人分だけです。';
+ const profileError=validateProfile(p);if(profileError)return '架空患者情報を確認してください：'+profileError;
+ const insuranceError=validateInsurance(p);if(insuranceError)return '架空の保険情報を確認してください：'+insuranceError;
+ const treatmentError=validateTreatment(p,r);if(treatmentError)return '架空の施術・医師同意情報を確認してください：'+treatmentError;
+ if(r.days.length===0)return '施術日が選択されていません。';
+ if(r.days.length>15)return '月16回以上は追加の算定条件・書類確認が必要なため、Ver.0.8.2の帳票出力を停止しています。';
+ if(!r.checks.every(Boolean))return '料金・確認画面の3項目をすべてチェックしてください（全施術日に同一の同意部位を施術した架空の試験条件）。';
+ return '';
+}
+// All inputs are demonstration-only. Free-text demo fields are not persisted, but real identifiers must NEVER be entered.
+
+
+// Ver.0.8.2 PDF overlay, using ONLY the exact user-supplied sample template.
+// No external libraries, embedded PDF, upload, network requests, or private-bank strings.
+// Japanese demo strings are rendered as alpha-masked PDF image XObjects (no font files distributed).
+// Preserves the source PDF's vector content and all preprinted fields by incremental update.
+const TEMPLATE_SHA256='07b5f53ecb6e712a6d4a76e16d582671fcfc17724aad36943aceacac16a48e1d';
+const FORM_W=595.32,FORM_H=841.92;
+let templateBytes=null,templateName='',generatedUrl='',generatedSignature='',templateUrl='';
+const enc=new TextEncoder();
+const safeText=v=>String(v).replace(/[\\()]/g,x=>'\\'+x);
+const asciiBytes=string=>enc.encode(string);
+function toRawString(bytes){
+ let raw='';for(let i=0;i<bytes.length;i+=16384)raw+=String.fromCharCode(...bytes.subarray(i,i+16384));
+ return raw;
+}
+function setTemplateStatus(message,kind=''){let box=el('templateStatus');box.textContent=message;box.className='savestatus'+(kind?' '+kind:'')}
+function pdfSignature(p,r){return JSON.stringify([year,month,p.id,r.days,r.checks,templateName,profiles[p.id]])}
+function clearGeneratedPdf(){
+ if(generatedUrl){URL.revokeObjectURL(generatedUrl);generatedUrl=''}
+ generatedSignature='';el('pdfLinks').hidden=true;el('previewSlot').hidden=true;
+
+}
+function checkOriginalPdfStructure(raw){
+ // Only support the exact 1-page vector original provided in this conversation.
+ if(!raw.startsWith('%PDF-1.7'))throw Error('指定の元PDFではありません。');
+ if(!/^4 0 obj\s*<<\/Type\/Page\b[\s\S]*?\/Contents 5 0 R[\s\S]*?endobj/m.test(raw))throw Error('申請書のページ構造が異なります。');
+ const pts=[...raw.matchAll(/startxref\s+(\d+)\s+%%EOF/g)];
+ if(!pts.length)throw Error('PDFの参照情報を読み取れません。');
+ return {startXref:Number(pts[pts.length-1][1])};
+}
+async function loadPdfFile(file){
+ templateBytes=null;templateName='';clearGeneratedPdf();renderPrintPanel(patient(),record(patient()));
+ if(!file){setTemplateStatus('PDFが選択されていません。');return}
+ if(file.size>4000000){setTemplateStatus('この試作版では4MB以下のPDFのみ対応します。','fail');return}
+ setTemplateStatus('PDFの書式を検証中…');
+ try{
+   const bytes=new Uint8Array(await file.arrayBuffer());
+   const digest=await crypto.subtle.digest('SHA-256',bytes);
+   const hash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+   if(hash!==TEMPLATE_SHA256)throw Error('指定の見本PDFと一致しません。別のPDFは安全のため受け付けません。');
+   checkOriginalPdfStructure(toRawString(bytes));
+   templateBytes=bytes;templateName=file.name;
+   setTemplateStatus('✓ 元の帳票を確認しました。罫線や支払機関欄はそのまま保持します。');
+ }catch(e){setTemplateStatus('PDFを読み込めません：'+(e?.message||'形式エラー'),'fail');}
+ renderPrintPanel(patient(),record(patient()));
+}
+function renderPrintPanel(p,r){
+ const reason=printEligibility(p,r);const gate=el('printGate');
+ const message=reason||(!templateBytes?'① 元の見本PDFを選択してください。':'✓ 架空データの確認が完了。元PDFの上に試験用の氏名・保険情報・数字を記入できます。');
+ gate.textContent=message;gate.className=(!reason&&templateBytes)?'ok':'alert';
+ el('printBtn').disabled=!!reason||!templateBytes;
+ const sig=pdfSignature(p,r);
+ if(generatedSignature!==sig)clearGeneratedPdf();
+}
+// PDF point coordinates are bottom-left origins; the established positions use top-left.
+const fromTop=y=>(FORM_H-y).toFixed(2);
+function txt(text,x,y,size=8,align='left',color='black'){
+ text=String(text);const glyphWidth=[...text].reduce((sum,ch)=>sum+(ch>='0'&&ch<='9'?0.56:ch===','?0.28:ch==='.'?0.28:0.52),0)*size;
+ const left=x-(align==='right'?glyphWidth:align==='center'?glyphWidth/2:0);
+ const rgb=color==='red'?'0.76 0.13 0.16':'0.05 0.06 0.08';
+ return `BT /FDemo ${size} Tf ${rgb} rg 1 0 0 1 ${left.toFixed(2)} ${fromTop(y)} Tm (${safeText(text)}) Tj ET\n`;
+}
+// Draw only actual Japanese glyph pixels; keep every other pixel transparent.
+// Embed RGB image + 8-bit soft mask (/SMask) as separate PDF XObjects.
+// Uncompressed streams avoid external PNG/deflate libraries and iOS compatibility dependencies.
+function demoTransparentGlyphs(text,wide,high,fontPt,minPt,fieldLabel='文字欄',maxLines=1){
+ const scale=6,canvas=document.createElement('canvas');
+ canvas.width=Math.round(wide*scale);canvas.height=Math.round(high*scale);
+ const context=canvas.getContext('2d',{willReadFrequently:true});
+ if(!context)throw Error('日本語描画用Canvasが使用できません。');
+ context.clearRect(0,0,canvas.width,canvas.height);
+ const fontFamily='"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",sans-serif';
+ const value=String(text).trim();
+ const available=canvas.width-scale*4;
+ function setFont(size){context.font=`${size*scale}px ${fontFamily}`}
+ function fits(value){return context.measureText(value).width<=available}
+ // Prefer boundaries between diagnoses to avoid splitting disease names midword.
+ function twoLines(value){
+   const chars=[...value],candidates=[];
+   for(let k=1;k<chars.length;k++){
+     const a=chars.slice(0,k).join('').trim(),b=chars.slice(k).join('').trim();
+     if(!a||!b||!fits(a)||!fits(b))continue;
+     const natural=/^[\u3000 ]$/.test(chars[k-1])||/^[\u3000 ]$/.test(chars[k]);
+     candidates.push({lines:[a,b],natural,maxWidth:Math.max(context.measureText(a).width,context.measureText(b).width)});
+   }
+   // Natural word boundary first, then balanced emergency wrap with no omission.
+   candidates.sort((a,b)=>Number(b.natural)-Number(a.natural)||a.maxWidth-b.maxWidth);
+   return candidates[0]?.lines||null;
+ }
+ let lines=null,chosen=fontPt;
+ // Keep long diagnoses legible by trying two lines before shrinking.
+ for(let size=fontPt;size>=minPt-.001;size=Math.max(minPt,Math.round((size-.25)*100)/100)){
+   setFont(size);
+   if(fits(value)){lines=[value];chosen=size;break}
+   if(maxLines>=2&&high>=15&&twoLines(value)){lines=twoLines(value);chosen=size;break}
+   if(size<=minPt)break;
+ }
+ if(!lines)throw Error(`${fieldLabel}が記入欄に収まりません。文字数と印字幅を確認してください（省略せず出力を停止しました）。`);
+ setFont(chosen);context.fillStyle='#111111';context.textBaseline='middle';
+ if(lines.length===1){context.fillText(lines[0],2*scale,canvas.height*.52)}
+ else{context.fillText(lines[0],2*scale,canvas.height*.285);context.fillText(lines[1],2*scale,canvas.height*.715)}
+ const raw=context.getImageData(0,0,canvas.width,canvas.height).data;
+ const pixels=canvas.width*canvas.height;
+ const rgb=new Uint8Array(pixels*3),alpha=new Uint8Array(pixels);
+ let hasInk=false;
+ for(let i=0;i<pixels;i++){
+   const j=i*4,k=i*3;
+   rgb[k]=raw[j];rgb[k+1]=raw[j+1];rgb[k+2]=raw[j+2];
+   alpha[i]=raw[j+3];if(alpha[i])hasInk=true;
+ }
+ if(!hasInk)throw Error(`${fieldLabel}の文字が描画されませんでした。`);
+ return {rgb,alpha,width:canvas.width,height:canvas.height};
+}
+// Actual alpha pixel bounds are checked against the original printed row boundaries.
+// Fail closed if a platform font extends a glyph toward the ruled lines.
+function assertInkInside(img,topY,height,allowedTop,allowedBottom,label){
+ let y0=img.height,y1=-1;
+ for(let y=0;y<img.height;y++){
+  for(let x=0;x<img.width;x++){
+   if(img.alpha[y*img.width+x]>30){y0=Math.min(y0,y);y1=Math.max(y1,y)}
+  }
+ }
+ if(y1<0)throw Error(label+'の文字が描画されていません。');
+ const inkTop=topY+y0*height/img.height;
+ const inkBottom=topY+(y1+1)*height/img.height;
+ if(inkTop<allowedTop||inkBottom>allowedBottom){
+  throw Error(label+'の文字が罫線に近すぎます。文字量を調整してください。');
+ }
+}
+function pdfImageDraw(key,x,topY,w,h){return `q ${w} 0 0 ${h} ${x} ${(FORM_H-topY-h).toFixed(2)} cm /${key} Do Q\n`}
+function japaneseProfileImages(p){
+ const info=personDetails(p);const images=[
+  {key:'JName',obj:49,maskObj:51,x:115,y:156,w:132,h:20,img:demoTransparentGlyphs(info.name.trim(),132,20,11,7.25,'氏名')},
+  {key:'JKana',obj:50,maskObj:52,x:146,y:137.5,w:100,h:10.4,img:demoTransparentGlyphs(info.kana.trim(),100,10.4,7.2,5.25,'フリガナ')},
+  {key:'JInsured',obj:53,maskObj:54,x:33,y:118.4,w:133,h:14,img:demoTransparentGlyphs(info.insuredSymbol?info.insuredSymbol+'  '+info.insuredNumber:info.insuredNumber,133,14,8.1,6.25,'被保険者記号・番号')},
+  {key:'JIllness',obj:55,maskObj:56,x:151,y:224.4,w:292,h:9.7,img:demoTransparentGlyphs(illnessPreview(info)[0],292,9.7,7.2,5.2,'傷病名及び症状欄の傷病名')},
+  {key:'JSymptoms',obj:57,maskObj:58,x:151,y:235.4,w:292,h:9.3,img:demoTransparentGlyphs(illnessPreview(info)[1],292,9.3,7.0,4.9,'症状・施術部位')},
+  {key:'JInitialEra',obj:59,maskObj:60,x:39,y:204.0,w:25,h:14,img:demoTransparentGlyphs(japaneseEra(info.firstTreatment).name,25,14,9.2,8,'初療年月日の元号')},
+  {key:'JDoctor',obj:61,maskObj:62,x:31.5,y:709.0,w:117,h:16,img:demoTransparentGlyphs(info.doctor,117,16,8.7,6.3,'同意医師氏名')},
+  {key:'JDoctorAddr',obj:63,maskObj:64,x:160,y:708.5,w:141.5,h:18,img:demoTransparentGlyphs(info.doctorAddress,141.5,18,7.8,5.3,'同意医師住所')},
+  {key:'JDoctorIllness',obj:65,maskObj:66,x:398,y:708.0,w:92.5,h:17,img:demoTransparentGlyphs(info.diseases.trim(),92.5,17,7.5,5.1,'医師同意記録の傷病名',2)},
+  {key:'JDoctorPeriod',obj:67,maskObj:68,x:501.5,y:708.5,w:66.7,h:16,img:info.consentPeriod.trim()?demoTransparentGlyphs(info.consentPeriod,66.7,16,7.3,5.3,'要加療期間'):{width:8,height:8,rgb:new Uint8Array(192),alpha:new Uint8Array(64)}}
+ ];
+ const a=images.find(z=>z.key==='JIllness'),b=images.find(z=>z.key==='JSymptoms');
+ // The original form's horizontal borders are around top positions 222.5 and 246.5 pt.
+ // Also reserve 1 pt clearance between the first and second printed lines.
+ assertInkInside(a.img,a.y,a.h,223.6,234.0,'傷病名');
+ assertInkInside(b.img,b.y,b.h,235.0,244.5,'症状・施術部位');
+ return images;
+}
+function inkRing(x,topY,rx=5.1,ry=5.1){
+ const y=FORM_H-topY,k=.55228475;
+ return `0.13 0.19 0.25 RG 0.65 w ${x+rx} ${y} m `+
+ `${x+rx} ${y+ry*k} ${x+rx*k} ${y+ry} ${x} ${y+ry} c `+
+ `${x-rx*k} ${y+ry} ${x-rx} ${y+ry*k} ${x-rx} ${y} c `+
+ `${x-rx} ${y-ry*k} ${x-rx*k} ${y-ry} ${x} ${y-ry} c `+
+ `${x+rx*k} ${y-ry} ${x+rx} ${y-ry*k} ${x+rx} ${y} c S\n`;
+}
+function visitCircle(x,topY){
+ const y=FORM_H-topY,r=3.05,k=r*.55228475;
+ return `0.12 0.15 0.19 RG 0.7 w ${x+r} ${y} m `+
+ `${x+r} ${y+k} ${x+k} ${y+r} ${x} ${y+r} c `+
+ `${x-k} ${y+r} ${x-r} ${y+k} ${x-r} ${y} c `+
+ `${x-r} ${y-k} ${x-k} ${y-r} ${x} ${y-r} c `+
+ `${x+k} ${y-r} ${x+r} ${y-k} ${x+r} ${y} c S\n`+
+ txt('1',x,topY+1.5,4.5,'center');
+}
+function makeOverlayCommands(p,r){
+ const n=r.days.length,price=PRICES[personDetails(p).sites.length];let result='q\n';
+ const era=japaneseEra(personDetails(p).birth);
+ result+=pdfImageDraw('JName',115,156,132,20);result+=pdfImageDraw('JKana',146,137.5,100,10.4);result+=pdfImageDraw('JInsured',33,118.4,133,14);
+ // Eight insurer-number boxes, including leading zeros. No integer conversion.
+ const insurance=personDetails(p);for(let i=0;i<8;i++)result+=txt(insurance.insurerNumber[i],402.7+22.33*i,102.1,9,'center');
+ // Benefit-rate box preprints 8, 9, 10 only. Mark 9 for 1割, 8 for 2割 (trial only).
+ result+=inkRing(insurance.burdenRate==='1'?536.3:514,67.5,8,5.8);
+ result+=inkRing(era.center,184.5,5.3,5.2);
+ result+=txt(era.year,198.5,186.5,7.5,'center');
+ result+=txt(era.month,220.8,186.5,7.5,'center');
+ result+=txt(era.day,245.1,186.5,7.5,'center');
+ // Date, patient specimen, effective service period and count, visit-fee trial amounts.
+ result+=txt(year-2018,302,26.0,8,'center');result+=txt(month+1,326,26,8,'center');
+ // No real identifiers; the Japanese demo profile above is rendered in the proper fields.
+ result+=txt(year-2018,198,215,7,'center');result+=txt(month+1,224,215,7,'center');result+=txt(r.days[0],250,215,7,'center');
+ result+=txt(year-2018,322,215,7,'center');result+=txt(month+1,347,215,7,'center');result+=txt(r.days[r.days.length-1],373,215,7,'center');
+ result+=txt(n,409,215,8,'center');
+ result+=txt(price.toLocaleString('en-US'),263,306.5,8,'right');
+ result+=txt(n,335,306.5,8,'right');
+ result+=txt((price*n).toLocaleString('en-US'),420,306.5,8,'right');
+ result+=txt((price*n).toLocaleString('en-US'),420,483,8,'right');
+ // Individual site counts reflect all selected visits, ONLY after explicit actual-days confirmation.
+ // Any exception / mid-month site change is outside this demonstration and must be handled separately.
+ const info=personDetails(p);const xs=[269.5,306.4,343.4,380.4,417.5];
+ SITE_NAMES.forEach((site,i)=>{if(info.sites.includes(site))result+=txt(n,xs[i],265.8,7.3,'right')});
+ // The top illness/symptom rows and consent-record fields are rasterized as alpha-masked black glyphs.
+ for(const [image,x,y,w,h] of [
+  ['JIllness',151,224.4,292,9.7],['JSymptoms',151,235.4,292,9.3],
+  ['JInitialEra',39,204,25,14],['JDoctor',31.5,709,117,16],
+  ['JDoctorAddr',160,708.5,141.5,18],['JDoctorIllness',398,708,92.5,17],
+  ['JDoctorPeriod',501.5,708.5,66.7,16]
+ ])result+=pdfImageDraw(image,x,y,w,h);
+ const first=japaneseEra(info.firstTreatment);result+=txt(first.year,80,215,7.3,'center');result+=txt(first.month,103,215,7.3,'center');result+=txt(first.day,137,215,7.3,'center');
+ const consent=japaneseEra(info.consentDate);
+ // The template has a fixed preprinted 令和 in its doctor's consent field.
+ if(consent.name!=='令和')throw Error('この帳票の同意日欄は「令和」表示のみ対応しています。');
+ result+=txt(consent.year,325.3,722.2,7,'center');result+=txt(consent.month,355.3,722.2,7,'center');result+=txt(consent.day,381.3,722.2,7,'center');
+ for(const day of r.days)result+=visitCircle(114+14.89*(day-1),526.7);
+ // Full-color vector warning cannot be mistaken for a formal insurance submission.
+ result+='q 0.766 0.643 -0.643 0.766 160 375 cm\n';
+ result+='BT /FDemo 24 Tf 0.76 0.13 0.16 rg 1 0 0 1 0 0 Tm (TEST ONLY - DO NOT SUBMIT) Tj ET\n';result+='Q\n';
+ result+=txt('DEMO v0.8.2 - NOT FOR SUBMISSION',FORM_W/2,833.5,7,'center','red');
+ result+='Q\n';return result;
+}
+// Fixed-layout incremental PDF update. Restrict to hashed, known original to avoid
+// changing an unexpected form, and preserve original page content/font/paths exactly.
+function appendDemoPage(original,overlay,images){
+ const raw=toRawString(original);const {startXref}=checkOriginalPdfStructure(raw);
+ const pageStart=raw.indexOf('4 0 obj');const pageEnd=raw.indexOf('endobj',pageStart)+6;
+ if(pageStart<0||pageEnd<6)throw Error('ページの定義が見つかりません。');
+ const oldPage=raw.slice(pageStart,pageEnd);
+ const refs=images.map(image=>'/'+image.key+' '+image.obj+' 0 R').join('');
+ const newPage=oldPage.replace('/Contents 5 0 R','/Contents[5 0 R 47 0 R]')
+    .replace('/F5 25 0 R>>','/F5 25 0 R/FDemo 48 0 R>>')
+    .replace('/ProcSet[/PDF/Text/ImageB/ImageC/ImageI]','/ProcSet[/PDF/Text/ImageB/ImageC/ImageI]/XObject<<'+refs+'>>');
+ if(newPage===oldPage||!newPage.includes('/FDemo 48 0 R')||!newPage.includes('/XObject<<'))throw Error('元のページの書式が一致しません。');
+ const commandBytes=asciiBytes(overlay),chunks=[];let offset=0;const offsets={};
+ function push(chunk){if(typeof chunk==='string')chunk=asciiBytes(chunk);chunks.push(chunk);offset+=chunk.length}
+ function mark(obj){offsets[obj]=offset}
+ function imageObject(number,dictionary,bytes){
+   mark(number);
+   push(`${number} 0 obj\n<<${dictionary}/Length ${bytes.length}>>\nstream\n`);
+   push(bytes);push('\nendstream\nendobj\n');
+ }
+ push(original);push('\n');
+ imageObject(47,'',commandBytes);
+ mark(4);push(newPage+'\n');
+ mark(48);push('48 0 obj\n<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>\nendobj\n');
+ for(const data of images){
+   const img=data.img,base=`/Type/XObject/Subtype/Image/Width ${img.width}/Height ${img.height}/BitsPerComponent 8`;
+   imageObject(data.obj,base+`/ColorSpace/DeviceRGB/SMask ${data.maskObj} 0 R`,img.rgb);
+   imageObject(data.maskObj,base+'/ColorSpace/DeviceGray',img.alpha);
+ }
+ const xrefOffset=offset;
+ push('xref\n4 1\n'+String(offsets[4]).padStart(10,'0')+' 00000 n \n');
+ for(let obj=47;obj<=68;obj++){
+   if(!Number.isInteger(offsets[obj]))throw Error('PDF画像情報が不足しています。');
+   push(obj+' 1\n'+String(offsets[obj]).padStart(10,'0')+' 00000 n \n');
+ }
+ push('trailer\n<</Size 69/Root 1 0 R/Info 3 0 R/Prev '+startXref+'>>\nstartxref\n'+xrefOffset+'\n%%EOF\n');
+ const out=new Uint8Array(offset);let pos=0;for(const chunk of chunks){out.set(chunk,pos);pos+=chunk.length}return out;
+}
+
+async function generatePdf(){
+ const p=patient(),r=record(p);
+ if(!templateBytes||printEligibility(p,r)){renderPrintPanel(p,r);return}
+ const btn=el('printBtn');btn.disabled=true;btn.textContent='PDFを生成中…';
+ const error=el('pdfError');error.classList.add('screenhide');
+ try{
+   const images=japaneseProfileImages(p);
+   const bytes=appendDemoPage(templateBytes,makeOverlayCommands(p,r),images);
+   clearGeneratedPdf();generatedUrl=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+   generatedSignature=pdfSignature(p,r);
+   const name='receipt-v082-test-'+year+String(month+1).padStart(2,'0')+'.pdf';
+   el('pdfOpen').href=generatedUrl;el('pdfSave').href=generatedUrl;el('pdfSave').download=name;
+   el('pdfLinks').hidden=false;el('previewSlot').hidden=false;
+ }catch(e){error.textContent='PDFを生成できませんでした：'+(e?.message||'不明なエラー');error.classList.remove('screenhide')}
+ finally{btn.textContent='② A4 PDFを生成する';renderPrintPanel(patient(),record(patient()))}
+}
+el('templateFile').addEventListener('change',e=>loadPdfFile(e.target.files?.[0]));
+function render(){const p=patient(),r=record(p);renderSidebar();el('patientTitle').textContent=p.label;el('patientCaption').textContent=year+'年'+(month+1)+'月分 ／ 定期訪問：'+p.days.map(d=>DOW[d]+'曜').join('・');for(const x of ['calendar','review','profile','print']){const id=x==='calendar'?'Calendar':x==='review'?'Review':x==='profile'?'Profile':'Print';el('tab'+id).classList.toggle('active',screen===x);el('tab'+id).setAttribute('aria-selected',String(screen===x));el(x==='print'?'printPanel':x+'Panel').classList.toggle('screenhide',screen!==x)}renderCalendar(p,r);renderReview(p,r);renderProfile(p);renderPrintPanel(p,r)}
+function changeMonth(delta){const next=year*12+month+delta;if(next<MIN||next>MAX)return;year=Math.floor(next/12);month=next%12;screen='calendar';saveDemo();render()}
+function setScreen(value){screen=value;render()}
+el('prevMonth').addEventListener('click',()=>changeMonth(-1));el('nextMonth').addEventListener('click',()=>changeMonth(1));el('tabCalendar').addEventListener('click',()=>setScreen('calendar'));el('tabReview').addEventListener('click',()=>setScreen('review'));el('tabPrint').addEventListener('click',()=>setScreen('print'));el('tabProfile').addEventListener('click',()=>setScreen('profile'));el('goReview').addEventListener('click',()=>setScreen('review'));el('backCalendar').addEventListener('click',()=>setScreen('calendar'));el('goPrint').addEventListener('click',()=>setScreen('print'));el('backReview').addEventListener('click',()=>setScreen('review'));el('profileToPrint').addEventListener('click',()=>setScreen('print'));
+['profileName','profileKana','profileBirth','insurerNumber','insuredNumber','insuredSymbol','treatmentDiseases','treatmentSymptoms','firstTreatment','consentDoctor','consentAddress','consentDate','consentPeriod'].forEach(id=>el(id).addEventListener('input',updateProfile));
+ document.querySelectorAll('[data-consent-site]').forEach(e=>e.addEventListener('change',updateProfile));
+el('burdenRate').addEventListener('change',updateProfile);
+el('resetProfile').addEventListener('click',()=>{profiles[selectedId]=cloneDemo(DEMO_DEFAULTS[selectedId]);record(patient()).checks=[false,false,false];saveDemo();clearGeneratedPdf();render()});
+el('restoreDates').addEventListener('click',()=>{const r=record(patient());r.days=schedule(patient());r.checks=[false,false,false];saveDemo();render()});el('clearDates').addEventListener('click',()=>{const r=record(patient());r.days=[];r.checks=[false,false,false];saveDemo();render()});
+['checkActual','checkInsurance','checkConsent'].forEach((id,i)=>el(id).addEventListener('change',e=>{const r=record(patient());r.checks[i]=e.target.checked;saveDemo();render()}));
+el('reset').addEventListener('click',()=>{
+ if(!confirm('このSafariに保存された架空データを削除し、すべて初期状態に戻しますか？'))return;
+ if(storage){try{storage.removeItem(STORE_KEY);if(storage.getItem(STORE_KEY)!==null)throw Error('delete failed')}catch(e){setSaveStatus('保存データを削除できませんでした。再試行してください。','fail');return}}
+ storageLocked=false;records=Object.create(null);year=2026;month=10;selectedId='A';screen='calendar';
+ for(const id of Object.keys(DEMO_DEFAULTS))profiles[id]=cloneDemo(DEMO_DEFAULTS[id]);
+ if(storage)saveDemo();else setSaveStatus('保存機能が使えません。画面内のみ初期化しました。','fail');render();
+});
+el('printBtn').addEventListener('click',generatePdf);
+initializeStorage();render();
+})();
+</script>
+</body>
+</html>

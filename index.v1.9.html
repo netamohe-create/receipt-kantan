@@ -1,0 +1,1702 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src blob:; frame-src blob:">
+<title>レセプトかんたん入力 Ver.1.9｜本番候補・要確認</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#203147;background:#f5f7fb;font-size:16px;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px}button{font:inherit;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #357fd0;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.43}button,select{touch-action:manipulation}.app{max-width:1210px;margin:0 auto;padding:24px 24px 64px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:20px}.top h1{font-size:clamp(22px,2.6vw,31px);margin:4px 0 6px;letter-spacing:-.03em}.top p{color:#617187;font-size:13px;margin:0}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#46637d}.pill{background:#fff1cf;color:#856018;border:1px solid #f2dc9c;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}.notice{background:#fff6e6;border:1px solid #f1d69b;color:#654c1a;padding:13px 16px;border-radius:13px;line-height:1.65;font-size:13px;margin-bottom:18px}.layout{display:grid;grid-template-columns:312px minmax(0,1fr);gap:17px}.card{background:#fff;border:1px solid #e1e8f0;box-shadow:0 3px 20px rgba(26,53,87,.045);border-radius:17px}.sidebar{padding:17px}.hline{display:flex;align-items:center;justify-content:space-between;gap:12px}.section-label{font-weight:800;font-size:14px}.monthbar{display:flex;align-items:center;gap:8px;margin:12px 0 17px}.monthbar strong{flex:1;text-align:center;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}.iconbtn{background:#f3f6fa;border:1px solid #dfe7f0;color:#315c82;border-radius:10px;height:42px;min-width:42px;font-size:22px}.iconbtn:disabled{opacity:.28}.subtle{color:#6e8094;font-size:12px;line-height:1.55}.sidebar .section-label{margin-bottom:6px}.patients{display:grid;gap:9px;margin:13px 0 14px}.patient{border:1px solid #e1e8f0;background:#fff;border-radius:12px;padding:13px;text-align:left;width:100%;color:#26364b}.patient.active{background:#ecf4ff;border:2px solid #3981cd;padding:12px}.p-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.p-name{font-weight:800}.p-note{font-size:12px;color:#63758a;margin-top:6px}.status{font-size:11px;padding:4px 8px;border-radius:100px;background:#f0f2f5;color:#647082;font-weight:750;white-space:nowrap}.status.done{background:#e5f6eb;color:#267647}.status.part{background:#fff1d9;color:#936100}.mini-total{border-top:1px solid #e7edf4;padding-top:15px;margin-top:14px}.mini-total strong{display:block;font-size:21px;margin:4px 0}.savestatus{border:1px solid #dce8f3;background:#f2f7fd;color:#275c88;padding:10px 11px;border-radius:10px;font-size:12px;font-weight:700;line-height:1.6;margin-top:10px}.savestatus.fail{color:#9b2929;background:#fff0ed;border-color:#e9bcb7}.savestatus.warn{color:#845c16;background:#fff9e9;border-color:#eed9ae}.reset{font-size:12px;border:0;background:none;color:#446f9e;text-decoration:underline;padding:12px 0 0}.workspace{padding:22px 25px}.personhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid #e5eaf1;padding-bottom:17px;margin-bottom:17px}.personhead h2{font-size:25px;margin:0 0 5px}.personhead p{margin:0;color:#617187;font-size:13px}.btag{background:#eef3fb;color:#44627e;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700}.tabs{display:flex;flex-wrap:wrap;background:#f1f4f8;padding:5px;border-radius:12px;margin-bottom:18px;gap:4px}.tab{border:0;flex:1 1 22%;border-radius:9px;padding:11px 9px;background:transparent;color:#62738a;font-weight:800;font-size:14px;min-height:44px}.tab.active{background:#fff;color:#175d9b;box-shadow:0 1px 5px #ccd7e5}.sectionhead{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:9px}.sectionhead h3{font-size:18px;margin:0}.count{color:#1b5f9e;font-size:21px;font-weight:850;font-variant-numeric:tabular-nums}.desc{font-size:13px;color:#65768a;line-height:1.65;margin:0 0 15px}.weekhead,.dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.weekhead{margin:12px 0 7px}.weekhead span{text-align:center;font-size:12px;color:#647489;font-weight:700}.weekhead span:first-child{color:#c56c65}.weekhead span:last-child{color:#5283c2}.date{aspect-ratio:1.15;min-height:51px;border:1px solid #e3e9f0;border-radius:11px;background:#f9fbfd;color:#34465a;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;font-size:15px;gap:3px;font-weight:650}.date:active{transform:scale(.97)}.date.selected{background:#e3efff;border:2px solid #4b8bcf;color:#175996}.date.extra{background:#e6f6ec;border-color:#3da76b;color:#246947}.date.removed{border:1px dashed #dfad58;color:#ae7d2a;background:#fffbf3}.date.off{border:0;background:transparent;pointer-events:none}.date .mark{font-size:9px;line-height:1;min-height:10px;font-weight:800}.date.selected .mark{color:#2979bd}.date.extra .mark{color:#248056}.date.removed .mark{color:#a67b36}.legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin:14px 0 5px;font-size:12px;color:#647489}.dot{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:5px;background:#dcecff;border:1px solid #4b8bcf}.dot.extra{background:#e6f6ec;border-color:#3da76b}.dot.removed{background:#fff7e4;border:1px dashed #dfad58}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{border:1px solid #cddae8;border-radius:11px;padding:11px 16px;min-height:45px;background:white;color:#265d91;font-weight:800;font-size:14px}.btn.primary{background:#256ca9;color:#fff;border-color:#256ca9}.btn.full{width:100%}.btn.light{background:#eff5fc}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0 18px}.metric{background:#f5f8fc;border:1px solid #e6edf5;border-radius:12px;padding:13px 12px}.metric label{font-size:12px;color:#6b788a;display:block}.metric strong{font-size:20px;display:block;margin-top:4px;font-variant-numeric:tabular-nums}.calc{border:1px solid #dfe8f1;border-radius:13px;overflow:hidden;margin:13px 0}.calcrow{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 15px;border-bottom:1px solid #e9edf3;font-size:14px}.calcrow:last-child{border:0}.calcrow b{font-variant-numeric:tabular-nums;white-space:nowrap}.calcrow.total{background:#edf5ff;font-weight:800}.calcrow.total b{font-size:24px;color:#14588f}.alert{background:#fff8e9;border:1px solid #f2ddad;border-radius:11px;padding:12px 13px;color:#7d5d24;font-size:12px;line-height:1.7;margin:12px 0 17px}.checks{display:grid;gap:11px}.checkrow{display:flex;gap:11px;align-items:flex-start;border:1px solid #e3eaf2;border-radius:12px;padding:13px;background:#fff;cursor:pointer;font-size:14px;font-weight:650;line-height:1.55}.checkrow input{width:20px;height:20px;accent-color:#256ca9;flex:none;margin:0;margin-top:1px}.checkrow small{display:block;color:#738094;font-weight:400;margin-top:2px}.ok{background:#eaf7ef;color:#236c42;border-radius:11px;padding:12px;font-size:13px;margin-top:14px;font-weight:750}.notok{background:#f5f7fa;color:#687b8f;border-radius:11px;padding:12px;font-size:13px;margin-top:14px}.bottom{border-top:1px solid #e7edf4;margin-top:23px;padding-top:18px}.smallprint{margin-top:18px;color:#677a8c;font-size:12px;line-height:1.7}.foot{margin-top:20px;text-align:center;color:#8190a0;font-size:12px}.screenhide{display:none!important}@media(max-width:850px){.app{padding:17px 15px 36px}.layout{grid-template-columns:1fr}.sidebar{padding:15px}.patients{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.patient{padding:11px}.patient.active{padding:10px}.p-top{display:block}.status{display:inline-block;margin-top:6px}.p-note{line-height:1.5}.mini-total{display:none}.workspace{padding:18px}.personhead h2{font-size:23px}}@media(max-width:480px){.top{margin-bottom:13px}.top h1{font-size:22px}.pill{font-size:10px;padding:6px 8px}.sidebar{padding:13px}.patient{padding:9px}.patient.active{padding:8px}.p-name{font-size:14px}.p-note{font-size:11px}.status{font-size:10px}.workspace{padding:15px 13px}.date{min-height:40px;aspect-ratio:1.03;border-radius:9px}.weekhead,.dates{gap:4px}.date .mark{font-size:8px}.summary{gap:7px}.metric{padding:9px 8px}.metric label{font-size:10px}.metric strong{font-size:17px}.calcrow{font-size:13px;padding:12px}.notice{font-size:12px;padding:11px}.desc{font-size:12px}}
+
+/* v0.9 input additions: consented sites and treatment records */
+.sites-fieldset{border:1px solid #dfe8f1;border-radius:12px;padding:13px 13px 15px;margin:13px 0}
+.sites-fieldset legend{font-weight:800;font-size:14px;color:#274967;padding:0 5px}
+.site-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.site-grid label{display:flex;gap:8px;align-items:center;font-size:14px}
+.site-grid input{width:19px;height:19px;accent-color:#256ca9;flex:none}
+.profile-field textarea{font:inherit;width:100%;min-width:0;padding:10px 11px;border:1px solid #cbd9e8;border-radius:10px;background:#fff;color:#203147;line-height:1.5;resize:vertical;min-height:66px}
+.preview-two-lines{border:1px solid #dce6f0;background:#f6f9fc;border-radius:12px;padding:13px;margin:12px 0 18px;font-size:13px;line-height:1.65}
+.preview-two-lines b{display:block;margin-bottom:6px;color:#356382}.preview-two-lines div{overflow-wrap:anywhere}
+/* v0.3: A4 test sheet, never a legal form */
+.tabs .tab{font-size:13px;line-height:1.3}
+.paper-scroll{max-width:100%;overflow:auto;margin-top:16px;padding:8px 0;background:#eef2f5;border:1px solid #dee4eb;border-radius:12px}
+.paper{font-family:"Hiragino Mincho ProN","Yu Mincho","Hiragino Kaku Gothic ProN",Meiryo,serif;font-size:9px;color:#151515;background:#fff;box-sizing:border-box;width:210mm;min-height:297mm;max-width:none;padding:8mm 7.5mm 7mm;position:relative;line-height:1.2;margin:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.paper *{box-sizing:border-box}
+.print-only{display:none}
+.paper-watermark{position:absolute;left:4%;top:39%;width:92%;text-align:center;transform:rotate(-28deg);font-size:48px;letter-spacing:.11em;font-weight:900;color:rgba(162,37,37,.18);z-index:10;pointer-events:none;white-space:nowrap}
+.paper-head{position:relative;text-align:center;height:15mm;padding-top:2mm}
+.paper-head .form-label{position:absolute;right:0;top:0;font-size:8px}
+.paper h2{margin:0;font-size:14px;letter-spacing:.08em}
+.paper-head .form-sub{font-size:9px;margin-top:3px}
+.paper .demo-strip{border:1px solid #333;background:#fff1eb;color:#a32f22;text-align:center;font-weight:800;padding:2.5px;font-size:10px}
+.paper .block-table{border:1px solid #333;border-bottom:0}
+.paper .prow{display:flex;min-height:8.2mm;border-bottom:1px solid #333}
+.paper .pcell{border-right:1px solid #333;padding:2px 4px;flex:1;min-width:0;overflow:hidden}
+.paper .pcell:last-child{border-right:0}
+.paper .label{font-size:8px;font-weight:700;letter-spacing:.01em}
+.paper .data{margin:3px 0 0;font-size:9px}
+.paper .muted{color:#777}
+.paper .small{font-size:7.6px}
+.paper .sectionbar{border:1px solid #333;border-top:0;padding:2px 5px;font-weight:800;background:#f2f2f2;font-size:8.6px}
+.paper .costrow{display:grid;grid-template-columns:37mm 1fr 14mm 15mm 28mm;min-height:6.9mm;border-bottom:1px solid #333}
+.paper .costrow>div{padding:3px 4px;border-right:1px solid #333;overflow:hidden}
+.paper .costrow>div:last-child{border-right:0;text-align:right}
+.paper .costrow strong{font-size:8.6px}
+.paper .costhead{font-weight:800;background:#f8f8f8}
+.paper .day-grid{display:grid;grid-template-columns:21mm repeat(31,minmax(0,1fr));border-left:1px solid #333;border-top:1px solid #333}
+.paper .day-grid>span{border-right:1px solid #333;border-bottom:1px solid #333;min-width:0;min-height:5.2mm;display:flex;align-items:center;justify-content:center;font-size:7px}
+.paper .day-grid>span:first-child{font-size:7px;font-weight:800}
+.paper .day-grid .on{font-weight:900;color:#111}
+.paper .footnote{font-size:7px;line-height:1.55;padding:2px 1px}
+.paper .stampblank{height:9mm}
+.paper .sectiongap{height:1mm}
+.paper .print-area-title{font-size:8px;font-weight:800;margin:2px 0}
+.paper .mock-line{display:inline-block;border-bottom:1px solid #333;min-width:70px;min-height:12px}
+.paper .form-footer{font-size:7.3px;text-align:center;margin-top:4px;border-top:1px solid #aaa;padding-top:4px;font-weight:800;color:#8e2525}
+@media(max-width:600px){.tab{padding:9px 3px;font-size:11px!important}.paper-scroll{padding:0}}
+@page{size:A4 portrait;margin:0}
+@media print{
+html,body{padding:0!important;margin:0!important;background:white!important;width:210mm!important;height:297mm!important}
+.app{display:none!important}
+.print-only{display:block!important}
+.paper{margin:0!important;padding:8mm 7.5mm 7mm!important;width:210mm!important;height:297mm!important;min-height:0!important;max-height:297mm!important;overflow:hidden!important;box-shadow:none!important;border:0!important;break-inside:avoid!important;page-break-inside:avoid!important}
+}
+
+/* Ver.0.4: image-backed, A4-accurate print-form preview */
+.sheet-canvas{display:block;width:100%;height:auto;background:white;box-shadow:0 2px 10px #0002}
+.pdf-links{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.pdf-links[hidden]{display:none!important}
+.pdf-links .btn{text-decoration:none;display:inline-flex;justify-content:center;align-items:center}
+.paper-scroll{padding:10px;background:#e8edf3;overflow:hidden}
+@media(max-width:600px){.pdf-links .btn{flex:1 1 100%}}
+
+/* v0.5: ローカルPDF選択と生成結果の表示 */
+.local-upload{border:1px solid #c7d8ec;background:#f7fbff;padding:15px;border-radius:12px;margin:16px 0}.local-upload label{display:block;margin-bottom:9px}.local-upload input{font-size:15px;width:100%;max-width:100%;padding:10px;background:white;border:1px solid #bfccd9;border-radius:8px}.local-upload .savestatus{margin-top:10px}.pdf-preview{width:100%;height:680px;border:0;background:white}.pdf-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.paper-scroll{margin-top:14px;border:1px solid #dbe4ef;border-radius:10px;overflow:hidden}@media(max-width:640px){.pdf-preview{height:420px}}
+
+/* v0.6: Japanese demo profile field entry */
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:15px}
+.profile-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:750;color:#3a516a}
+.profile-field input{width:100%;min-width:0;border:1px solid #bfcedd;border-radius:10px;font-size:17px;padding:12px;background:white;color:#203147;min-height:46px;font-family:inherit}
+.profile-field.wide{grid-column:1/-1}
+.profile-state{margin-top:12px}
+.insurance-heading{margin:19px 0 6px;font-size:16px;border-top:1px solid #e4ebf3;padding-top:15px}
+.profile-field select{width:100%;min-width:0;border:1px solid #bfcedd;border-radius:10px;font-size:16px;padding:11px;background:#fff;color:#203147;min-height:46px;font-family:inherit}
+@media(max-width:520px){.profile-grid{grid-template-columns:1fr}.profile-field.wide{grid-column:auto}.tabs .tab{flex:1 1 45%;font-size:12px;padding:10px 6px}}
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}.tabs .tab{min-width:0;flex:auto}@media(max-width:850px){.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:520px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.shared-disease{border:1px solid #dfe8f1;border-radius:12px;background:#f6f9fc;padding:13px;font-size:13px;color:#46617c;line-height:1.6}.shared-disease-value{font-weight:700;color:#203147;overflow-wrap:anywhere;margin-top:5px}
+/* v0.9 shared practitioner & certification date */
+.shared-preview{border:1px solid #d7e3ef;border-radius:11px;padding:12px 13px;background:#f5f9ff;line-height:1.65;font-size:13px;margin:14px 0}
+.shared-preview b{display:block;color:#2f5b7c;margin-bottom:4px}
+.shared-setting-note{margin-top:14px;border-radius:10px;background:#fff7e9;border:1px solid #f1d9ac;padding:12px 13px;color:#76551e;font-size:12px;line-height:1.7}
+.cert-check{border:1px solid #cad9eb;padding:12px;border-radius:11px;display:flex;align-items:flex-start;gap:9px;line-height:1.5;font-size:13px}
+.cert-check input{width:20px;height:20px;flex:none;accent-color:#256ca9}
+.period-fieldset{border:1px solid #cfddea;border-radius:12px;margin:14px 0;padding:12px;display:grid;gap:12px}
+.period-fieldset legend{font-weight:800;color:#345979;padding:0 5px;font-size:13px}
+.period-fieldset label{display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.5}
+.period-fieldset input{width:19px;height:19px;accent-color:#256ca9;flex:none}
+.period-preview{padding:11px 12px;background:#f1f6fc;color:#294f75;border-radius:9px;font-weight:800;font-size:13px}
+/* v1.2: compact date navigation on iPad */
+.jumpmonth{display:flex;align-items:center;gap:8px;margin:-7px 0 16px;flex-wrap:wrap;color:#50657b;font-size:13px}
+.jumpmonth select{appearance:auto;font:inherit;background:#fff;border:1px solid #cbd9e8;border-radius:8px;padding:7px 9px;min-height:39px;min-width:82px;color:#24394f}
+.jumpmonth label{font-weight:750}
+@media(max-width:410px){.jumpmonth{gap:5px}.jumpmonth select{min-width:72px}}
+.additional-panel{border:1px solid #d9e5f1;background:#fbfdff;border-radius:13px;margin:18px 0;padding:13px 14px}
+.additional-panel>summary{font-weight:850;color:#1c5686;font-size:16px;cursor:pointer;padding:7px 2px;list-style-position:inside}
+.additional-panel .insurance-heading:first-of-type{margin-top:13px}
+.additional-panel input[type="month"]{min-width:0;width:100%;font:inherit;padding:11px;border-radius:10px;border:1px solid #bfcedd;min-height:46px}
+
+/* v1.4: encrypted file backup + v1.3 plaintext migration (demo only) */
+.backup-panel{padding:20px 24px;margin-top:18px}
+.backup-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 18px}
+.backup-actions .btn{min-height:44px}
+.backup-panel .local-upload{margin:18px 0}
+.backup-panel #importDemoCommit{margin-top:12px}
+
+.backup-crypto-box{background:#f3f8fd;border:1px solid #d4e3f4;padding:14px;border-radius:12px;margin:14px 0}
+.backup-crypto-box h4{margin:2px 0 10px;color:#234b73;font-size:15px}
+.backup-password-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:9px 0}
+.backup-password-grid label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#36516c}
+.backup-password-grid input{min-width:0;width:100%;border:1px solid #b6c9df;border-radius:9px;padding:10px 11px;min-height:45px;font:inherit;font-size:16px;background:#fff;color:#1a2e45}
+.backup-password-grid .fullrow{grid-column:1/-1}
+.backup-file{display:block;font-size:14px;max-width:100%;margin:12px 0;padding:10px 0}
+.backup-migrate{margin:18px 0;border:1px solid #e4eaf1;border-radius:12px;padding:10px 13px}
+.backup-migrate summary{cursor:pointer;font-weight:750;color:#2a5a87;padding:7px 0}
+.backup-divider{border:0;border-top:1px solid #d5e2ef;margin:18px 0}
+@media(max-width:600px){.backup-panel{padding:18px 16px}.backup-actions .btn{width:100%}.backup-password-grid{grid-template-columns:1fr}}
+
+/* v1.7: patient-specific audit and PDF output */
+.claim-audit{margin-top:19px;border:1px solid #dce5ef;border-radius:13px;padding:14px;background:#f9fbfe}
+.claim-audit h4{margin:0 0 8px;font-size:16px;color:#244d70}
+.audit-summary{font-size:13px;line-height:1.6;font-weight:750;margin-bottom:10px}
+.audit-items{display:grid;gap:7px}
+.audit-item{display:flex;align-items:flex-start;gap:8px;background:white;border:1px solid #e7ebf0;border-radius:9px;padding:9px 11px;font-size:12px;line-height:1.6}
+.audit-tag{flex:none;border-radius:6px;padding:2px 6px;font-weight:800;min-width:48px;text-align:center}
+.audit-tag.stop{background:#fcebea;color:#9b3535}.audit-tag.manual{background:#fff0d1;color:#856319}.audit-tag.warn{background:#fff7e7;color:#926d2a}.audit-tag.pass{background:#e7f6ed;color:#1a6842}
+.audit-item span:last-child{overflow-wrap:anywhere}
+.audit-manual{margin:13px 0;border:1px solid #dbe5ef;border-radius:11px;background:#f8fbff;padding:13px}
+.audit-manual label{display:flex;gap:10px;line-height:1.6;align-items:flex-start;font-weight:750;font-size:13px}
+.audit-manual input{height:20px;width:20px;flex:none;margin-top:2px;accent-color:#256ca9}
+.audit-manual small{display:block;font-weight:400;margin-top:5px;color:#5d7086}
+.audit-mini{margin-top:12px}
+@media(max-width:480px){.claim-audit{padding:10px}.audit-item{padding:8px}.audit-tag{min-width:43px}}
+/* v1.7: patient identification must be visible before generating any file. */
+.pdf-target{background:#eaf3ff;border:2px solid #98bbdf;border-radius:12px;padding:13px 15px;color:#174f86;font-weight:800;font-size:16px;line-height:1.6;margin:13px 0 15px}
+.pdf-target small{display:block;font-size:12px;color:#506c87;font-weight:500;margin-top:3px}
+@media(max-width:480px){.pdf-target{font-size:14px;padding:11px}}
+
+/* v1.8: read-only archived revision comparison. No persistence/schema change. */
+.revision-history{margin-top:15px;border:1px solid #cbddec;border-radius:12px;padding:11px 14px;background:#f9fbfe}
+.revision-history>summary{cursor:pointer;color:#235b8c;font-size:15px;font-weight:800;padding:7px 0;line-height:1.5}
+.revision-history[open]>summary{margin-bottom:10px}
+.revision-history-controls{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+.revision-history-controls label{display:grid;gap:5px;flex:1 1 180px;font-size:13px;font-weight:750;color:#36516c}
+.revision-history-controls select{min-height:44px;max-width:100%;width:100%;padding:9px;border:1px solid #b8ccde;border-radius:9px;background:white;color:#203147;font:inherit;font-size:16px}
+.revision-table-scroll{overflow-x:auto;margin-top:12px;border:1px solid #dbe5ef;border-radius:11px;background:white;-webkit-overflow-scrolling:touch}
+.revision-table{width:100%;min-width:520px;border-collapse:collapse;table-layout:fixed;font-size:13px}
+.revision-table th,.revision-table td{padding:10px 11px;vertical-align:top;border-bottom:1px solid #e5edf4;overflow-wrap:anywhere;white-space:pre-wrap;line-height:1.55;text-align:left}
+.revision-table th{background:#eaf3fc;font-weight:800;color:#275477}
+.revision-table th:first-child{width:28%}.revision-table th:nth-child(2),.revision-table th:nth-child(3){width:36%}
+.revision-table .revision-section th{background:#f1f5f9;color:#345168;padding:8px 11px}
+.revision-table tr.revision-changed td{background:#fff9ea}
+.revision-change-mark{font-size:11px;font-weight:800;color:#895c12;display:block;margin-top:3px}
+.revision-history .empty-note{margin:10px 0;padding:12px;border:1px solid #e0e8f1;border-radius:9px;background:white;font-size:13px;color:#607388;line-height:1.7}
+.revision-history .revision-diff-only{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:650;margin:10px 0;color:#355879}
+.revision-history .revision-diff-only input{width:19px;height:19px;accent-color:#256ca9}
+.revision-history .revision-nochange{padding:12px;font-size:13px;color:#5f7185}
+@media(max-width:480px){.revision-history{padding:10px}.revision-table{font-size:12px}.revision-table th,.revision-table td{padding:8px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="eyebrow">MASSAGE CLAIMS · REVIEW CANDIDATE</div><h1>レセプトかんたん入力</h1><p>iPad用 Ver.1.9 ／ 保存・PDFの安全対策を追加</p></div><span class="pill">⚠ 本番候補・要確認</span></header>
+<div class="notice"><b>Ver.1.9は本番候補・検証中です。</b> 正式な書類として使う前に、師会の様式・請求条件・端末と保存先の安全対策を確認してください。<b>このページでは患者情報も施術日もSafariに自動保存しません。</b> 画面を閉じると未書き出しの変更は失われます。変更のたびに暗号化JSONを保存先へ保存し、選び直して照合してください。初期患者情報・施術所情報は空欄です。旧版の試験用バックアップを復元した場合は正式PDFを出力できません。</div>
+<div class="layout">
+<aside class="card sidebar" aria-label="患者選択と対象月">
+<div class="section-label">対象年月 <span style="color:#8a98a8;font-size:11px;font-weight:500">（2026年7月〜2031年12月）</span></div>
+<div class="monthbar"><button class="iconbtn" id="prevMonth" aria-label="前の月">‹</button><strong id="monthText">2026年11月</strong><button class="iconbtn" id="nextMonth" aria-label="次の月">›</button></div><div class="jumpmonth"><label for="jumpYear">年</label><select id="jumpYear" aria-label="年を選択"></select><label for="jumpMonth">月</label><select id="jumpMonth" aria-label="月を選択"></select><button id="jumpGo" type="button" class="btn" style="min-height:39px;padding:6px 12px">移動</button></div>
+<div class="hline"><div class="section-label">患者一覧</div><span class="subtle">3人を管理</span></div>
+<div id="patientList" class="patients"></div>
+<div id="saveStatus" class="savestatus" role="status" aria-live="polite">保存状態を確認中…</div>
+<div class="mini-total"><div class="subtle">選択月の施術予定（3人合計）</div><strong id="allCount">—</strong><div class="subtle">確認済みの人数：<span id="allComplete">—</span></div></div>
+<button class="reset" type="button" id="reset">すべて初期状態に戻す（空欄）</button>
+</aside>
+<main class="card workspace">
+<div class="personhead"><div><h2 id="patientTitle">患者A</h2><p id="patientCaption"></p></div><span class="btag">訪問施術料1</span></div>
+<div class="tabs" role="tablist" aria-label="入力画面切替"><button class="tab active" id="tabCalendar" role="tab" aria-selected="true" aria-controls="calendarPanel">① 施術日カレンダー</button><button class="tab" id="tabReview" role="tab" aria-selected="false" aria-controls="reviewPanel">② 料金・確認</button><button class="tab" id="tabProfile" role="tab" aria-selected="false" aria-controls="profilePanel">③ 患者・保険</button><button class="tab" id="tabSettings" role="tab" aria-selected="false" aria-controls="settingsPanel">④ 施術者・施術所</button><button class="tab" id="tabPrint" role="tab" aria-selected="false" aria-controls="printPanel">⑤ 帳票・PDF</button></div>
+<section id="calendarPanel" role="tabpanel" aria-labelledby="tabCalendar">
+<div class="sectionhead"><h3>施術日の選択</h3><span class="count" id="selectedCount">— 回</span></div>
+<p class="desc" id="scheduleDesc"></p>
+<div class="weekhead" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+<div class="dates" id="calendar" aria-label="施術日のカレンダー"></div>
+<div class="legend"><span><i class="dot"></i>選択中</span><span><i class="dot extra"></i>追加した日</span><span><i class="dot removed"></i>予定から外した日</span></div>
+<div class="actions"><button class="btn" type="button" id="restoreDates">曜日の予定に戻す</button><button class="btn" type="button" id="clearDates">すべて解除</button><button class="btn primary" type="button" id="goReview">料金・確認へ →</button></div>
+<p class="smallprint">定期訪問曜日をもとに、月初めに予定日を表示します。日付をタップして追加・取消できます。実際に施術した日と照合して確定するまでは、予定日です。</p>
+</section>
+<section id="reviewPanel" role="tabpanel" aria-labelledby="tabReview" class="screenhide">
+<div class="sectionhead"><h3>料金の試算</h3><span class="count" id="reviewCount">— 回</span></div>
+<p class="desc">選択した日付をもとにした参考計算です。2026年7〜12月・訪問施術料1・15回以下の限定条件で、申請書用の負担金と請求額を計算します。</p>
+<div class="summary"><div class="metric"><label>局所数</label><strong id="siteCount">—</strong></div><div class="metric"><label>通常単価</label><strong id="unitPrice">—</strong></div><div class="metric"><label>選択回数</label><strong id="visitCount">—</strong></div></div>
+<div class="calc"><div class="calcrow"><span>1〜15回目の料金</span><b id="normalLine">—</b></div><div class="calcrow"><span>16回目以降の料金（50%・参考）</span><b id="halfLine">—</b></div><div class="calcrow total"><span>施術料金合計</span><b id="grandTotal">—</b></div><div class="calcrow"><span>保険請求額（給付割合から計算）</span><b id="insurerClaim">—</b></div><div class="calcrow"><span>申請書に記載する一部負担金（合計－請求額）</span><b id="formPatientShare">—</b></div><div class="calcrow"><span>患者からの徴収額（端数は四捨五入）</span><b id="collectedShare">—</b></div></div><div id="feeStatus" class="savestatus warn" aria-live="polite"></div>
+<div class="alert"><b>必ずお読みください</b><br>厚生労働省の2026年7月適用・訪問施術料1の単価と、給付割合による請求額の端数計算を使用します。<b>算定対象は2026年7〜12月・1〜15回・訪問施術料1・1〜2割負担のみ</b>です。16回以降は参考金額だけを示し、2027年以降は料金改定未確認として請求額を非表示・PDFを停止します。各種加算、通所、訪問施術料2以降、月途中の変更、同意の適否、保険資格の照会は未対応です。Ver.1.7では同一建物人数の手動確認と入力の整合性検査を、患者A〜Cの出力前にそれぞれ適用しています。<b>提出前に師会のルール・対象患者の条件を必ず照合してください。</b></div>
+<h3 style="font-size:17px;margin:22px 0 12px">3項目をまとめて確認</h3>
+<div class="checks"><label class="checkrow"><input type="checkbox" id="checkActual"><span>施術日・回数は実績と一致しています<small>予定から変更した日付も含めて確認</small></span></label><label class="checkrow"><input type="checkbox" id="checkInsurance"><span>保険情報・負担割合を確認しました<small>保険情報を確認してください。資格照会ではありません</small></span></label><label class="checkrow"><input type="checkbox" id="checkConsent"><span>医師の同意内容・部位を確認しました<small>入力した同意・施術情報と、実績を確認してください</small></span></label></div>
+<div class="audit-manual">
+  <label><input id="checkBuilding" type="checkbox"><span>訪問施術料1：すべての施術日について、同一建物での施術人数が「1人」の条件に合うことを、自身の記録と照合し確認しました。
+  <small>曜日・同じ建物での施術人数は、患者3人分の訪問日だけでは判定できません。実際の施設・訪問記録を確認する想定の手動チェックです。確認状態はこの画面を開いている間だけ有効で、バックアップには保存しません。</small></span></label>
+</div>
+<div id="reviewStatus" class="notok" aria-live="polite"></div>
+<div class="claim-audit"><h4>申請前チェック（Ver.1.7・患者別・データ）</h4><div class="audit-summary" id="auditReviewSummary"></div><div class="audit-items" id="auditReviewItems" aria-live="polite"></div><p class="subtle">「合格」は入力の内部整合性だけです。保険資格・同意の有効性・提出規則をオンライン照会したものではありません。</p></div>
+<div class="actions"><button class="btn" type="button" id="backCalendar">← カレンダーに戻る</button></div>
+<div class="bottom"><button class="btn primary full" type="button" id="goPrint">A4帳票の確認へ →</button><p class="smallprint">チェックは画面の動作確認専用です。編集保護中も再確認だけはできます（施術日・金額等の編集はできません）。実際の保険資格や医師同意の確認を代行するものではありません。</p></div>
+</section>
+<section id="profilePanel" role="tabpanel" aria-labelledby="tabProfile" class="screenhide">
+  <div class="sectionhead"><h3>患者・保険情報</h3><span class="pill">未保存に注意</span></div>
+  <p class="desc">患者・申請者・保険・同意情報を入力します。<b>この画面の情報はこのアプリはSafariの保存領域に書き込みません。</b> ファイルへ暗号化して保存し、保存先から再選択して照合してください。端末のパスコード・PDFの保管・使用環境の確認が済むまで実患者情報を入力しないでください。</p>
+  <div class="alert"><b>印字テストについて</b>：このアプリでは名前の長さに合わせて印字を小さくします。日本語の字形をiPadの画面内で背景透明の画像にしてからPDFに重ねます。文字以外の部分は透明なため、元の罫線を隠しません。</div>
+  <div class="profile-grid">
+    <label class="profile-field wide">氏名（漢字・かな）<input type="text" id="profileName" maxlength="32" placeholder="例：山田 さくら" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field wide">フリガナ（全角カタカナ）<input type="text" id="profileKana" maxlength="40" placeholder="例：ヤマダ サクラ" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field">生年月日（西暦で選択）<input type="date" id="profileBirth" min="1912-07-30" max="2031-12-31" autocomplete="off"></label>
+  </div>
+  <h4 class="insurance-heading">申請者情報（患者A〜Cごと）</h4>
+  <p class="desc">申請欄と受領委任欄に住所を転記します。申請欄には郵便番号・電話番号も転記します。<b>患者さんが手書きする氏名（署名欄）は2か所とも空白</b>にします。入力内容を実際の書類と照合してください。</p>
+  <div class="profile-grid">
+    <label class="profile-field">郵便番号<input id="applicantPostal" type="text" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="000-0000"></label>
+    <label class="profile-field">電話番号（任意）<input id="applicantPhone" type="text" inputmode="tel" maxlength="16" autocomplete="off" placeholder="000-0000-0000"></label>
+    <label class="profile-field wide">申請者住所<input id="applicantAddress" type="text" maxlength="90" autocomplete="off" spellcheck="false" placeholder="住所を入力"></label>
+  </div>
+  <div id="applicantState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <h4 class="insurance-heading">保険情報（後期高齢者医療）</h4>
+  <div class="profile-grid">
+    <label class="profile-field">保険者番号（8桁・先頭の0も入力）<input id="insurerNumber" type="text" inputmode="numeric" maxlength="8" placeholder="半角数字8桁" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field">被保険者番号（8桁）<input id="insuredNumber" type="text" inputmode="numeric" maxlength="8" placeholder="半角数字8桁" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+    <label class="profile-field wide">被保険者記号（任意・英数字／ハイフン）<input id="insuredSymbol" type="text" maxlength="8" placeholder="例：AB12（通常は空欄）" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+    <label class="profile-field wide">自己負担割合（保険資格資料で確認）
+      <select id="burdenRate"><option value="">選択してください</option><option value="1">1割（給付9割）</option><option value="2">2割（給付8割）</option><option value="3">3割（給付7割：この帳票では出力不可）</option></select>
+    </label>
+  </div>
+  <div id="insuranceState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <p class="subtle">元の帳票には「給付割合 8・9・10」が印刷されています。1割・2割の例では該当数字を囲み、3割は対応欄がないためPDF生成を止めます。保険の資格や給付割合が正しいかは判定しません。2026年7〜12月の対応条件に限って一部負担金・請求額を計算します。</p>
+  <details class="additional-panel" id="additionalDetails" open>
+    <summary>追加の申請項目（6項目・データ）</summary>
+    <p class="desc">申請書で未記入だった発病時期、原因・経過、続柄、業務上・第三者行為、請求区分・転帰、訪問理由・摘要を入力します。<b>端末・保存先の安全対策を確認してから使用してください。</b> ここでの情報もSafariには自動保存せず、手動のJSON書き出し対象とします。</p>
+    <h4 class="insurance-heading">① 発病又は負傷年月日</h4>
+    <div class="profile-grid">
+      <label class="profile-field wide">記入方法
+        <select id="onsetKind"><option value="">選択してください</option><option value="exact">年月日が分かる</option><option value="unknown">不詳</option><option value="month">年月頃（見本PDFでは未対応・出力停止）</option></select>
+      </label>
+      <label class="profile-field" id="onsetDateWrap">発病・負傷日（西暦）<input id="onsetDate" type="date" min="1912-07-30" max="2031-12-31" autocomplete="off"></label>
+      <label class="profile-field screenhide" id="onsetMonthWrap">発病・負傷年月（西暦）<input id="onsetMonth" type="month" min="1912-07" max="2031-12" autocomplete="off"></label>
+    </div>
+    <h4 class="insurance-heading">② 傷病名・原因・経過（上部欄）</h4>
+    <p class="desc">傷病名は既存の共通入力欄を参照し、「傷病名同じ」と印字します。原因と経過だけ入力してください。同意書・記録にない内容は推測しません。</p>
+    <div class="profile-grid">
+      <label class="profile-field">発症・負傷の原因<input id="onsetCause" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="例：不詳"></label>
+      <label class="profile-field">経過<input id="illnessCourse" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="例：経過観察中"></label>
+    </div>
+    <h4 class="insurance-heading">③ 続柄と④ 業務上・第三者行為</h4>
+    <div class="profile-grid">
+      <label class="profile-field">続柄<select id="relationship"><option value="">選択してください</option><option value="本人">本人</option><option value="配偶者">配偶者</option><option value="子">子</option><option value="その他">その他</option></select></label>
+      <label class="profile-field">業務上・外、第三者行為<select id="workType"><option value="">選択してください</option><option value="1">1. 業務上</option><option value="2">2. 第三者行為</option><option value="3">3. その他</option></select></label>
+      <label class="profile-field wide" id="workNoteWrap">「その他」の補足<input id="workNote" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="例：不詳"></label>
+    </div>
+    <h4 class="insurance-heading">⑤ 請求区分・転帰</h4>
+    <div class="profile-grid">
+      <label class="profile-field">請求区分<select id="claimType"><option value="">選択してください</option><option value="新規">新規</option><option value="継続">継続</option></select></label>
+      <label class="profile-field">転帰<select id="outcome"><option value="">選択してください</option><option value="継続">継続</option><option value="治癒">治癒</option><option value="中止">中止</option><option value="転医">転医</option></select></label>
+    </div>
+    <h4 class="insurance-heading">⑥ 往療又は訪問の理由・摘要</h4>
+    <p class="desc">理由の番号と、自由記載の「摘要」は別々に入力します。訪問施術料と往療料は異なるため、実際の同意書・組合の記入指導と照合してください。</p>
+    <div class="profile-grid">
+      <label class="profile-field wide">往療又は訪問の理由<select id="visitReason"><option value="">選択してください</option><option value="1">1. 公共交通機関を使った独歩での外出が困難</option><option value="2">2. 認知症・視覚・内部・精神障害等で独歩困難</option><option value="3">3. その他</option></select></label>
+      <label class="profile-field wide screenhide" id="visitOtherWrap">「その他」の具体的理由<input id="visitOther" type="text" maxlength="60" autocomplete="off" spellcheck="false" placeholder="例：歩行困難のため"></label>
+      <label class="profile-field wide">摘要欄の補足（3行以内）<textarea id="remarks" rows="3" maxlength="100" autocomplete="off" spellcheck="false" placeholder="例：訪問の理由&#10;歩行困難のため"></textarea></label>
+    </div>
+    <div class="preview-two-lines"><b>申請書への印字プレビュー</b><div id="additionalPreview"></div></div>
+    <div id="additionalInfoState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  </details>
+  <h4 class="insurance-heading">施術・医師同意</h4>
+  <p class="desc">組合の記載方法に合わせ、「傷病名」と「症状＋施術部位」を2段で印字します。同意部位は5つから選択します。<b>選択したすべての施術日に、同じ同意部位を施術した場合に限り</b>、部位別回数を連動します。日によって施術部位が異なる場合は使用しないでください。</p>
+  <fieldset class="sites-fieldset">
+    <legend>医師が同意した部位</legend>
+    <div class="site-grid">
+      <label><input type="checkbox" data-consent-site="躯幹"> 躯幹</label>
+      <label><input type="checkbox" data-consent-site="右上肢"> 右上肢</label>
+      <label><input type="checkbox" data-consent-site="左上肢"> 左上肢</label>
+      <label><input type="checkbox" data-consent-site="右下肢"> 右下肢</label>
+      <label><input type="checkbox" data-consent-site="左下肢"> 左下肢</label>
+    </div>
+  </fieldset>
+  <div id="siteCounts" class="savestatus profile-state" aria-live="polite"></div>
+  <div class="profile-grid">
+    <label class="profile-field wide">傷病名（共通入力・医師の同意記録にも転記）<textarea id="treatmentDiseases" rows="2" maxlength="95" placeholder="例：両変形性膝関節症　変形性脊椎症" autocomplete="off" spellcheck="false"></textarea></label>
+    <label class="profile-field wide">症状<textarea id="treatmentSymptoms" rows="2" maxlength="55" placeholder="例：筋麻痺・筋萎縮" autocomplete="off" spellcheck="false"></textarea></label>
+    <label class="profile-field">初療年月日（西暦で入力）<input id="firstTreatment" type="date" min="1912-07-30" max="2031-12-31" autocomplete="off"></label>
+  </div>
+  <div class="preview-two-lines" aria-label="帳票印字プレビュー">
+    <b>傷病名及び症状欄の印字プレビュー</b>
+    <div id="treatmentPreviewDisease"></div>
+    <div id="treatmentPreviewSymptoms"></div>
+  </div>
+  <h4 class="insurance-heading">医師の同意記録（傷病名は共通）</h4>
+  <div class="profile-grid">
+    <label class="profile-field">同意医師氏名<input id="consentDoctor" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="例：医師氏名"></label>
+    <label class="profile-field wide">医師の住所<input id="consentAddress" type="text" maxlength="70" autocomplete="off" spellcheck="false" placeholder="例：医師の住所"></label>
+    <label class="profile-field">同意年月日（西暦）<input id="consentDate" type="date" min="1912-07-30" max="2031-12-31" autocomplete="off"></label>
+    <div class="profile-field wide shared-disease"><b>同意記録の傷病名</b><div>上の「傷病名」欄から自動転記します（再入力不要）。</div><div id="doctorDiseasePreview" class="shared-disease-value" aria-live="polite"></div></div>
+    <label class="profile-field">要加療期間（同意書に記載がある場合）<input id="consentPeriod" type="text" maxlength="28" autocomplete="off" spellcheck="false" placeholder="例：6か月"></label>
+  </div>
+  <div id="treatmentState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <p class="smallprint">同意日だけで有効性を自動判定しません。月途中の同意・部位変更や、部位ごとの施術回数が異なる場合はこのPDFを作成できません。入力内容はSafariの保存領域に自動保存しません。</p>
+  <div id="profileState" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <div class="actions"><button class="btn" type="button" id="resetProfile">この人の入力情報を初期値に戻す</button><button class="btn primary" type="button" id="profileToPrint">帳票・PDFへ →</button></div>
+  <p class="smallprint">氏名・住所・郵便番号・電話番号・保険情報・同意・傷病名などを変更すると、3項目の確認チェックはすべて解除されます。PDF出力は患者A・B・Cのデータに対応します。各患者の情報は独立して転記されます。</p>
+</section>
+<section id="settingsPanel" role="tabpanel" aria-labelledby="tabSettings" class="screenhide">
+  <div class="sectionhead"><h3>共通の施術者・施術所設定</h3><span class="pill">データ専用</span></div>
+  <p class="desc">ここに入力した施術者情報を患者A・B・Cに共通で適用します。<b>入力前に端末・保存先の保護を確認してください。</b> 共通設定は月ごとに保持し、Safariには自動保存しません。必要ならJSONファイルで書き出してください。</p>
+  <h4 class="insurance-heading">施術証明欄の共通情報</h4>
+  <div class="profile-grid">
+    <label class="profile-field wide">保健所登録区分
+      <select id="clinicRegistrationType"><option value="">選択してください</option><option value="1">1. 施術所所在地</option><option value="2">2. 出張専門施術者住所地</option></select>
+    </label>
+    <label class="profile-field">登録記号番号<input id="clinicRegisterNo" type="text" maxlength="30" autocomplete="off" spellcheck="false" placeholder="登録記号番号"></label>
+    <label class="profile-field">郵便番号<input id="clinicPostal" type="text" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="000-0000"></label>
+    <label class="profile-field wide">施術所所在地・住所地<input id="clinicAddress" type="text" maxlength="90" autocomplete="off" spellcheck="false" placeholder="住所を入力"></label>
+    <label class="profile-field wide">施術所名称<input id="clinicName" type="text" maxlength="48" autocomplete="off" spellcheck="false" placeholder="施術所名"></label>
+    <label class="profile-field">施術管理者氏名<input id="clinicManager" type="text" maxlength="32" autocomplete="off" spellcheck="false" placeholder="管理者氏名"></label>
+    <label class="profile-field">電話番号<input id="clinicPhone" type="text" inputmode="tel" maxlength="16" autocomplete="off" spellcheck="false" placeholder="000-0000-0000"></label>
+  </div>
+  <div id="clinicStatus" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <div class="shared-preview"><b>PDF転記イメージ</b><div id="clinicPreview">入力情報を表示します。</div></div>
+  <h4 class="insurance-heading">選択月の申請書日付（患者ごと・月ごと）</h4>
+  <p class="desc"><b>継続施術では「月初～月末」が初期設定</b>です。実際の施術日と、帳票の施術期間は別に管理します。保険者・組合の指定がある場合は実施日ベースに切り替えられます。</p>
+  <fieldset class="period-fieldset"><legend>施術期間の記載方法</legend>
+    <label><input type="radio" name="periodMode" value="month" checked> 月の1日～末日（継続施術の提出例）</label>
+    <label><input type="radio" name="periodMode" value="actual"> その月の最初～最後の施術日</label>
+    <div id="periodPreview" class="period-preview" aria-live="polite"></div>
+  </fieldset>
+  <p class="desc">下の3つの日付は、月末日を<b>候補</b>として表示します。実際の証明・申請・委任の成立日を確定するものではありません。必要に応じて個別に直してください。</p>
+  <div class="profile-grid">
+    <label class="profile-field">① 施術証明日（西暦）<input id="certificateDate" type="date" min="2026-07-01" max="2031-12-31" autocomplete="off"></label>
+    <label class="profile-field">② 申請日（西暦）<input id="applicationDate" type="date" min="2026-07-01" max="2031-12-31" autocomplete="off"></label>
+    <label class="profile-field">③ 受領委任日（西暦）<input id="delegationDate" type="date" min="2026-07-01" max="2031-12-31" autocomplete="off"></label>
+    <div class="profile-field"><span>日付の一括入力</span><button class="btn" type="button" id="monthEndSuggestion">選択月の末日を3か所へ</button></div>
+  </div>
+  <div class="shared-setting-note">申請欄・受領委任欄の<b>患者署名欄は空白のまま</b>です。月末前に未来の日付で署名・申請したことにはしないでください。正式な署名・申請の成立日と一致していることを必ず確認してください。</div>
+  <label class="cert-check" style="margin-top:14px"><input id="certificateReceipt" type="checkbox"><span>自身の記録と照合し、施術実績を確認し、費用の領収条件を確認しました。</span></label>
+  <label class="cert-check" style="margin-top:10px"><input id="documentDatesConfirmed" type="checkbox"><span>自身の記録と照合し3日付を確認しました。実際の証明・署名・委任を意味しないことを理解しています。</span></label>
+  <div id="certificateStatus" class="savestatus profile-state" role="status" aria-live="polite"></div>
+  <div class="actions"><button class="btn" type="button" id="resetClinic">共通の入力情報を初期値に戻す</button><button class="btn primary" type="button" id="clinicToPrint">帳票・PDFへ →</button></div>
+  <p class="smallprint">共通情報を変えると確認チェックを解除します。期間方式や3日付を変更するとPDFを無効にします。証明日と施術者情報はJSONへの手動書き出し対象です。Safariを再読み込みすると、書き出していない変更は失われます。</p>
+</section>
+<section id="printPanel" role="tabpanel" aria-labelledby="tabPrint" class="screenhide">
+  <div class="sectionhead"><h3>A4申請書・元PDFへの直接記入</h3><span class="pill">Ver.1.9 本番候補</span></div>
+  <p class="desc">確認済みの<strong>元の申請書PDF</strong>をiPadの「ファイル」から選んでください。元の罫線や支払機関情報を<strong>削除・画像化せず</strong>、氏名・申請者住所・郵便番号・電話番号・保険番号・追加申請6項目・施術日・同意部位・部位別回数・傷病名・初療年月日・医師同意情報・共通施術者情報・施術期間・施術証明日・申請日・受領委任日・限定条件で算定した合計・負担金・請求額を重ねたPDFを作ります。申請欄と委任欄の患者署名欄は空白です。</p>
+  <div class="alert"><b>必ず守ってください</b>：このアプリは、確認済みの<strong>特定の元PDF</strong>だけを読み込めます。ほかのPDFは安全のため読み込めません。選んだPDFはGitHubへアップロードされず、Safari内でのみ処理します。<b>患者情報入りPDFをGitHubに登録しないでください。</b></div>
+  <div id="pdfTarget" class="pdf-target" role="status" aria-live="polite">出力対象を確認中…</div>
+  <div class="local-upload">
+    <label for="templateFile"><b>① 元の申請書PDFを選ぶ</b></label>
+    <input id="templateFile" type="file" accept=".pdf,application/pdf">
+    <div id="templateStatus" class="savestatus" role="status" aria-live="polite">まだ選択されていません（選んだPDFは端末内だけで処理します）</div>
+    <p class="smallprint">アプリを開き直した場合、PDFは再選択してください。PDFの中身はSafariの自動保存対象に含めません。</p>
+  </div>
+  <div id="printGate" class="alert" aria-live="polite"></div>
+<div class="claim-audit audit-mini"><h4>PDF出力前の整合性確認</h4><div id="auditPrintSummary" class="audit-summary"></div><div id="auditPrintItems" class="audit-items"></div></div>
+  <div class="actions"><button class="btn primary" id="printBtn" type="button" disabled>② A4 PDFを生成する</button><button class="btn" id="backReview" type="button">← 確認画面へ</button></div>
+  <div id="pdfLinks" class="pdf-links" hidden><a id="pdfOpen" class="btn primary" target="_blank" rel="noopener">生成したPDFを開く</a><a id="pdfSave" class="btn" download="receipt-review-v19.pdf">PDFファイルを保存</a></div>
+  <div id="pdfError" class="alert screenhide" role="status" aria-live="polite"></div>
+  <div class="ok" id="previewSlot" hidden>✓ PDFを生成しました。「生成したPDFを開く」で内容を確認し、必要ならiPadの「ファイル」に保存してください。</div>
+  <p class="smallprint">患者A/B/Cを切り替えると前の人のPDFリンクは無効になり、選択した人の確認をやり直す必要があります。<br>出力PDFには試験用の透かしを付けません。日本語文字は背景が透明な文字画像として描画します。<b>限定条件での計算・提出前の最終確認が必要</b>です。保険・医師同意情報・施術者情報は実記録に基づく入力に限ります。入力の整合性検査はありますが、資格・同意の有効性や正式提出への適合は保証できません。限定条件で金額を試算し、申請書の負担金・請求額に転記します。</p>
+</section>
+<section class="card backup-panel" aria-labelledby="backupHeading">
+  <div class="sectionhead"><h3 id="backupHeading">⑥ 月次引き継ぎ・暗号化バックアップ</h3><span class="pill">AES-256-GCM</span></div>
+  <p class="desc">患者A〜Cの基本情報・複数月の施術記録・訂正履歴を暗号化します。翌月には基本情報を引き継ぎます。<b>このアプリはSafariの保存領域に書き込みません。</b> 画面を閉じる前に暗号化ファイルを書き出し、必ず読み戻して照合してください。</p>
+  <div id="startupBackupNotice" class="savestatus warn" role="status" aria-live="polite">この起動では暗号化バックアップを復元していません。前回の患者情報は表示されていません。</div>
+  <div id="backupStatus" class="savestatus warn" role="status" aria-live="polite"></div>
+  <div id="cryptoSupport" class="savestatus warn" role="status" aria-live="polite">このブラウザーの暗号化機能を確認中…</div>
+  <div class="backup-crypto-box">
+    <h4>① 🔐 暗号化ファイルを作成</h4>
+    <p class="subtle">16文字以上の保存用パスワードを入力します。パスワードはファイルやSafariには保存しません。<b>忘れると復元できません。</b></p>
+    <div class="backup-password-grid">
+      <label>保存用パスワード<input type="password" id="exportPassword" autocomplete="new-password" minlength="16" maxlength="256" autocapitalize="off" spellcheck="false" placeholder="16文字以上"></label>
+      <label>確認用（同じものを再入力）<input type="password" id="exportPasswordConfirm" autocomplete="new-password" minlength="16" maxlength="256" autocapitalize="off" spellcheck="false" placeholder="もう一度入力"></label>
+    </div>
+    <div class="backup-actions"><button type="button" id="exportDemo" class="btn primary">暗号化JSONを作成する</button></div>
+    <div id="cryptoExportStatus" class="savestatus warn" role="status" aria-live="polite">ファイルを作成しただけでは保存済みになりません。iPadの「ファイル」へ保存し、下の②で同じファイルを選んで照合してください。</div>
+    <p class="smallprint">ファイル名に日時と識別子が入り、既存ファイルとの名前の重複を防ぎます（保存先での同名ファイル上書きまでは制御できません）。<b>iCloud Driveに少なくとも2世代</b>を手動で残し、可能なら別の場所にも控えを保管してください。元PDF・生成PDFは含みません。</p>
+  </div>
+  <div class="backup-crypto-box">
+    <h4>② 🔓 暗号化ファイルを読み込み・照合・復元</h4>
+    <label for="encryptedFile"><b>iPad内に保存した暗号化JSONを選択</b></label>
+    <input class="backup-file" type="file" id="encryptedFile" accept=".json,application/json">
+    <div class="backup-password-grid"><label class="fullrow">保存時のパスワード<input id="decryptPassword" type="password" autocomplete="off" maxlength="256" autocapitalize="off" spellcheck="false" placeholder="復元用パスワード"></label></div>
+    <div class="backup-actions"><button type="button" id="decryptCheckBtn" class="btn">ファイルを復号して内容を検査</button><button type="button" id="importEncryptedCommit" class="btn primary" disabled>検査済みデータを復元する</button></div>
+    <div id="encryptedImportPreview" class="savestatus warn" role="status" aria-live="polite">まだ検査していません。検査のみでは現在の入力内容を変更しません。</div>
+    <div id="backupGenerationSummary" class="savestatus warn" role="status" aria-live="polite">この起動では、保存先のファイルをまだ照合していません。書き出し後に同じファイルを選び直して照合してください。</div>
+    <p class="smallprint">保存先からファイルを選び直して検査すると、復号と現在の入力内容との照合を行います。異なる世代は内容に差があっても正常です（現画面と一致したとは表示しません）。復元を押す場合は、現在のデータと置き換える前に確認が出ます。誤ったパスワードや改ざん・破損ファイルは拒否します。</p>
+  </div>
+  <details class="backup-migrate">
+    <summary>旧Ver.1.3の架空JSONを確認する（本番出力は不可）</summary>
+    <p class="alert"><b>旧JSONは暗号化されていません。</b> 旧版のデータの閲覧用であり、本番PDFの出力はできません。</p>
+    <div class="local-upload"><label for="importDemoFile"><b>旧版JSONを選択</b></label>
+      <input type="file" id="importDemoFile" accept=".json,application/json">
+      <div id="importPreview" class="savestatus warn" aria-live="polite">旧版JSONを選ぶと、取り込む前に内容を検査します。</div>
+      <button type="button" id="importDemoCommit" class="btn" disabled>旧JSONから復元する</button>
+    </div>
+  </details>
+  <p class="smallprint">暗号化はWeb Crypto API（PBKDF2-HMAC-SHA256・60万回、AES-256-GCM）を使用します。旧v1.4〜1.8形式の試験用ファイルは互換読み込みできますが、本番用PDFの作成には利用できません。照合は患者・月別・施術者情報・訂正履歴などを対象とし、復元時に解除される確認チェックと表示中の年月・患者選択は別扱いです。公開配信コード・端末・ファイル保存先について安全性の確認が必要です。このアプリだけで情報漏えい防止が保証されるわけではありません。</p>
+  <h4 class="insurance-heading">選択月の編集保護</h4>
+  <p class="desc">完了した月を間違って編集しないための保護です。訂正する場合は旧版を月別の履歴に残して新しい編集用コピーへ切り替えます。<b>履歴と保護状態は暗号化JSONを保存・照合しなければ残りません。</b></p>
+  <div id="monthLockStatus" class="savestatus"></div>
+  <div class="backup-actions"><button type="button" id="lockMonthBtn" class="btn">この月を編集保護</button><button type="button" id="reviseMonthBtn" class="btn" disabled>訂正用コピーを作る</button></div>
+  <p class="smallprint" id="historySummary">旧版の履歴：0件</p>
+  <details class="revision-history" id="revisionHistoryPanel">
+    <summary id="revisionHistoryHeading">訂正前の履歴を見る（閲覧専用）</summary>
+    <p class="subtle">旧版の施術日・金額・保険情報・同意・証明日・施術所情報を、現在の版と比較します。<b>ここでは編集・復元・削除はできません。</b> 確認チェックの状態は比較対象から除きます。</p>
+    <div id="revisionHistoryEmpty" class="empty-note"></div>
+    <div id="revisionHistoryContent" hidden>
+      <div class="revision-history-controls">
+        <label>確認する旧版<select id="revisionSelect" aria-label="確認する過去の版"></select></label>
+        <label>対象患者<select id="revisionPatientSelect" aria-label="履歴を見る患者"><option value="A">患者A</option><option value="B">患者B</option><option value="C">患者C</option></select></label>
+      </div>
+      <div id="revisionDiffSummary" class="savestatus" role="status" aria-live="polite"></div>
+      <label class="revision-diff-only"><input id="revisionDiffOnly" type="checkbox"> 変更された項目だけ表示</label>
+      <div class="revision-table-scroll"><table class="revision-table"><thead><tr><th scope="col">項目</th><th scope="col" id="revisionOldTitle">訂正前</th><th scope="col" id="revisionNewTitle">現在</th></tr></thead><tbody id="revisionCompareBody"></tbody></table></div>
+      <p class="smallprint">旧版は「訂正用コピーを作る」を押した時点の記録です。現在版と差がなくても、旧版の記録が消えたわけではありません。履歴は暗号化JSONに含まれ、このアプリはSafariの保存領域に書き込みません。データ変更後は新しく暗号化して保存先から照合してください。</p>
+    </div>
+  </details>
+</section>
+</main>
+</div>
+<div class="foot">v1.9 · Safariへの自動保存なし · 旧版の閲覧比較維持 · 暗号化保存 · 師会の提出条件は別途確認</div>
+</div>
+
+<script>
+'use strict';
+(function(){
+const DATA=[{id:'A',label:'患者A',days:[1,4]},{id:'B',label:'患者B',days:[2,5]},{id:'C',label:'患者C',days:[3]}];
+// 令和8年7月施術分からの通知。後年の単価は未照合のため必ず差し止める。
+const PRICES=[0,2770,3240,3710,4180,4650];
+const VERIFIED_FEE_START='2026-07', VERIFIED_FEE_END='2026-12';
+function yenRound(value){return Math.floor(value+0.5)}
+function feeBreakdown(p,r){
+ const monthCode=monthKey(),sites=personDetails(p).sites.length,count=r.days.length;
+ const base=PRICES[sites]||0,full=Math.min(count,15),half=Math.max(0,count-15),
+       gross=base*full+(base*half)/2;
+ const burden=Number(personDetails(p).burdenRate),rateOk=[1,2].includes(burden);
+ const verified=monthCode>=VERIFIED_FEE_START&&monthCode<=VERIFIED_FEE_END&&
+       count>=1&&count<=15&&sites>=1&&sites<=5&&rateOk;
+ const benefit=10-burden;
+ // 申請書: 請求額=floor(合計×給付割合), 一部負担金=合計−請求額。
+ // 徴収額: round(合計×自己負担割合)。申請書の一部負担金とは異なることがある。
+ const insurerClaim=verified?Math.floor(gross*benefit/10):null;
+ const formPatientShare=verified?gross-insurerClaim:null;
+ const collectedShare=verified?yenRound(gross*burden/10):null;
+ return {monthCode,sites,count,base,full,half,gross,burden,benefit,verified,
+         insurerClaim,formPatientShare,collectedShare};
+}
+function feeBlockReason(p,r){
+ const f=feeBreakdown(p,r);
+ if(f.monthCode<VERIFIED_FEE_START||f.monthCode>VERIFIED_FEE_END)return '料金表の適用を確認できるのは2026年7〜12月です。2027年以降の請求額・PDF出力は停止します。';
+ if(f.count===0)return '施術実績を選択してください。';
+ if(f.count>15)return '月16回以上は別の算定確認が必要です。限定計算のPDFは生成しません。';
+ if(![1,2].includes(f.burden))return f.burden===3?'この元帳票には給付7割欄がありません。3割負担のPDFは生成しません。':'自己負担割合を選択してください。';
+ if(!f.base)return '施術部位数を確認してください。';
+ return '';
+}
+const SITE_NAMES=['躯幹','右上肢','左上肢','右下肢','左下肢'];
+// v1.9: never seed a candidate with patient names, IDs, addresses, physician or clinic data.
+const EMPTY_PROFILE={name:'',kana:'',birth:'',applicantPostal:'',applicantAddress:'',applicantPhone:'',insurerNumber:'',insuredNumber:'',insuredSymbol:'',burdenRate:'',sites:[],diseases:'',symptoms:'',firstTreatment:'',doctor:'',doctorAddress:'',consentDate:'',consentPeriod:'',onsetKind:'',onsetDate:'',onsetMonth:'',onsetCause:'',illnessCourse:'',relationship:'',workType:'',workNote:'',claimType:'',outcome:'',visitReason:'',visitOther:'',remarks:''};
+const DEMO_DEFAULTS={A:{...EMPTY_PROFILE,sites:[]},B:{...EMPTY_PROFILE,sites:[]},C:{...EMPTY_PROFILE,sites:[]}};
+const cloneDemo=p=>({...p,sites:[...p.sites]});
+const monthlyProfiles=Object.create(null); // YYYY-MM:A etc.; month-specific test snapshots
+const DOW=['日','月','火','水','木','金','土'];
+const CLINIC_DEFAULT={type:'',registerNo:'',postal:'',address:'',name:'',manager:'',phone:''};
+const monthlyClinics=Object.create(null); // shared practitioner settings per month
+let clinic={...CLINIC_DEFAULT};
+const certificates=Object.create(null); // patient+month specific dates; JSON export only
+function monthEndDate(){return year+'-'+String(month+1).padStart(2,'0')+'-'+String(new Date(year,month+1,0).getDate()).padStart(2,'0')}
+function certificateRecord(){const k=key(selectedId);return certificates[k]||(certificates[k]={periodMode:'month',date:monthEndDate(),applicationDate:monthEndDate(),delegationDate:monthEndDate(),received:false,datesConfirmed:false})}
+function clearConfirmationAll(){for(const p of DATA){const item=records[key(p.id)];if(item)item.checks=[false,false,false]}} // current month only
+function invalidateAfterVisitEdit(){const item=certificateRecord();item.received=false;item.datesConfirmed=false;delete sameBuildingReview[key(selectedId)];}
+function periodDates(r){if(!r.days.length)return {start:0,end:0};const mode=certificateRecord().periodMode;return mode==='month'?{start:1,end:daysInMonth()}:{start:Math.min(...r.days),end:Math.max(...r.days)}}
+function prettyDate(v){if(!v)return '未入力';const [y,m,d]=v.split('-').map(Number);return `${y}年${m}月${d}日`}
+function validCertificateDate(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const [yy,mm,dd]=v.split('-').map(Number);const t=new Date(Date.UTC(yy,mm-1,dd));return t.getUTCFullYear()===yy&&t.getUTCMonth()===mm-1&&t.getUTCDate()===dd&&v>='2026-07-01'&&v<='2031-12-31'}
+function certificateEra(v){const y=Number(v.slice(0,4)),m=Number(v.slice(5,7)),d=Number(v.slice(8,10));return {year:y-2018,month:m,day:d}}
+function tokyoToday(){return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+function validateClinic(){
+ const a=clinic;
+ if(!['1','2'].includes(a.type))return '保健所登録区分を選択してください。';
+ if(!singleLine(a.registerNo,30))return '登録記号番号を確認してください。';
+ if(!/^\d{3}-\d{4}$/.test(a.postal))return '郵便番号は000-0000の形式で入力してください。';
+ if(!singleLine(a.address,90)||!singleLine(a.name,48)||!singleLine(a.manager,32))return '所在地・名称・施術管理者氏名を入力してください。';
+ if(!/^[0-9-]{10,16}$/.test(a.phone))return '電話番号は数字とハイフンで入力してください。';
+ return '';
+}
+function validateCertificate(r){
+ const item=certificateRecord();
+ if(!['month','actual'].includes(item.periodMode))return '施術期間の記載方式を選択してください。';
+ if(!r.days.length)return '実際の施術日を選択してください。';
+ const lastDay=year+'-'+String(month+1).padStart(2,'0')+'-'+String(Math.max(...r.days)).padStart(2,'0');
+ for(const [field,label] of [['date','施術証明日'],['applicationDate','申請日'],['delegationDate','受領委任日']]){
+   if(!validCertificateDate(item[field]))return label+'を正しく入力してください。';
+   if(item[field]<lastDay)return label+'が月内の最終施術日より前です。';
+ }
+ if(!item.received)return '施術完了・領収の確認にチェックしてください。';
+ if(!item.datesConfirmed)return '3つの日付の確認にチェックしてください。';
+ return '';
+}
+function renderClinicStatus(r){
+ const err=validateClinic(),certErr=validateCertificate(r),i=el('clinicStatus'),j=el('certificateStatus'),obj=certificateRecord();
+ i.textContent=err?'共通情報：'+err:'✓ 共通情報の形式を確認しました。';i.className='savestatus profile-state'+(err?' fail':'');
+ const dates=periodDates(r);
+ el('periodPreview').textContent=r.days.length?`${prettyDate(year+'-'+String(month+1).padStart(2,'0')+'-'+String(dates.start).padStart(2,'0'))} ～ ${prettyDate(year+'-'+String(month+1).padStart(2,'0')+'-'+String(dates.end).padStart(2,'0'))}`:'施術日が未選択です';
+ const future=[obj.date,obj.applicationDate,obj.delegationDate].some(v=>v>tokyoToday());
+ j.textContent=certErr?'日付の確認：'+certErr:future?'⚠ 未来の日付を含みます。本番候補PDFの出力は停止します。':'✓ 3日付と施術完了・領収条件のチェックを確認しました。';
+ j.className='savestatus profile-state'+(certErr?' fail':future?' warn':'');
+ el('clinicPreview').textContent=(clinic.type==='1'?'施術所所在地':'出張専門施術者住所地')+' ／ '+clinic.postal+' ／ '+clinic.address+' ／ '+clinic.name+' ／ '+clinic.manager+' ／ '+clinic.phone+' ／ 登録番号 '+clinic.registerNo;
+}
+function renderClinic(r){
+ for(const [field,id] of [['type','clinicRegistrationType'],['registerNo','clinicRegisterNo'],['postal','clinicPostal'],['address','clinicAddress'],['name','clinicName'],['manager','clinicManager'],['phone','clinicPhone']])el(id).value=clinic[field];
+ const cert=certificateRecord();
+ document.querySelectorAll('input[name="periodMode"]').forEach(e=>e.checked=e.value===cert.periodMode);
+ for(const [field,id] of [['date','certificateDate'],['applicationDate','applicationDate'],['delegationDate','delegationDate']])el(id).value=cert[field];
+ el('certificateReceipt').checked=cert.received;el('documentDatesConfirmed').checked=cert.datesConfirmed;
+ renderClinicStatus(r);
+}
+function updateClinic(){
+ if(isMonthLocked())return render();
+ for(const [field,id] of [['type','clinicRegistrationType'],['registerNo','clinicRegisterNo'],['postal','clinicPostal'],['address','clinicAddress'],['name','clinicName'],['manager','clinicManager'],['phone','clinicPhone']])clinic[field]=el(id).value;
+ clearConfirmationAll();clearBuildingForCurrentMonth();for(const [k,value] of Object.entries(certificates))if(k.startsWith(monthKey()+':'))value.datesConfirmed=false;
+ saveDemo();clearGeneratedPdf();renderClinicStatus(record(patient()));renderSidebar();renderReview(patient(),record(patient()));renderPrintPanel(patient(),record(patient()));
+}
+function updateCertificate(){
+ if(isMonthLocked())return render();
+ const r=record(patient()),obj=certificateRecord();
+ obj.periodMode=document.querySelector('input[name="periodMode"]:checked')?.value||'month';
+ for(const [field,id] of [['date','certificateDate'],['applicationDate','applicationDate'],['delegationDate','delegationDate']])obj[field]=el(id).value;
+ obj.received=el('certificateReceipt').checked;obj.datesConfirmed=el('documentDatesConfirmed').checked;
+ // Per-patient dates/receipt checks do not invalidate other patients' confirmations.
+ r.checks=[false,false,false];delete sameBuildingReview[key(selectedId)];saveDemo();clearGeneratedPdf();renderClinicStatus(r);renderSidebar();renderReview(patient(),r);renderPrintPanel(patient(),r);
+}
+const MIN=2026*12+6,MAX=2031*12+11;
+const STORE_KEY='receipt-kantan-demo-v08'; // 旧版から施術日だけ移行。個人情報は保存しない
+const OLD_STORE_KEY='receipt-kantan-demo-v07';
+const OLDEST_STORE_KEY='receipt-kantan-demo-v04';
+let storage=null,storageLocked=false,saveMessage='';
+let year=2026,month=10,selectedId='A',screen='calendar';
+let records=Object.create(null);
+const el=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('ja-JP').format(n)+'円';
+const monthKey=()=>year+'-'+String(month+1).padStart(2,'0');
+const key=id=>monthKey()+':'+id;
+const daysInMonth=()=>new Date(year,month+1,0).getDate();
+function schedule(patient){const out=[];for(let d=1;d<=daysInMonth();d++){if(patient.days.includes(new Date(year,month,d).getDay()))out.push(d)}return out}
+function record(patient){const k=key(patient.id);if(!records[k])records[k]={days:schedule(patient),checks:[false,false,false]};return records[k]}
+function setSaveStatus(message,kind=''){const e=el('saveStatus');e.textContent=message;e.className='savestatus'+(kind?' '+kind:'')}
+function validSaved(v){
+ if(!v||typeof v!=='object'||![2,3,4,7,8,10].includes(v.version)||!v.records||typeof v.records!=='object'||Array.isArray(v.records))return false;
+ if(!Number.isInteger(v.year)||v.year<2026||v.year>2031||!Number.isInteger(v.month)||v.month<0||v.month>11||v.year*12+v.month<MIN||!DATA.some(p=>p.id===v.selectedId))return false;
+ const entries=Object.entries(v.records);if(entries.length>198)return false;
+ for(const [k,r] of entries){const m=/^(202[6-9]|203[01])-(0[1-9]|1[0-2]):([ABC])$/.exec(k);if(!m||!r||!Array.isArray(r.days)||!Array.isArray(r.checks)||r.checks.length!==3)return false;
+ const yy=Number(m[1]),mm=Number(m[2]);if(yy*12+mm-1<MIN||yy*12+mm-1>MAX)return false;const nd=new Date(yy,mm,0).getDate();if(r.days.length>nd||new Set(r.days).size!==r.days.length||r.days.some(d=>!Number.isInteger(d)||d<1||d>nd)||r.checks.some(c=>typeof c!=='boolean'))return false;
+ }return true;
+}
+// v1.9: strictly volatile business state. No localStorage/sessionStorage access.
+function initializeStorage(){
+ storage=null;storageLocked=false;
+ setSaveStatus('⚠ 自動保存なし：この起動中の情報は暗号化JSONとして手動保存・照合してください。ページを閉じると未保存データは失われます。','warn');
+}
+function saveDemo(mark=true){
+ if(mark){
+   const current=businessKey(snapshotData());
+   if(backupStage==='created'&&current===lastCreatedDataKey){exportDirty=true;}
+   else if(lastVerifiedBusinessKey&&current===lastVerifiedBusinessKey){
+     exportDirty=false;if(!['restored','verified'].includes(backupStage))backupStage='verified';
+   }else{exportDirty=true;if(['generated','created','verified','restored'].includes(backupStage))backupStage='changed';}
+   renderBackupStatus();
+ }
+ setSaveStatus('⚠ 自動保存なし：患者情報・施術日・編集履歴はこの画面内のみ。暗号化バックアップの保存・読み戻しが必要です。','warn');
+}
+function patient(){return DATA.find(p=>p.id===selectedId)}
+function allChecked(r){return r.checks.every(Boolean)&&r.days.length>0}
+function renderSidebar(){el('monthText').textContent=year+'年'+(month+1)+'月';el('jumpYear').value=String(year);el('jumpMonth').value=String(month+1);el('jumpMonth').querySelectorAll('option').forEach(o=>{o.disabled=(year===2026&&Number(o.value)<7)});el('prevMonth').disabled=year*12+month<=MIN;el('nextMonth').disabled=year*12+month>=MAX;
+const list=el('patientList');list.replaceChildren();let count=0,complete=0;
+for(const p of DATA){const r=record(p);count+=r.days.length;if(allChecked(r))complete++;const b=document.createElement('button');b.type='button';b.className='patient'+(p.id===selectedId?' active':'');b.setAttribute('aria-pressed',String(p.id===selectedId));const stat=allChecked(r)?'確認済み':r.checks.some(Boolean)?'一部確認':'未確認';const cls=allChecked(r)?' done':r.checks.some(Boolean)?' part':'';b.innerHTML='<div class="p-top"><span class="p-name">'+p.label+'</span><span class="status'+cls+'">'+stat+'</span></div><div class="p-note">'+p.days.map(d=>DOW[d]+'曜').join('・')+' ／ '+personDetails(p).sites.length+'局所 ／ '+r.days.length+'回</div>';b.addEventListener('click',()=>{selectedId=p.id;screen='calendar';saveDemo();render()});list.appendChild(b)}
+el('allCount').textContent=count+'回';el('allComplete').textContent=complete+' / 3人';}
+function makeDay(day,scheduled,selected){const b=document.createElement('button');b.type='button';b.className='date';const isSchedule=scheduled.includes(day),isSelected=selected.includes(day);if(isSelected)b.classList.add(isSchedule?'selected':'extra');else if(isSchedule)b.classList.add('removed');b.setAttribute('aria-label',month+1+'月'+day+'日 '+(isSelected?'選択中・タップで解除':'未選択・タップで追加'));b.setAttribute('aria-pressed',String(isSelected));const label=isSelected?(isSchedule?'✓':'追加'):(isSchedule?'除外':'');b.innerHTML='<span>'+day+'</span><span class="mark">'+label+'</span>';b.addEventListener('click',()=>{if(isMonthLocked())return;const r=record(patient());r.days=isSelected?r.days.filter(n=>n!==day):[...r.days,day].sort((a,b)=>a-b);r.checks=[false,false,false];invalidateAfterVisitEdit();saveDemo();render()});return b}
+function renderCalendar(p,r){const scheduleDays=schedule(p);const grid=el('calendar');grid.replaceChildren();const first=new Date(year,month,1).getDay();const total=daysInMonth();const cells=Math.ceil((first+total)/7)*7;for(let i=0;i<cells;i++){const d=i-first+1;if(d<1||d>total){const blank=document.createElement('span');blank.className='date off';blank.setAttribute('aria-hidden','true');grid.appendChild(blank)}else grid.appendChild(makeDay(d,scheduleDays,r.days))}
+el('scheduleDesc').textContent='定期予定：'+p.days.map(d=>DOW[d]+'曜日').join('・')+'。青色が選択中、緑色は追加日、点線は予定から外した日です。';el('selectedCount').textContent=r.days.length+'回';}
+function renderReview(p,r){
+ const f=feeBreakdown(p,r),count=f.count,base=f.base,full=f.full,half=f.half;
+ el('reviewCount').textContent=count+'回';el('siteCount').textContent=f.sites+'局所';
+ el('unitPrice').textContent=money(base);el('visitCount').textContent=count+'回';
+ el('normalLine').textContent=money(base)+' × '+full+'回 = '+money(base*full);
+ el('halfLine').textContent=money(base/2)+' × '+half+'回 = '+money(base*half/2);
+ el('grandTotal').textContent=money(f.gross);
+ for(const [id,value] of [['insurerClaim',f.insurerClaim],['formPatientShare',f.formPatientShare],['collectedShare',f.collectedShare]])el(id).textContent=value===null?'算定対象外':money(value);
+ const why=feeBlockReason(p,r),statusBox=el('feeStatus');
+ statusBox.textContent=why||'✓ 2026年7〜12月・訪問施術料1・15回以下・'+f.burden+'割負担の限定計算です。請求額は給付'+f.benefit+'割の1円未満切捨て、申請書の一部負担金は差額、徴収額は四捨五入で計算します。';
+ statusBox.className='savestatus '+(why?'warn':'');
+['checkActual','checkInsurance','checkConsent'].forEach((id,i)=>{el(id).checked=r.checks[i]});const status=el('reviewStatus');const ok=allChecked(r);status.className=ok?'ok':'notok';status.textContent=ok?'✓ 3項目のチェックが揃いました（入力内容の手動確認のみ）。':count===0?'施術日が選択されていません。カレンダーで日付を選んでください。':'未確認の項目があります。3項目の確認は画面上の手動確認です。';
+ el('checkBuilding').checked=buildingVerified(p,r);renderAudit(p,r,'Review');}
+
+// Patient profiles are session-only and exported only through encrypted backup.
+function personDetails(p){
+ const k=key(p.id);
+ if(!monthlyProfiles[k]){
+  const earlier=Object.keys(monthlyProfiles).filter(z=>z.endsWith(':'+p.id)&&z.slice(0,7)<monthKey()).sort();
+  monthlyProfiles[k]=cloneDemo(earlier.length?monthlyProfiles[earlier[earlier.length-1]]:DEMO_DEFAULTS[p.id]);
+ }
+ return monthlyProfiles[k];
+}
+function clinicForMonth(){
+ const k=monthKey();
+ if(!monthlyClinics[k]){
+  const earlier=Object.keys(monthlyClinics).filter(z=>z<k).sort();
+  monthlyClinics[k]={...(earlier.length?monthlyClinics[earlier[earlier.length-1]]:CLINIC_DEFAULT)};
+ }
+ return monthlyClinics[k];
+}
+function japaneseEra(dateString){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(dateString))return null;
+ const [y,m,d]=dateString.split('-').map(Number);
+ const probe=new Date(y,m-1,d);if(probe.getFullYear()!==y||probe.getMonth()!==m-1||probe.getDate()!==d)return null;
+ const eras=[{start:'2019-05-01',value:'令',name:'令和',base:2018,center:178.5},{start:'1989-01-08',value:'平',name:'平成',base:1988,center:161.5},{start:'1926-12-25',value:'昭',name:'昭和',base:1925,center:144.5},{start:'1912-07-30',value:'大',name:'大正',base:1911,center:127.5}];
+ const era=eras.find(x=>dateString>=x.start);if(!era||dateString>'2031-12-31')return null;
+ return {...era,year:y-era.base,month:m,day:d};
+}
+function validateProfile(p){
+ const info=personDetails(p),name=info.name.trim(),kana=info.kana.trim();
+ if(!name||!kana)return '氏名とフリガナを入力してください。';
+ if(/架空|サンプル|テスト|TEST/i.test(name+kana))return '試験用の文字が含まれています。患者情報を確認してください。';
+ if(/[\x00-\x1f<>]/.test(name+kana))return '使用できない文字が含まれています。';
+ if([...name].length>32||[...kana].length>40)return '名前が長すぎます。';
+ if(!/^[ァ-ヶー・ 　]+$/.test(kana))return 'フリガナは全角カタカナで入力してください。';
+ if(!japaneseEra(info.birth))return '生年月日を正しく入力してください（大正元年以降）。';
+ return '';
+}
+function validateApplicant(p){
+ const a=personDetails(p);
+ if(!/^\d{3}-\d{4}$/.test(a.applicantPostal))return '申請者の郵便番号は000-0000の形式で入力してください。';
+ if(!singleLine(a.applicantAddress,90))return '申請者の住所を入力してください（改行は使用できません）。';
+ if(a.applicantPhone&&!/^[0-9-]{10,16}$/.test(a.applicantPhone))return '電話番号は数字とハイフンで入力してください（電話番号がなければ空欄）。';
+ return '';
+}
+function validateInsurance(p){
+ const info=personDetails(p);
+ if(!/^[0-9]{8}$/.test(info.insurerNumber))return '保険者番号は半角数字8桁で入力してください。先頭の0も必要です。';
+ if(['00000001','00000002','00000003'].includes(info.insurerNumber))return '旧試験用の保険者番号が入力されています。';
+ if(!/^[0-9]{8}$/.test(info.insuredNumber))return '被保険者番号は半角数字8桁で入力してください。';
+ if(!/^[A-Z0-9-]{0,8}$/.test(info.insuredSymbol))return '被保険者記号は英大文字・数字・ハイフンの8文字以内で入力してください。';
+ if(!['1','2','3'].includes(info.burdenRate))return '自己負担割合を選択してください。';
+ if(info.burdenRate==='3')return '3割負担は、この帳票の給付割合欄に「7」がないため、PDFを生成できません。';
+ return '';
+}
+// Do not infer treatment or validity from diagnosis. This is a fixed-scope demo only.
+function dateValid(v){return /^\d{4}-\d{2}-\d{2}$/.test(v)&&!!japaneseEra(v)}
+function singleLine(value,max){const t=String(value||'').trim();return t&&[...t].length<=max&&!/[\x00-\x1f<>]/.test(t)}
+function illnessPreview(info){return ['【傷病名】'+info.diseases.trim(),'【症状】'+info.symptoms.trim()+'　'+SITE_NAMES.filter(s=>info.sites.includes(s)).join('・')]}
+function validateTreatment(p,r){
+ const x=personDetails(p);
+ if(!Array.isArray(x.sites)||!x.sites.length||x.sites.length>5||new Set(x.sites).size!==x.sites.length||x.sites.some(z=>!SITE_NAMES.includes(z)))return '同意部位を1〜5部位から選択してください。';
+ if(!singleLine(x.diseases,95)||!singleLine(x.symptoms,55))return '傷病名と症状を入力してください（改行・制御文字は使用できません）。';
+ if(!dateValid(x.firstTreatment)||!dateValid(x.consentDate))return '初療年月日・医師の同意年月日を正しく入力してください。';
+ if(!singleLine(x.doctor,24)||!singleLine(x.doctorAddress,70))return '医師氏名と住所を入力してください。';
+ if(x.consentPeriod&&!singleLine(x.consentPeriod,28))return '要加療期間の文字を確認してください。';
+ if(r.days.length){const serviceDay=year+'-'+String(month+1).padStart(2,'0')+'-'+String(r.days[0]).padStart(2,'0');
+  if(x.firstTreatment>serviceDay)return '初療年月日が施術日より後です。';
+  if(x.consentDate>serviceDay)return 'この版は月途中の同意開始・変更に対応していません。同意日と施術日を確認してください。';
+  if(japaneseEra(x.consentDate).name!=='令和')return '医師同意日は、この帳票に印刷された「令和」の年月日だけを試験表示できます。';
+ }
+ return '';
+}
+// Ver.1.2: Patient-specific form annotations are demo-only, kept in memory.
+const ADDITIONAL_FIELDS=[
+ ['onsetKind','onsetKind'],['onsetDate','onsetDate'],['onsetMonth','onsetMonth'],
+ ['onsetCause','onsetCause'],['illnessCourse','illnessCourse'],['relationship','relationship'],
+ ['workType','workType'],['workNote','workNote'],['claimType','claimType'],['outcome','outcome'],
+ ['visitReason','visitReason'],['visitOther','visitOther'],['remarks','remarks']
+];
+function additionalTopText(a){return '傷病名同じ／'+a.onsetCause.trim()+'／'+a.illnessCourse.trim()}
+function validateAdditional(p){
+ const a=personDetails(p);
+ if(!['exact','unknown','month'].includes(a.onsetKind))return '発病・負傷年月日の記入方法を確認してください。';
+ if(a.onsetKind==='exact'&&!dateValid(a.onsetDate))return '発病・負傷年月日が正しくありません。';
+ if(a.onsetKind==='month')return '年月頃の元帳票への安全な印字方法は未検証です。この条件ではPDF出力を停止します。';
+ if(!singleLine(a.onsetCause,40)||!singleLine(a.illnessCourse,40))return '発症・負傷の原因と経過を確認してください。';
+ if(!['本人','配偶者','子','その他'].includes(a.relationship))return '続柄を選んでください。';
+ if(!['1','2','3'].includes(a.workType))return '業務上・第三者行為の区分を選んでください。';
+ if(a.workType==='3'&&!singleLine(a.workNote,40))return '「その他」の補足を入力してください。';
+ if(!['新規','継続'].includes(a.claimType)||!['継続','治癒','中止','転医'].includes(a.outcome))return '請求区分と転帰を選んでください。';
+ if(!['1','2','3'].includes(a.visitReason))return '往療又は訪問の理由を選択してください。';
+ if(a.visitReason==='3'&&!singleLine(a.visitOther,60))return '「その他」の訪問理由を入力してください。';
+ const lines=a.remarks.trim()?a.remarks.replace(/\r\n?/g,'\n').split('\n'):[];
+ if(lines.length>3||lines.some(t=>!t.trim()||[...t].length>34||/[\x00-\x09\x0b-\x1f<>]/.test(t)))return '摘要は空欄か、1行34文字以内・3行以内で入力してください。';
+ return '';
+}
+function renderAdditional(p){
+ const a=personDetails(p);
+ el('onsetDateWrap').classList.toggle('screenhide',a.onsetKind!=='exact');
+ el('onsetMonthWrap').classList.toggle('screenhide',a.onsetKind!=='month');
+ el('workNoteWrap').classList.toggle('screenhide',a.workType!=='3');
+ el('visitOtherWrap').classList.toggle('screenhide',a.visitReason!=='3');
+ const top=additionalTopText(a);
+ el('additionalPreview').textContent=`発病時期：${a.onsetKind==='exact'?(a.onsetDate||'未入力'):a.onsetKind==='unknown'?'不詳':(a.onsetMonth||'未入力')+'頃'}／上部：${top}／続柄：${a.relationship}／業務等：${a.workType==='3'?'その他('+a.workNote+')':a.workType}／請求：${a.claimType}／転帰：${a.outcome}／理由：${a.visitReason}／摘要：${a.remarks||'空欄'}`;
+ const err=validateAdditional(p),box=el('additionalInfoState');
+ box.className='savestatus profile-state'+(err?' fail':'');
+ box.textContent=err?'追加項目の確認：'+err:'✓ 追加6項目を確認しました。記載内容の正しさは、同意書や記録と照合してください。';
+}
+function renderTreatment(p,r){
+ const x=personDetails(p);
+ document.querySelectorAll('[data-consent-site]').forEach(node=>{node.checked=x.sites.includes(node.dataset.consentSite)});
+ const lines=illnessPreview(x);
+ el('treatmentPreviewDisease').textContent=lines[0];el('treatmentPreviewSymptoms').textContent=lines[1];el('doctorDiseasePreview').textContent=x.diseases.trim()||'未入力';
+ el('siteCounts').textContent='選択：'+x.sites.length+'局所　／　'+r.days.length+'回／局所（'+(r.checks[0]?'施術実績を確認済み':'施術予定・未確認')+'）';
+ el('siteCounts').className='savestatus profile-state'+(!x.sites.length?' fail':'');
+ const err=validateTreatment(p,r);el('treatmentState').textContent=err?'施術・同意情報：'+err:'✓ 部位・傷病名・初療日・医師情報の形式を確認しました。同意の有効性までは判断していません。';
+ el('treatmentState').className='savestatus profile-state'+(err?' fail':'');
+}
+function renderProfileStatus(p){
+ const info=personDetails(p);
+ const err=validateProfile(p),insErr=validateInsurance(p),state=el('profileState'),insState=el('insuranceState');
+ state.textContent=err?'患者の入力内容を確認してください：'+err:'✓ 氏名・フリガナ・生年月日の形式を確認しました。';
+ const appErr=validateApplicant(p),appState=el('applicantState');appState.textContent=appErr?'申請者情報の確認：'+appErr:'✓ 住所・郵便番号・電話番号を確認しました。申請欄・委任欄の署名は空白にします。';appState.className='savestatus profile-state'+(appErr?' fail':'');
+ state.className='savestatus profile-state'+(err?' fail':'');
+ insState.textContent=insErr?'保険情報の確認：'+insErr:'✓ 保険番号の桁数・形式を確認しました（給付'+(10-Number(info.burdenRate))+'割）。資格の真偽は確認できません。';
+ insState.className='savestatus profile-state'+(insErr?' fail':'');
+ renderTreatment(p,record(p));renderAdditional(p);
+}
+function renderProfile(p){
+ const info=personDetails(p);
+ for(const [field,id] of [['name','profileName'],['kana','profileKana'],['birth','profileBirth'],['applicantPostal','applicantPostal'],['applicantAddress','applicantAddress'],['applicantPhone','applicantPhone'],['insurerNumber','insurerNumber'],['insuredNumber','insuredNumber'],['insuredSymbol','insuredSymbol'],['burdenRate','burdenRate'],['diseases','treatmentDiseases'],['symptoms','treatmentSymptoms'],['firstTreatment','firstTreatment'],['doctor','consentDoctor'],['doctorAddress','consentAddress'],['consentDate','consentDate'],['consentPeriod','consentPeriod'],...ADDITIONAL_FIELDS])el(id).value=info[field];
+ renderProfileStatus(p);
+}
+function updateProfile(){
+ if(isMonthLocked())return render();
+ const p=patient(),info=personDetails(p);
+ for(const [field,id] of [['name','profileName'],['kana','profileKana'],['birth','profileBirth'],['applicantPostal','applicantPostal'],['applicantAddress','applicantAddress'],['applicantPhone','applicantPhone'],['insurerNumber','insurerNumber'],['insuredNumber','insuredNumber'],['insuredSymbol','insuredSymbol'],['burdenRate','burdenRate'],['diseases','treatmentDiseases'],['symptoms','treatmentSymptoms'],['firstTreatment','firstTreatment'],['doctor','consentDoctor'],['doctorAddress','consentAddress'],['consentDate','consentDate'],['consentPeriod','consentPeriod'],...ADDITIONAL_FIELDS])info[field]=el(id).value;
+ // Insurance details are strictly in-memory. Persist only confirmation-reset and dates.
+ info.sites=SITE_NAMES.filter(z=>document.querySelector(`[data-consent-site="${z}"]`)?.checked);
+ const r=record(p);r.checks=[false,false,false];delete sameBuildingReview[key(p.id)];certificateRecord().datesConfirmed=false;saveDemo();clearGeneratedPdf();
+ renderProfileStatus(p);renderSidebar();renderReview(p,r);renderPrintPanel(p,r);
+}
+// Ver.1.6: Prefiling check. Only one manual confirmation (same-building), bound to
+// the exact patient/month/data set in this session. Not saved to localStorage/JSON.
+const sameBuildingReview=Object.create(null);
+function clearBuildingForCurrentMonth(){
+ for(const p of DATA)delete sameBuildingReview[key(p.id)];
+}
+function buildingAuditSignature(p,r){
+ const c=certificateRecord();
+ return JSON.stringify([monthKey(),p.id,r.days,personDetails(p),clinic,c.periodMode,c.date,c.applicationDate,c.delegationDate]);
+}
+function buildingVerified(p,r){
+ const item=sameBuildingReview[key(p.id)];
+ return !!item&&item===buildingAuditSignature(p,r);
+}
+function auditClaim(p,r){
+ const issues=[];
+ const add=(kind,text)=>issues.push({kind,text});
+ const f=feeBreakdown(p,r),d=personDetails(p);
+ if(!Array.isArray(r.days)||r.days.length!==new Set(r.days).size||r.days.some(n=>!Number.isInteger(n)||n<1||n>daysInMonth()))
+   add('stop','施術日データに重複や月外の日付があります。');
+ else if(!r.days.length)add('stop','施術日の実績が0日です。');
+ else add('pass',`カレンダーの${r.days.length}日が対象月に収まっています（実際の施術の裏付けは手動確認）。`);
+ if(!Array.isArray(d.sites)||!d.sites.length||d.sites.length>5||d.sites.some(s=>!SITE_NAMES.includes(s))||new Set(d.sites).size!==d.sites.length)
+   add('stop','同意部位の選択が不正です。');
+ else add('pass',`同意部位${d.sites.length}か所 × 選択日${r.days.length}日として部位別回数を自動計算しています（すべて毎回施術した前提）。`);
+ const feeError=feeBlockReason(p,r);
+ if(feeError)add('stop',feeError);
+ else if(Number.isInteger(f.insurerClaim)&&Number.isInteger(f.formPatientShare)&&
+         f.insurerClaim>=0&&f.formPatientShare>=0&&f.gross===f.insurerClaim+f.formPatientShare&&f.gross===f.base*r.days.length)
+   add('pass',`限定料金の算術一致：${money(f.gross)}＝保険請求${money(f.insurerClaim)}＋申請書負担金${money(f.formPatientShare)}。`);
+ else add('stop','料金・負担金・保険請求額の算術整合を確認できません。');
+ for(const [label,fn] of [['患者情報',validateProfile],['申請者情報',validateApplicant],['保険番号・負担割合',validateInsurance],['施術部位・医師同意記録',q=>validateTreatment(q,r)],['追加の申請項目',validateAdditional]]){
+   const err=fn(p);if(err)add('stop',`${label}：${err}`);
+ }
+ const clinicErr=validateClinic();if(clinicErr)add('stop','施術者・施術所：'+clinicErr);
+ const certErr=validateCertificate(r);
+ if(certErr){
+   if(certErr.includes('チェックしてください'))add('manual','書類日付・領収の確認：'+certErr);
+   else add('stop','書類日付：'+certErr);
+ }else add('pass','施術証明・申請・委任の日付の入力と確認が揃っています（成立日の適法性は未判定）。');
+ if(!r.checks[0])add('manual','施術日・回数は予定のままではありませんか？ 施術実績を照合し、上の①にチェックしてください。');
+ if(!r.checks[1])add('manual','当月の保険資格と負担割合を確認し、上の②にチェックしてください（資格照会はできません）。');
+ if(!r.checks[2])add('manual','同意書・部位・再同意・必要な添付記録を確認し、上の③にチェックしてください。');
+ if(!buildingVerified(p,r))add('manual','訪問施術料1の同一建物人数を確認し、専用のチェックを入れてください。');
+ else add('pass','同一建物での人数条件を手動確認済み（自動照会ではありません）。');
+ if(/^\d{4}-\d{2}-\d{2}$/.test(d.consentDate)){
+   const [cy,cm]=d.consentDate.split('-').map(Number);
+   const passed=(year-cy)*12+(month+1-cm);
+   if(passed>=5)add('warn',`医師の同意は${d.consentDate}付です。再同意の時期・方式・添付の要否を個別に確認してください。※期間切れと自動判定はしません。`);
+ }
+ if(d.claimType==='新規'&&d.firstTreatment&&d.firstTreatment.slice(0,7)!==monthKey())
+   add('warn','「新規」を選択していますが、初療年月日は請求月と異なります。請求区分の根拠を確認してください。');
+ if(d.outcome!=='継続'&&certificateRecord().periodMode==='month')
+   add('warn','転帰が「'+d.outcome+'」ですが、施術期間は月初〜月末方式です。保険者・組合の記入方法を確認してください。');
+ const c=certificateRecord();
+ if([c.date,c.applicationDate,c.delegationDate].some(x=>x>tokyoToday()))
+   add('warn','証明・申請・委任に未来の日付が含まれます。試験用の月末候補であり、実際の成立を意味しません。');
+ add('warn','資格・同意・同一建物条件・添付書類は実資料との照合が必要です。画面のチェックは公的な確認の代わりにはなりません。');
+ return issues;
+}
+function renderAudit(p,r,prefix){
+ const items=auditClaim(p,r),counts={stop:0,manual:0,warn:0,pass:0};
+ for(const issue of items)counts[issue.kind]++;
+ const summary=el('audit'+prefix+'Summary'),list=el('audit'+prefix+'Items');
+ summary.textContent=`出力停止 ${counts.stop}件／手動確認 ${counts.manual}件／注意 ${counts.warn}件／内部整合OK ${counts.pass}件`;
+ summary.style.color=counts.stop?'#9b2929':counts.manual?'#845c16':'#236c42';
+ list.replaceChildren();
+ const names={stop:'停止',manual:'要確認',warn:'注意',pass:'一致'};
+ for(const issue of items){
+   const row=document.createElement('div');row.className='audit-item';
+   const mark=document.createElement('span');mark.className='audit-tag '+issue.kind;mark.textContent=names[issue.kind];
+   const desc=document.createElement('span');desc.textContent=issue.text;
+   row.append(mark,desc);list.append(row);
+ }
+}
+function printEligibility(p,r){
+ if(importedLegacyDemo)return '旧版の架空データを読み込んでいます。本番候補PDFは出力できません.バックアップを残し、「すべて初期状態に戻す」から新規入力してください。';
+ const feeReason=feeBlockReason(p,r);if(feeReason)return feeReason;
+ const profileError=validateProfile(p);if(profileError)return '患者情報を確認してください：'+profileError;
+ const applicantError=validateApplicant(p);if(applicantError)return '申請者情報を確認してください：'+applicantError;
+ const insuranceError=validateInsurance(p);if(insuranceError)return '保険情報を確認してください：'+insuranceError;
+ const treatmentError=validateTreatment(p,r);if(treatmentError)return '施術・医師同意情報を確認してください：'+treatmentError;
+ const extraError=validateAdditional(p);if(extraError)return '追加の申請項目を確認してください：'+extraError;
+ if(r.days.length===0)return '施術日が選択されていません。';
+ if(r.days.length>15)return '月16回以上は追加の算定条件・書類確認が必要なため、Ver.1.6の帳票出力を停止しています。';
+ if(!r.checks.every(Boolean))return '料金・確認画面の3項目をすべてチェックしてください（全施術日に同一の同意部位を施術した手動条件）。';
+ if(!buildingVerified(p,r))return '訪問施術料1の同一建物での施術人数が1人であることを、料金・確認画面で手動確認してください。';
+ const clinicError=validateClinic();if(clinicError)return '施術者・施術所情報：'+clinicError;
+ const certError=validateCertificate(r);if(certError)return '施術証明日：'+certError;
+ if([certificateRecord().date,certificateRecord().applicationDate,certificateRecord().delegationDate].some(x=>x>tokyoToday()))return '未来の証明・申請・受領委任日は本番候補PDFに出力できません。実際の成立日以降に確定してください。';
+ if(backupStage!=='verified'||exportDirty)return '最新の業務データの暗号化バックアップを作成し、iPadの保存先から選び直して「業務データ一致」を確認してください。';
+ return '';
+}
+// All inputs are demonstration-only. Free-text demo fields are not persisted, but real identifiers must NEVER be entered.
+
+
+// Ver.1.4 maintains the unchanged PDF overlay geometry from Ver.1.3.
+// No external libraries, embedded PDF, upload, network requests, or private-bank strings.
+// Japanese demo strings are rendered as alpha-masked PDF image XObjects (no font files distributed).
+// Preserves the source PDF's vector content and all preprinted fields by incremental update.
+const TEMPLATE_SHA256='07b5f53ecb6e712a6d4a76e16d582671fcfc17724aad36943aceacac16a48e1d';
+const FORM_W=595.32,FORM_H=841.92;
+let templateBytes=null,templateName='',generatedUrl='',generatedSignature='',templateUrl='';
+const enc=new TextEncoder();
+const safeText=v=>String(v).replace(/[\\()]/g,x=>'\\'+x);
+const asciiBytes=string=>enc.encode(string);
+function toRawString(bytes){
+ let raw='';for(let i=0;i<bytes.length;i+=16384)raw+=String.fromCharCode(...bytes.subarray(i,i+16384));
+ return raw;
+}
+function setTemplateStatus(message,kind=''){let box=el('templateStatus');box.textContent=message;box.className='savestatus'+(kind?' '+kind:'')}
+function pdfSignature(p,r){return JSON.stringify([year,month,p.id,r.days,r.checks,templateName,personDetails(p),clinic,certificateRecord()])}
+function clearGeneratedPdf(){
+ if(generatedUrl){URL.revokeObjectURL(generatedUrl);generatedUrl=''}
+ generatedSignature='';el('pdfLinks').hidden=true;el('previewSlot').hidden=true;
+
+}
+function checkOriginalPdfStructure(raw){
+ // Only support the exact 1-page vector original provided in this conversation.
+ if(!raw.startsWith('%PDF-1.7'))throw Error('指定の元PDFではありません。');
+ if(!/^4 0 obj\s*<<\/Type\/Page\b[\s\S]*?\/Contents 5 0 R[\s\S]*?endobj/m.test(raw))throw Error('申請書のページ構造が異なります。');
+ const pts=[...raw.matchAll(/startxref\s+(\d+)\s+%%EOF/g)];
+ if(!pts.length)throw Error('PDFの参照情報を読み取れません。');
+ return {startXref:Number(pts[pts.length-1][1])};
+}
+async function loadPdfFile(file){
+ templateBytes=null;templateName='';clearGeneratedPdf();renderPrintPanel(patient(),record(patient()));
+ if(!file){setTemplateStatus('PDFが選択されていません。');return}
+ if(file.size>4000000){setTemplateStatus('この版では4MB以下のPDFのみ対応します。','fail');return}
+ setTemplateStatus('PDFの書式を検証中…');
+ try{
+   const bytes=new Uint8Array(await file.arrayBuffer());
+   const digest=await crypto.subtle.digest('SHA-256',bytes);
+   const hash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+   if(hash!==TEMPLATE_SHA256)throw Error('指定の見本PDFと一致しません。別のPDFは安全のため受け付けません。');
+   checkOriginalPdfStructure(toRawString(bytes));
+   templateBytes=bytes;templateName=file.name;
+   setTemplateStatus('✓ 元の帳票を確認しました。罫線や支払機関欄はそのまま保持します。');
+ }catch(e){setTemplateStatus('PDFを読み込めません：'+(e?.message||'形式エラー'),'fail');}
+ renderPrintPanel(patient(),record(patient()));
+}
+function renderPrintPanel(p,r){
+ const f=feeBreakdown(p,r);
+ const target=el('pdfTarget');
+ target.replaceChildren();
+ const strong=document.createElement('div');
+ strong.textContent=`出力対象：${p.label}｜${year}年${month+1}月分`;
+ const small=document.createElement('small');
+ small.textContent=`${f.sites}局所・${f.count}回・自己負担${f.burden}割 ／ 保存名：receipt_${monthKey().replace('-','')}_${p.id}.pdf`;
+ target.append(strong,small);
+ el('printBtn').textContent=`② ${p.label}のA4 PDFを生成する`;
+ renderAudit(p,r,'Print');
+ const reason=printEligibility(p,r);const gate=el('printGate');
+ const message=reason||(!templateBytes?'① 元の申請書PDFを選択してください。':'✓ 計算と手動確認・暗号化バックアップ照合が揃いました。必ずPDF内容を目視確認してください（署名欄は空白）。');
+ gate.textContent=message;gate.className=(!reason&&templateBytes)?'ok':'alert';
+ el('printBtn').disabled=!!reason||!templateBytes;
+ const sig=pdfSignature(p,r);
+ if(generatedSignature!==sig)clearGeneratedPdf();
+}
+// PDF point coordinates are bottom-left origins; the established positions use top-left.
+const fromTop=y=>(FORM_H-y).toFixed(2);
+function txt(text,x,y,size=8,align='left',color='black'){
+ text=String(text);const glyphWidth=[...text].reduce((sum,ch)=>sum+(ch>='0'&&ch<='9'?0.56:ch===','?0.28:ch==='.'?0.28:0.52),0)*size;
+ const left=x-(align==='right'?glyphWidth:align==='center'?glyphWidth/2:0);
+ const rgb=color==='red'?'0.76 0.13 0.16':'0.05 0.06 0.08';
+ return `BT /FDemo ${size} Tf ${rgb} rg 1 0 0 1 ${left.toFixed(2)} ${fromTop(y)} Tm (${safeText(text)}) Tj ET\n`;
+}
+// Draw only actual Japanese glyph pixels; keep every other pixel transparent.
+// Embed RGB image + 8-bit soft mask (/SMask) as separate PDF XObjects.
+// Uncompressed streams avoid external PNG/deflate libraries and iOS compatibility dependencies.
+function demoTransparentGlyphs(text,wide,high,fontPt,minPt,fieldLabel='文字欄',maxLines=1){
+ const scale=6,canvas=document.createElement('canvas');
+ canvas.width=Math.round(wide*scale);canvas.height=Math.round(high*scale);
+ const context=canvas.getContext('2d',{willReadFrequently:true});
+ if(!context)throw Error('日本語描画用Canvasが使用できません。');
+ context.clearRect(0,0,canvas.width,canvas.height);
+ const fontFamily='"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",sans-serif';
+ const value=String(text).trim().replace(/\r\n?/g,'\n');
+ const available=canvas.width-scale*4;
+ function setFont(size){context.font=`${size*scale}px ${fontFamily}`}
+ function fits(value){return context.measureText(value).width<=available}
+ // Prefer boundaries between diagnoses to avoid splitting disease names midword.
+ function twoLines(value){
+   const chars=[...value],candidates=[];
+   for(let k=1;k<chars.length;k++){
+     const a=chars.slice(0,k).join('').trim(),b=chars.slice(k).join('').trim();
+     if(!a||!b||!fits(a)||!fits(b))continue;
+     const natural=/^[\u3000 ]$/.test(chars[k-1])||/^[\u3000 ]$/.test(chars[k]);
+     candidates.push({lines:[a,b],natural,maxWidth:Math.max(context.measureText(a).width,context.measureText(b).width)});
+   }
+   // Natural word boundary first, then balanced emergency wrap with no omission.
+   candidates.sort((a,b)=>Number(b.natural)-Number(a.natural)||a.maxWidth-b.maxWidth);
+   return candidates[0]?.lines||null;
+ }
+ let lines=null,chosen=fontPt;
+ // Keep long diagnoses legible by trying two lines before shrinking.
+ for(let size=fontPt;size>=minPt-.001;size=Math.max(minPt,Math.round((size-.25)*100)/100)){
+   setFont(size);
+   if(!value.includes('\n')&&fits(value)){lines=[value];chosen=size;break}
+   if(value.includes('\n')){
+     const explicit=value.split('\n');
+     if(explicit.length<=maxLines&&explicit.every(z=>z.trim()&&fits(z))){lines=explicit;chosen=size;break}
+   }else if(maxLines>=2&&high>=15&&twoLines(value)){lines=twoLines(value);chosen=size;break}
+   if(size<=minPt)break;
+ }
+ if(!lines)throw Error(`${fieldLabel}が記入欄に収まりません。文字数と印字幅を確認してください（省略せず出力を停止しました）。`);
+ setFont(chosen);context.fillStyle='#111111';context.textBaseline='middle';
+ if(lines.length===1){context.fillText(lines[0],2*scale,canvas.height*.52)}
+ else{lines.forEach((line,i)=>context.fillText(line,2*scale,canvas.height*(i+.5)/lines.length))}
+ const raw=context.getImageData(0,0,canvas.width,canvas.height).data;
+ const pixels=canvas.width*canvas.height;
+ const rgb=new Uint8Array(pixels*3),alpha=new Uint8Array(pixels);
+ let hasInk=false;
+ for(let i=0;i<pixels;i++){
+   const j=i*4,k=i*3;
+   rgb[k]=raw[j];rgb[k+1]=raw[j+1];rgb[k+2]=raw[j+2];
+   alpha[i]=raw[j+3];if(alpha[i])hasInk=true;
+ }
+ if(!hasInk)throw Error(`${fieldLabel}の文字が描画されませんでした。`);
+ return {rgb,alpha,width:canvas.width,height:canvas.height};
+}
+// Actual alpha pixel bounds are checked against the original printed row boundaries.
+// Fail closed if a platform font extends a glyph toward the ruled lines.
+function assertInkInside(img,topY,height,allowedTop,allowedBottom,label){
+ let y0=img.height,y1=-1;
+ for(let y=0;y<img.height;y++){
+  for(let x=0;x<img.width;x++){
+   if(img.alpha[y*img.width+x]>30){y0=Math.min(y0,y);y1=Math.max(y1,y)}
+  }
+ }
+ if(y1<0)throw Error(label+'の文字が描画されていません。');
+ const inkTop=topY+y0*height/img.height;
+ const inkBottom=topY+(y1+1)*height/img.height;
+ if(inkTop<allowedTop||inkBottom>allowedBottom){
+  throw Error(label+'の文字が罫線に近すぎます。文字量を調整してください。');
+ }
+}
+function pdfImageDraw(key,x,topY,w,h){return `q ${w} 0 0 ${h} ${x} ${(FORM_H-topY-h).toFixed(2)} cm /${key} Do Q\n`}
+function blankGlyph(){return {width:8,height:8,rgb:new Uint8Array(192),alpha:new Uint8Array(64)}}
+function japaneseProfileImages(p){
+ const info=personDetails(p);const images=[
+  {key:'JName',obj:49,maskObj:51,x:115,y:156,w:132,h:20,img:demoTransparentGlyphs(info.name.trim(),132,20,11,7.25,'氏名')},
+  {key:'JKana',obj:50,maskObj:52,x:146,y:137.5,w:100,h:10.4,img:demoTransparentGlyphs(info.kana.trim(),100,10.4,7.2,5.25,'フリガナ')},
+  {key:'JInsured',obj:53,maskObj:54,x:33,y:118.4,w:133,h:14,img:demoTransparentGlyphs(info.insuredSymbol?info.insuredSymbol+'  '+info.insuredNumber:info.insuredNumber,133,14,8.1,6.25,'被保険者記号・番号')},
+  {key:'JIllness',obj:55,maskObj:56,x:151,y:224.4,w:292,h:9.7,img:demoTransparentGlyphs(illnessPreview(info)[0],292,9.7,7.2,5.2,'傷病名及び症状欄の傷病名')},
+  {key:'JSymptoms',obj:57,maskObj:58,x:151,y:235.4,w:292,h:9.3,img:demoTransparentGlyphs(illnessPreview(info)[1],292,9.3,7.0,4.9,'症状・施術部位')},
+  {key:'JInitialEra',obj:59,maskObj:60,x:39,y:204.0,w:25,h:14,img:demoTransparentGlyphs(japaneseEra(info.firstTreatment).name,25,14,9.2,8,'初療年月日の元号')},
+  {key:'JDoctor',obj:61,maskObj:62,x:31.5,y:709.0,w:117,h:16,img:demoTransparentGlyphs(info.doctor,117,16,8.7,6.3,'同意医師氏名')},
+  {key:'JDoctorAddr',obj:63,maskObj:64,x:160,y:708.5,w:141.5,h:18,img:demoTransparentGlyphs(info.doctorAddress,141.5,18,7.8,5.3,'同意医師住所')},
+  {key:'JDoctorIllness',obj:65,maskObj:66,x:398,y:708.0,w:92.5,h:17,img:demoTransparentGlyphs(info.diseases.trim(),92.5,17,7.5,5.1,'医師同意記録の傷病名',2)},
+  {key:'JDoctorPeriod',obj:67,maskObj:68,x:501.5,y:708.5,w:66.7,h:16,img:info.consentPeriod.trim()?demoTransparentGlyphs(info.consentPeriod,66.7,16,7.3,5.3,'要加療期間'):{width:8,height:8,rgb:new Uint8Array(192),alpha:new Uint8Array(64)}},
+  {key:'JCertRegister',obj:69,maskObj:70,x:43,y:591.5,w:183,h:13,img:demoTransparentGlyphs(clinic.registerNo,183,13,8.5,6.0,'施術者登録記号番号')},
+  {key:'JCertAddress',obj:71,maskObj:72,x:350,y:569.8,w:215,h:13,img:demoTransparentGlyphs(clinic.address,215,13,8.4,5.5,'施術所所在地')},
+  {key:'JCertName',obj:73,maskObj:74,x:350,y:581.8,w:215,h:13,img:demoTransparentGlyphs(clinic.name,215,13,8.6,5.7,'施術所名称')},
+  {key:'JCertManager',obj:75,maskObj:76,x:350,y:593.8,w:126,h:13,img:demoTransparentGlyphs(clinic.manager,126,13,8.4,5.7,'施術管理者氏名')},
+  {key:'JCertPhone',obj:77,maskObj:78,x:499,y:593.8,w:65,h:13,img:demoTransparentGlyphs(clinic.phone,65,13,7.0,4.7,'施術所電話番号')},
+  {key:'JApplicantAddress',obj:79,maskObj:80,x:346,y:617.0,w:214,h:15,img:demoTransparentGlyphs(info.applicantAddress,214,15,8.5,5.6,'申請者住所')},
+  {key:'JDelegationAddress',obj:81,maskObj:82,x:143,y:746.8,w:162,h:17,img:demoTransparentGlyphs(info.applicantAddress,162,17,8.2,5.3,'受領委任欄の住所')},
+  {key:'JOnset',obj:83,maskObj:84,x:173,y:118.0,w:32,h:15,img:demoTransparentGlyphs(info.onsetKind==='unknown'?'不詳':japaneseEra(info.onsetDate).name,32,15,8.5,6.5,'発病年月日の元号・不詳')},
+  {key:'JCause',obj:85,maskObj:86,x:280,y:117.1,w:281,h:15,img:demoTransparentGlyphs(additionalTopText(info),281,15,8.3,5.8,'傷病名・原因・経過')},
+  {key:'JRelation',obj:87,maskObj:88,x:277.5,y:155.0,w:38,h:14,img:demoTransparentGlyphs(info.relationship,38,14,10.7,7.0,'続柄')},
+  {key:'JWorkNote',obj:89,maskObj:90,x:444,y:147.5,w:105,h:13,img:info.workType==='3'?demoTransparentGlyphs(info.workNote,105,13,7.3,5.4,'第三者行為の補足'):blankGlyph()},
+  {key:'JVisitOther',obj:91,maskObj:92,x:389,y:537.1,w:155,h:11,img:info.visitReason==='3'?demoTransparentGlyphs(info.visitOther,155,11,5.7,4.3,'訪問理由の補足'):blankGlyph()},
+  {key:'JRemark',obj:93,maskObj:94,x:449,y:274,w:112,h:63,img:info.remarks.trim()?demoTransparentGlyphs(info.remarks.trim(),112,63,10.0,6.9,'摘要（3行以内）',3):blankGlyph()}
+ ];
+ const a=images.find(z=>z.key==='JIllness'),b=images.find(z=>z.key==='JSymptoms');
+ // The original form's horizontal borders are around top positions 222.5 and 246.5 pt.
+ // Also reserve 1 pt clearance between the first and second printed lines.
+ assertInkInside(a.img,a.y,a.h,223.6,234.0,'傷病名');
+ assertInkInside(b.img,b.y,b.h,235.0,244.5,'症状・施術部位');
+ return images;
+}
+function inkRing(x,topY,rx=5.1,ry=5.1){
+ const y=FORM_H-topY,k=.55228475;
+ return `0.13 0.19 0.25 RG 0.65 w ${x+rx} ${y} m `+
+ `${x+rx} ${y+ry*k} ${x+rx*k} ${y+ry} ${x} ${y+ry} c `+
+ `${x-rx*k} ${y+ry} ${x-rx} ${y+ry*k} ${x-rx} ${y} c `+
+ `${x-rx} ${y-ry*k} ${x-rx*k} ${y-ry} ${x} ${y-ry} c `+
+ `${x+rx*k} ${y-ry} ${x+rx} ${y-ry*k} ${x+rx} ${y} c S\n`;
+}
+function visitCircle(x,topY){
+ const y=FORM_H-topY,r=3.05,k=r*.55228475;
+ return `0.12 0.15 0.19 RG 0.7 w ${x+r} ${y} m `+
+ `${x+r} ${y+k} ${x+k} ${y+r} ${x} ${y+r} c `+
+ `${x-k} ${y+r} ${x-r} ${y+k} ${x-r} ${y} c `+
+ `${x-r} ${y-k} ${x-k} ${y-r} ${x} ${y-r} c `+
+ `${x+k} ${y-r} ${x+r} ${y-k} ${x+r} ${y} c S\n`+
+ txt('1',x,topY+1.5,4.5,'center');
+}
+function makeOverlayCommands(p,r){
+ const f=feeBreakdown(p,r);if(!f.verified)throw Error('算定対象外のため、金額をPDFに記入しません。');
+ const n=r.days.length,price=f.base;let result='q\n';
+ const era=japaneseEra(personDetails(p).birth);
+ result+=pdfImageDraw('JName',115,156,132,20);result+=pdfImageDraw('JKana',146,137.5,100,10.4);result+=pdfImageDraw('JInsured',33,118.4,133,14);
+ // Eight insurer-number boxes, including leading zeros. No integer conversion.
+ const insurance=personDetails(p);for(let i=0;i<8;i++)result+=txt(insurance.insurerNumber[i],402.7+22.33*i,102.1,9,'center');
+ // Benefit-rate box preprints 8, 9, 10 only. Mark 9 for 1割, 8 for 2割 (trial only).
+ result+=inkRing(insurance.burdenRate==='1'?536.3:514,67.5,8,5.8);
+ result+=inkRing(era.center,184.5,5.3,5.2);
+ result+=txt(era.year,198.5,186.5,7.5,'center');
+ result+=txt(era.month,220.8,186.5,7.5,'center');
+ result+=txt(era.day,245.1,186.5,7.5,'center');
+ // Add-on fields: onset date, work-related cause, relationship, claim classification, disposition,
+ // visit reason and remarks. All additions are transparent overlays on the original form.
+ const add=personDetails(p);
+ if(add.onsetKind==='exact'){
+   const o=japaneseEra(add.onsetDate);if(!o)throw Error('発病年月日を確認してください。');
+   result+=txt(o.year,197.0,129.5,7.1,'center');
+   result+=txt(o.month,228.5,129.5,7.1,'center');
+   result+=txt(o.day,257.0,129.5,7.1,'center');
+ }
+ result+=inkRing(add.workType==='1'?333.5:add.workType==='2'?367.0:412.6,154.7,3.6,4.1);
+ result+=inkRing(add.claimType==='新規'?469.6:520.3,214.5,5.7,5.1);
+ const resultX={'継続':460.8,'治癒':486.4,'中止':511.9,'転医':537.5};
+ result+=inkRing(resultX[add.outcome],240.2,5.6,5.2);
+ result+=inkRing(add.visitReason==='1'?93.2:add.visitReason==='2'?206.4:358.9,543.1,3.4,3.5);
+
+ // Date, patient specimen, effective service period and count, visit-fee trial amounts.
+ result+=txt(year-2018,302,26.0,8,'center');result+=txt(month+1,326,26,8,'center');
+ // No real identifiers; the Japanese demo profile above is rendered in the proper fields.
+ const period=periodDates(r);
+ result+=txt(year-2018,198,215,7,'center');result+=txt(month+1,224,215,7,'center');result+=txt(period.start,250,215,7,'center');
+ result+=txt(year-2018,322,215,7,'center');result+=txt(month+1,347,215,7,'center');result+=txt(period.end,373,215,7,'center');
+ result+=txt(n,409,215,8,'center');
+ result+=txt(price.toLocaleString('en-US'),263,306.5,8,'right');
+ result+=txt(n,335,306.5,8,'right');
+ result+=txt(f.gross.toLocaleString('en-US'),420,306.5,8,'right');
+ result+=txt(f.gross.toLocaleString('en-US'),420,483,8,'right');
+ // Source form has dedicated lines: 一部負担金 487–496pt / 請求額 499–508pt.
+ result+=txt(f.formPatientShare.toLocaleString('en-US'),420,495.0,7.2,'right');
+ result+=txt(f.insurerClaim.toLocaleString('en-US'),420,507.0,7.2,'right');
+ // Circle the already-printed burden ratio (1割 / 2割), not an invented label.
+ result+=inkRing(f.burden===1?96.3:135.0,492.0,6.1,4.7);
+ // Individual site counts reflect all selected visits, ONLY after explicit actual-days confirmation.
+ // Any exception / mid-month site change is outside this demonstration and must be handled separately.
+ const info=personDetails(p);const xs=[269.5,306.4,343.4,380.4,417.5];
+ SITE_NAMES.forEach((site,i)=>{if(info.sites.includes(site))result+=txt(n,xs[i],265.8,7.3,'right')});
+ // The top illness/symptom rows and consent-record fields are rasterized as alpha-masked black glyphs.
+ for(const [image,x,y,w,h] of [
+  ['JIllness',151,224.4,292,9.7],['JSymptoms',151,235.4,292,9.3],
+  ['JInitialEra',39,204,25,14],['JDoctor',31.5,709,117,16],
+  ['JDoctorAddr',160,708.5,141.5,18],['JDoctorIllness',398,708,92.5,17],
+  ['JDoctorPeriod',501.5,708.5,66.7,16],
+  ['JCertRegister',43,591.5,183,13],['JCertAddress',350,569.8,215,13],
+  ['JCertName',350,581.8,215,13],['JCertManager',350,593.8,126,13],['JCertPhone',499,593.8,65,13],
+  ['JApplicantAddress',346,617.0,214,15],['JDelegationAddress',143,746.8,162,17],
+  ['JOnset',173,118.0,32,15],['JCause',280,117.1,281,15],['JRelation',277.5,155.0,38,14],
+  ['JWorkNote',444,147.5,105,13],['JVisitOther',389,537.1,155,11],['JRemark',449,274,112,63]
+ ])result+=pdfImageDraw(image,x,y,w,h);
+ const first=japaneseEra(info.firstTreatment);result+=txt(first.year,80,215,7.3,'center');result+=txt(first.month,103,215,7.3,'center');result+=txt(first.day,137,215,7.3,'center');
+ const consent=japaneseEra(info.consentDate);
+ // The template has a fixed preprinted 令和 in its doctor's consent field.
+ if(consent.name!=='令和')throw Error('この帳票の同意日欄は「令和」表示のみ対応しています。');
+ result+=txt(consent.year,325.3,722.2,7,'center');result+=txt(consent.month,355.3,722.2,7,'center');result+=txt(consent.day,381.3,722.2,7,'center');
+ // Use existing fixed certificate boxes; never cover the template or bank information.
+ result+=inkRing(clinic.type==='1'?402.5:470.5,555.2,5.1,5.0);
+ const postal=clinic.postal;
+ result+=txt(postal.slice(0,3),385,567.5,8,'center');result+=txt(postal.slice(4),435,567.5,8,'center');
+ const certified=certificateEra(certificateRecord().date);
+ result+=txt(certified.year,72,579.5,7.5,'center');
+ result+=txt(certified.month,106,579.5,7.5,'center');
+ result+=txt(certified.day,141,579.5,7.5,'center');
+ // Application and delegation dates are distinct events, each shown in its original form row.
+ const applied=certificateEra(certificateRecord().applicationDate);
+ result+=txt(applied.year,72,627.5,7.5,'center');
+ result+=txt(applied.month,106,627.5,7.5,'center');
+ result+=txt(applied.day,141,627.5,7.5,'center');
+ const delegated=certificateEra(certificateRecord().delegationDate);
+ result+=txt(delegated.year,383.5,744.5,7.5,'center');
+ result+=txt(delegated.month,418.5,744.5,7.5,'center');
+ result+=txt(delegated.day,451.5,744.5,7.5,'center');
+ // Applicant contact information is copied to both address fields; both signature/name lines stay blank.
+ const app=personDetails(p);
+ result+=txt(app.applicantPostal.slice(0,3),390.0,615.6,7.7,'center');
+ result+=txt(app.applicantPostal.slice(4),433.8,615.6,7.7,'center');
+ if(app.applicantPhone)result+=txt(app.applicantPhone,563.0,646.1,6.7,'right');
+ // Patient signature lines in the application/delegation blocks remain untouched.
+ for(const day of r.days)result+=visitCircle(114+14.89*(day-1),526.7);
+ // No demonstration overlay is added in v1.9; eligibility gates and PDF preflight are mandatory.
+ result+='Q\n';return result;
+}
+// Remove the known source form's embedded JavaScript *in place*.
+// Replacing each entire object with an inert dictionary and equal-length ASCII padding
+// preserves all existing xref offsets and the approved page geometry.
+function sanitizeKnownTemplate(original){
+ let raw=toRawString(original);
+ for(const [number,pattern] of [
+   [42,/42 0 obj\s*<<\/S\/JavaScript\/JS\/this\.print#28true#29>>\s*endobj/g],
+   [43,/43 0 obj\s*<<\/Names\[\(0\)\s*42 0 R\]\s*>>\s*endobj/g],
+   [44,/44 0 obj\s*<<\/JavaScript 43 0 R>>\s*endobj/g]
+ ]){
+   const matches=[...raw.matchAll(pattern)];
+   if(matches.length!==1)throw Error('元PDFのJavaScript構造が想定と異なります。出力を停止しました（番号 '+number+'）。');
+   const old=matches[0][0],neutral=`${number} 0 obj\n<<>>\nendobj`;
+   if(neutral.length>old.length)throw Error('PDF無害化の長さが不正です。');
+   raw=raw.slice(0,matches[0].index)+neutral+' '.repeat(old.length-neutral.length)+raw.slice(matches[0].index+old.length);
+ }
+ if(/\/JavaScript|\/JS\b|this\.print/.test(raw))throw Error('元PDFのJavaScriptを完全に無効化できません。');
+ const out=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)out[i]=raw.charCodeAt(i);
+ return out;
+}
+// Fixed-layout incremental PDF update. Restrict to hashed, known original to avoid
+// changing an unexpected form, and preserve original page content/font/paths exactly.
+function appendDemoPage(original,overlay,images){
+ const raw=toRawString(original);const {startXref}=checkOriginalPdfStructure(raw);
+ const pageStart=raw.indexOf('4 0 obj');const pageEnd=raw.indexOf('endobj',pageStart)+6;
+ if(pageStart<0||pageEnd<6)throw Error('ページの定義が見つかりません。');
+ const oldPage=raw.slice(pageStart,pageEnd);
+ const refs=images.map(image=>'/'+image.key+' '+image.obj+' 0 R').join('');
+ const newPage=oldPage.replace('/Contents 5 0 R','/Contents[5 0 R 47 0 R]')
+    .replace('/F5 25 0 R>>','/F5 25 0 R/FDemo 48 0 R>>')
+    .replace('/ProcSet[/PDF/Text/ImageB/ImageC/ImageI]','/ProcSet[/PDF/Text/ImageB/ImageC/ImageI]/XObject<<'+refs+'>>');
+ if(newPage===oldPage||!newPage.includes('/FDemo 48 0 R')||!newPage.includes('/XObject<<'))throw Error('元のページの書式が一致しません。');
+ const commandBytes=asciiBytes(overlay),chunks=[];let offset=0;const offsets={};
+ function push(chunk){if(typeof chunk==='string')chunk=asciiBytes(chunk);chunks.push(chunk);offset+=chunk.length}
+ function mark(obj){offsets[obj]=offset}
+ function imageObject(number,dictionary,bytes){
+   mark(number);
+   push(`${number} 0 obj\n<<${dictionary}/Length ${bytes.length}>>\nstream\n`);
+   push(bytes);push('\nendstream\nendobj\n');
+ }
+ push(original);push('\n');
+ imageObject(47,'',commandBytes);
+ mark(4);push(newPage+'\n');
+ mark(48);push('48 0 obj\n<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>\nendobj\n');
+ for(const data of images){
+   const img=data.img,base=`/Type/XObject/Subtype/Image/Width ${img.width}/Height ${img.height}/BitsPerComponent 8`;
+   imageObject(data.obj,base+`/ColorSpace/DeviceRGB/SMask ${data.maskObj} 0 R`,img.rgb);
+   imageObject(data.maskObj,base+'/ColorSpace/DeviceGray',img.alpha);
+ }
+ const xrefOffset=offset;
+ push('xref\n4 1\n'+String(offsets[4]).padStart(10,'0')+' 00000 n \n');
+ for(let obj=47;obj<=94;obj++){
+   if(!Number.isInteger(offsets[obj]))throw Error('PDF画像情報が不足しています。');
+   push(obj+' 1\n'+String(offsets[obj]).padStart(10,'0')+' 00000 n \n');
+ }
+ push('trailer\n<</Size 95/Root 1 0 R/Info 3 0 R/Prev '+startXref+'>>\nstartxref\n'+xrefOffset+'\n%%EOF\n');
+ const out=new Uint8Array(offset);let pos=0;for(const chunk of chunks){out.set(chunk,pos);pos+=chunk.length}return out;
+}
+
+async function generatePdf(){
+ const p=patient(),r=record(p),initialPatientId=selectedId,initialMonth=monthKey();
+ if(!DATA.some(person=>person.id===p.id)||!templateBytes||printEligibility(p,r)){renderPrintPanel(p,r);return}
+ const btn=el('printBtn');btn.disabled=true;btn.textContent='PDFを生成中…';
+ const error=el('pdfError');error.classList.add('screenhide');
+ try{
+   const images=japaneseProfileImages(p);
+   const cleaned=sanitizeKnownTemplate(templateBytes);
+   const bytes=appendDemoPage(cleaned,makeOverlayCommands(p,r),images);
+   if(selectedId!==initialPatientId||monthKey()!==initialMonth||printEligibility(p,r))throw Error('出力対象または確認状態が変更されました。患者と年月を選び直してください。');
+   clearGeneratedPdf();generatedUrl=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+   generatedSignature=pdfSignature(p,r);
+   const name='receipt_'+monthKey().replace('-','')+'_'+p.id+'.pdf';
+   el('pdfOpen').href=generatedUrl;el('pdfSave').href=generatedUrl;el('pdfSave').download=name;
+   el('pdfLinks').hidden=false;el('previewSlot').hidden=false;
+ }catch(e){error.textContent='PDFを生成できませんでした：'+(e?.message||'不明なエラー');error.classList.remove('screenhide')}
+ finally{renderPrintPanel(patient(),record(patient()))}
+}
+
+// v1.9: manual encrypted backups; legacy plaintext demo importer is read-only for candidate PDF eligibility.
+// v1.9 never reads or writes browser storage; old v1.8 keys remain untouched.
+let exportDirty=true, lastExportAt='', pendingImport=null, pendingImportMode='', backupSavedLabel='', archivedRevisions=[];
+// No patient data, passwords, or decryption keys are written to browser storage by this backup workflow.
+// The following verification state is session-only and clears on reload.
+let backupStage='never', sessionRestored=false, lastCreatedDataKey='', lastCreatedCipherId='', lastCreatedFileName='';
+let lastVerifiedBusinessKey='',lastVerifiedFileName='';
+let pendingFileId='', pendingFileName='', pendingFileMeta=null, encryptedCheckToken=0, legacyCheckToken=0;
+const verifiedGenerations=[];
+const monthLocks=Object.create(null);
+const BACKUP_TYPE='receipt-kantan-backup', LEGACY_BACKUP_TYPE='receipt-kantan-demo-backup', BACKUP_VERSION=15, BACKUP_MAX_BYTES=1200000;
+const formFieldNames=Object.keys(DEMO_DEFAULTS.A);
+const clinicFieldNames=Object.keys(CLINIC_DEFAULT);
+const validMonthCode=k=>/^(?:202[6-9]|203[01])-(?:0[1-9]|1[0-2])$/.test(k)&&k>='2026-07'&&k<='2031-12';
+const validRecordKey=k=>/^(?:202[6-9]|203[01])-(?:0[1-9]|1[0-2]):[ABC]$/.test(k)&&validMonthCode(k.slice(0,7));
+const deepClone=x=>JSON.parse(JSON.stringify(x));
+const nowISO=()=>new Date().toISOString();
+function isMonthLocked(){return !!monthLocks[monthKey()]?.locked}
+function renderBackupStatus(){
+ const box=el('backupStatus');if(!box)return;
+ const info=el('startupBackupNotice');
+ info.textContent=sessionRestored
+   ?'✓ この起動で保存ファイルからデータを復元しました。確認チェックは安全のため解除されています。'
+   :'⚠ この起動では暗号化バックアップをまだ復元していません。表示中の氏名や保険情報は空欄の初期値・この起動中の編集です。この画面内のデータは保存ファイルではありません。';
+ info.className='savestatus'+(sessionRestored?'':' warn');
+ const messages={
+  never:'⚠ 暗号化バックアップは、この起動では未検証です。ファイルを作成後、必ず保存先から選び直して照合してください。',
+  created:'⚠ 暗号化ファイルを作成しましたが、保存先からの読み戻しは未確認です。「保存済み」ではありません。',
+  changed:'⚠ 確認後に変更があります。最新の内容を改めて暗号化し、保存先から読み戻して照合してください。',
+  verified:'✓ 暗号化ファイルを復号し、現在の業務データと照合しました（iCloud同期・別端末での復元は未確認）。',
+  restored:'✓ この起動で暗号化ファイルを復元しました。確認チェックは解除されています。必要なら新しいバックアップを作成してください。',
+  legacy:'⚠ 旧JSONを閲覧用に復元しました。平文の旧ファイルは本番用に利用できません。'
+ };
+ box.textContent=messages[backupStage]||messages.never;
+ if(backupStage==='verified'&&!exportDirty&&lastVerifiedFileName)box.textContent+=' 照合できたファイル：'+lastVerifiedFileName;
+ if(backupStage==='verified'&&exportDirty){box.textContent=messages.changed;backupStage='changed'}
+ box.className='savestatus'+(['verified','restored'].includes(backupStage)?'':' warn');
+ renderGenerationSummary();
+}
+function renderGenerationSummary(){
+ const box=el('backupGenerationSummary');if(!box)return;
+ if(!verifiedGenerations.length){box.textContent='この起動で確認した保存ファイル：0件。少なくとも2つの異なる世代を保存先から選び直し、復号検査してください。';box.className='savestatus warn';return}
+ const rows=verifiedGenerations.slice(-4).reverse().map(x=>`${x.name.slice(0,80)}（${x.at}、識別 ${x.id.slice(0,12)}…）`);
+ const distinctContent=new Set(verifiedGenerations.map(x=>x.businessId)).size;
+ box.textContent=`この起動で復号確認した別ファイル：${verifiedGenerations.length}件／内容の異なる世代：${distinctContent}件。${distinctContent>=2?'異なる内容の2世代以上を確認しました。':'同じ内容を暗号化し直したファイルは別世代と数えません。異なる日時・内容のバックアップも検査してください。'}\n${rows.join('\n')}\n※同じファイルの再選択は件数に加えません。iCloud同期や独立保存先の確認にはなりません。`;
+ box.style.whiteSpace='pre-line';box.style.overflowWrap='anywhere';box.className='savestatus'+(distinctContent>=2?'':' warn');
+}
+// Order-independent comparison; only explicitly resettable confirmation/selection fields are omitted.
+function stableJSON(value){
+ if(Array.isArray(value))return '['+value.map(stableJSON).join(',')+']';
+ if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+stableJSON(value[k])).join(',')+'}';
+ return JSON.stringify(value);
+}
+function businessData(data){
+ const d=deepClone(data);
+ delete d.year;delete d.month;delete d.selectedId;
+ Object.values(d.records||{}).forEach(r=>{delete r.checks});
+ Object.values(d.certificates||{}).forEach(c=>{delete c.received;delete c.datesConfirmed});
+ return d;
+}
+const businessKey=data=>stableJSON(businessData(data));
+async function sha256Hex(bytes){
+ const digest=new Uint8Array(await crypto.subtle.digest('SHA-256',bytes));
+ return Array.from(digest,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function renderMonthLock(){
+ const k=monthKey(),state=monthLocks[k]||{locked:false,revision:1},locked=state.locked;
+ const count=archivedRevisions.filter(x=>x.month===k).length;
+ el('monthLockStatus').textContent=locked?`${k} は編集保護中（第${state.revision}版）。修正する場合は訂正用コピーを作成してください。`:`${k} は編集可能（第${state.revision}版・過去の版 ${count}件）。`;
+ el('lockMonthBtn').disabled=locked;el('reviseMonthBtn').disabled=!locked;
+ el('historySummary').textContent=`選択月の旧版履歴：${count}件 ／ 全月合計：${archivedRevisions.length}件（JSON書き出しに含まれます）`;
+ renderRevisionHistory();
+ // Disable just the input widgets; navigation, backup, and template selection remain available.
+ const panels=['profilePanel','settingsPanel','reviewPanel'];
+ for(const id of panels)el(id).querySelectorAll('input,select,textarea').forEach(node=>node.disabled=locked&&!['checkActual','checkInsurance','checkConsent','checkBuilding'].includes(node.id));
+ for(const id of ['resetProfile','resetClinic','restoreDates','clearDates','monthEndSuggestion'])el(id).disabled=locked;
+ el('calendar').querySelectorAll('button').forEach(node=>node.disabled=locked);
+}
+
+// v1.8: history is read-only. Read existing archivedRevisions without creating new records.
+// Selection lives only in the page; no changes to the v1.7 encrypted backup format.
+let revisionViewMonth='';
+const REVISION_PROFILE_FIELDS=[
+ ['患者・保険','name','患者氏名'],['患者・保険','kana','フリガナ'],['患者・保険','birth','生年月日'],
+ ['患者・保険','insurerNumber','保険者番号'],['患者・保険','insuredNumber','被保険者番号'],
+ ['患者・保険','insuredSymbol','被保険者記号'],['患者・保険','burdenRate','自己負担割合'],
+ ['患者・保険','applicantPostal','申請者郵便番号'],['患者・保険','applicantAddress','申請者住所'],
+ ['患者・保険','applicantPhone','申請者電話番号'],
+ ['傷病・同意','sites','同意部位'],['傷病・同意','diseases','傷病名'],['傷病・同意','symptoms','症状'],
+ ['傷病・同意','firstTreatment','初療年月日'],['傷病・同意','doctor','同意医師'],
+ ['傷病・同意','doctorAddress','同意医師住所'],['傷病・同意','consentDate','医師同意年月日'],
+ ['傷病・同意','consentPeriod','要加療期間'],
+ ['申請内容','onsetKind','発病日記入方法'],['申請内容','onsetDate','発病・負傷年月日'],
+ ['申請内容','onsetMonth','発病・負傷年月'],['申請内容','onsetCause','原因'],
+ ['申請内容','illnessCourse','経過'],['申請内容','relationship','続柄'],
+ ['申請内容','workType','業務上・第三者行為区分'],['申請内容','workNote','区分の補足'],
+ ['申請内容','claimType','請求区分'],['申請内容','outcome','転帰'],
+ ['申請内容','visitReason','訪問理由区分'],['申請内容','visitOther','訪問理由の補足'],
+ ['申請内容','remarks','摘要']
+];
+const REVISION_CLINIC_FIELDS=[['type','保健所登録区分'],['registerNo','登録番号'],['postal','施術所郵便番号'],['address','施術所住所'],['name','施術所名称'],['manager','施術管理者'],['phone','施術所電話番号']];
+const REVISION_CERT_FIELDS=[['periodMode','施術期間記載方法'],['date','施術証明日'],['applicationDate','申請日'],['delegationDate','受領委任日']];
+function revisionCellValue(v){
+ if(Array.isArray(v))return v.length?v.join('・'):'（なし）';
+ if(v===null||v===undefined||v==='')return '（空欄）';
+ return String(v);
+}
+function revisionFees(info,rec){
+ const count=Array.isArray(rec?.days)?rec.days.length:0,siteCount=Array.isArray(info?.sites)?info.sites.length:0;
+ const base=PRICES[siteCount]||0,burden=Number(info?.burdenRate);
+ if(monthKey()<'2026-07'||monthKey()>'2026-12'||count<1||count>15||![1,2].includes(burden)||!base)
+  return {unit:'対象外',total:'対象外',share:'対象外',claim:'対象外'};
+ const total=base*count,claim=Math.floor(total*(10-burden)/10);
+ return {unit:money(base),total:money(total),share:money(total-claim),claim:money(claim)};
+}
+function revisionCurrentSnapshotFor(id){
+ const fullKey=monthKey()+':'+id;
+ const p=DATA.find(x=>x.id===id);
+ // renderSidebar normally materializes current-month values; these fallbacks are only display values.
+ const d=records[fullKey]||{days:schedule(p)};
+ const profile=monthlyProfiles[fullKey]||DEMO_DEFAULTS[id];
+ const cert=certificates[fullKey]||{periodMode:'month',date:monthEndDate(),applicationDate:monthEndDate(),delegationDate:monthEndDate()};
+ return {record:d,profile,certificate:cert,clinic:monthlyClinics[monthKey()]||clinic};
+}
+function revisionPreviousSnapshot(h,id){
+ const k=h.month+':'+id,s=h.snapshot;
+ return {record:s.records[k],profile:s.profiles[k],certificate:s.certificates[k],clinic:s.clinic};
+}
+function revisionRowsFor(oldData,newData){
+ const rows=[];
+ const add=(section,label,oldValue,newValue)=>rows.push({section,label,oldText:revisionCellValue(oldValue),newText:revisionCellValue(newValue)});
+ add('施術・金額','施術日',oldData.record?.days?.map(x=>x+'日'),newData.record?.days?.map(x=>x+'日'));
+ add('施術・金額','施術回数',oldData.record?.days?.length===undefined?undefined:oldData.record.days.length+'回',newData.record?.days?.length===undefined?undefined:newData.record.days.length+'回');
+ const oldFees=revisionFees(oldData.profile,oldData.record),newFees=revisionFees(newData.profile,newData.record);
+ for(const [key,label] of [['unit','1回の料金（参考）'],['total','合計金額（参考）'],['share','一部負担金（参考）'],['claim','保険請求額（参考）']])
+  add('施術・金額',label,oldFees[key],newFees[key]);
+ for(const [section,field,label] of REVISION_PROFILE_FIELDS){
+  let before=oldData.profile?.[field],after=newData.profile?.[field];
+  if(field==='burdenRate'){before=before?before+'割':before;after=after?after+'割':after}
+  add(section,label,before,after);
+ }
+ for(const [field,label] of REVISION_CERT_FIELDS)
+  add('証明・申請日付',label,oldData.certificate?.[field],newData.certificate?.[field]);
+ for(const [field,label] of REVISION_CLINIC_FIELDS)
+  add('施術所（当月共通）',label,oldData.clinic?.[field],newData.clinic?.[field]);
+ return rows;
+}
+function renderRevisionHistory(){
+ const k=monthKey(),history=archivedRevisions.map((entry,i)=>({entry,i})).filter(x=>x.entry.month===k)
+  .sort((a,b)=>b.entry.revision-a.entry.revision||b.i-a.i);
+ const panel=el('revisionHistoryPanel'),heading=el('revisionHistoryHeading'),empty=el('revisionHistoryEmpty'),content=el('revisionHistoryContent');
+ heading.textContent=`訂正前の履歴を見る（閲覧専用・旧版${history.length}件）`;
+ if(!history.length){empty.hidden=false;empty.textContent='この月には、まだ訂正前の版が保存されていません。「編集保護」後に「訂正用コピーを作る」と、旧版がここに表示されます。';content.hidden=true;revisionViewMonth=k;return}
+ empty.hidden=true;content.hidden=false;
+ const versionSelect=el('revisionSelect'),patientSelect=el('revisionPatientSelect');
+ const selectedRevision=versionSelect.value,monthChanged=revisionViewMonth!==k;
+ versionSelect.replaceChildren();
+ for(const {entry,i} of history){
+  const option=document.createElement('option');option.value=String(i);
+  const date=new Date(entry.archivedAt);
+  const stamp=Number.isNaN(date.getTime())?'保存日時不明':date.toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  option.textContent=`第${entry.revision}版（保存 ${stamp}）`;
+  versionSelect.appendChild(option);
+ }
+ const exists=history.some(x=>String(x.i)===selectedRevision);
+ versionSelect.value=monthChanged||!exists?String(history[0].i):selectedRevision;
+ if(monthChanged||!DATA.some(p=>p.id===patientSelect.value))patientSelect.value=selectedId;
+ revisionViewMonth=k;
+ const archive=archivedRevisions[Number(versionSelect.value)];
+ if(!archive){content.hidden=true;return}
+ const id=patientSelect.value,oldData=revisionPreviousSnapshot(archive,id),newData=revisionCurrentSnapshotFor(id);
+ const rows=revisionRowsFor(oldData,newData),changed=rows.filter(x=>x.oldText!==x.newText),diffOnly=el('revisionDiffOnly').checked;
+ const revision=monthLocks[k]?.revision||1;
+ el('revisionOldTitle').textContent=`訂正前：第${archive.revision}版`;
+ el('revisionNewTitle').textContent=`現在：第${revision}版${isMonthLocked()?'（保護中）':''}`;
+ el('revisionDiffSummary').textContent=`${k}・患者${id} ／ 旧版 第${archive.revision}版と現在 第${revision}版を比較：${changed.length}項目に差異があります。${changed.length?'黄色の行が変更箇所です。':'記録が同じ内容の可能性があります。'} 旧版の閲覧によってデータは変更されません。`;
+ const body=el('revisionCompareBody');body.replaceChildren();
+ let currentSection='';
+ for(const row of rows){
+  const isChanged=row.oldText!==row.newText;
+  if(diffOnly&&!isChanged)continue;
+  if(row.section!==currentSection){
+   const header=document.createElement('tr');header.className='revision-section';
+   const th=document.createElement('th');th.colSpan=3;th.scope='colgroup';th.textContent=row.section;
+   header.appendChild(th);body.appendChild(header);currentSection=row.section;
+  }
+  const tr=document.createElement('tr');if(isChanged)tr.className='revision-changed';
+  const name=document.createElement('td');name.textContent=row.label;
+  if(isChanged){const mark=document.createElement('span');mark.className='revision-change-mark';mark.textContent='変更';name.appendChild(mark)}
+  const prior=document.createElement('td');prior.textContent=row.oldText;
+  const present=document.createElement('td');present.textContent=row.newText;
+  tr.append(name,prior,present);body.appendChild(tr);
+ }
+ if(!body.children.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=3;td.className='revision-nochange';td.textContent='この患者について、旧版と現在版の差異はありません。';tr.appendChild(td);body.appendChild(tr)}
+}
+function monthSnapshot(){
+ const k=monthKey(),byPatient=Object.create(null),byProfile=Object.create(null),byCertificate=Object.create(null);
+ for(const p of DATA){const fullKey=k+':'+p.id;byPatient[fullKey]=deepClone(record(p));byProfile[fullKey]=deepClone(personDetails(p));byCertificate[fullKey]=deepClone(certificates[fullKey]||certificateRecordFor(p.id));}
+ return {records:byPatient,profiles:byProfile,certificates:byCertificate,clinic:deepClone(clinic)};
+}
+function certificateRecordFor(id){const k=monthKey()+':'+id;return certificates[k]||(certificates[k]={periodMode:'month',date:monthEndDate(),applicationDate:monthEndDate(),delegationDate:monthEndDate(),received:false,datesConfirmed:false})}
+function lockMonth(){
+ if(isMonthLocked())return;
+ if(!confirm('この月を編集保護しますか？ 書き出したJSONから復元しないと保護は継続されません。'))return;
+ const rev=monthLocks[monthKey()]?.revision||1;
+ monthLocks[monthKey()]={locked:true,revision:rev};saveDemo();render();
+}
+function reviseMonth(){
+ const k=monthKey(),state=monthLocks[k];if(!state?.locked)return;
+ if(archivedRevisions.length>=24){alert('旧版履歴は24件が上限です。JSONへ書き出し、履歴を整理するまで追加できません。');return}
+ if(!confirm(`${k} の第${state.revision}版を履歴に残し、訂正用コピーを作成しますか？ チェック済み状態は解除されます。`))return;
+ archivedRevisions.push({month:k,revision:state.revision,archivedAt:nowISO(),snapshot:monthSnapshot()});
+ monthLocks[k]={locked:false,revision:state.revision+1};
+ for(const p of DATA){record(p).checks=[false,false,false];delete sameBuildingReview[key(p.id)];const c=certificateRecordFor(p.id);c.received=false;c.datesConfirmed=false}
+ saveDemo();clearGeneratedPdf();render();
+}
+function snapshotData(){
+ // Snapshot includes only deliberately created month-specific entries; no PDF bytes.
+ return {year,month,selectedId,records:deepClone(records),monthlyProfiles:deepClone(monthlyProfiles),monthlyClinics:deepClone(monthlyClinics),certificates:deepClone(certificates),monthLocks:deepClone(monthLocks),archivedRevisions:deepClone(archivedRevisions)};
+}
+function backupPayload(){return {type:BACKUP_TYPE,schemaVersion:BACKUP_VERSION,demoOnly:false,exportedAt:nowISO(),data:snapshotData()}}
+function downloadText(value,filename){
+ const url=URL.createObjectURL(new Blob([value],{type:'application/json;charset=utf-8'}));
+ const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+// v1.4 encrypted backup: Web Crypto only; no keys/passwords in browser storage.
+const ENVELOPE_TYPE='receipt-kantan-encrypted', LEGACY_ENVELOPE_TYPE='receipt-kantan-encrypted-demo', ENVELOPE_VERSION=1;
+const KDF_ITERATIONS=600000, ENC_FILE_MAX_BYTES=1850000;
+const AAD_TEXT='receipt-kantan-encrypted|v1|AES-256-GCM|PBKDF2-HMAC-SHA256|600000';
+const LEGACY_AAD_TEXT='receipt-kantan-encrypted-demo|v1|AES-256-GCM|PBKDF2-HMAC-SHA256|600000';
+let importedLegacyDemo=false, pendingImportIsDemo=false;
+const UTF8=new TextEncoder();
+const decodeUTF8=new TextDecoder('utf-8',{fatal:true});
+const cryptoReady=()=>window.isSecureContext&&!!(window.crypto&&window.crypto.subtle&&window.crypto.getRandomValues);
+function updateCryptoSupport(){
+ const box=el('cryptoSupport');
+ const ready=cryptoReady();
+ box.textContent=ready?'✓ このページではブラウザーの暗号化APIを利用できます。暗号化の成功や保存先の保護は、別途確認が必要です。':'⚠ 暗号化機能が利用できません。HTTPSのGitHub PagesをSafariで開いてください。';
+ box.className='savestatus'+(ready?'':' fail');
+ el('exportDemo').disabled=!ready;el('decryptCheckBtn').disabled=!ready;
+}
+function toB64(bytes){
+ let s='';for(let i=0;i<bytes.length;i+=16384)s+=String.fromCharCode(...bytes.subarray(i,i+16384));
+ return btoa(s);
+}
+function fromB64(s,maxBytes){
+ if(typeof s!=='string'||!s.length||s.length>Math.ceil(maxBytes/3)*4+8||!/^[A-Za-z0-9+/]+={0,2}$/.test(s)||s.length%4!==0)throw Error('暗号データが不正です。');
+ const bin=atob(s);if(bin.length>maxBytes)throw Error('ファイルが大きすぎます。');
+ const out=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)out[i]=bin.charCodeAt(i);
+ if(toB64(out)!==s)throw Error('暗号データの形式が不正です。');return out;
+}
+function aesParams(iv,aad=AAD_TEXT){return {name:'AES-GCM',iv,additionalData:UTF8.encode(aad),tagLength:128}}
+async function passwordKey(password,salt){
+ const base=await crypto.subtle.importKey('raw',UTF8.encode(password),'PBKDF2',false,['deriveKey']);
+ return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:KDF_ITERATIONS,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+function checkEncryptedEnvelope(o){
+ if(!o||typeof o!=='object'||Array.isArray(o)||![ENVELOPE_TYPE,LEGACY_ENVELOPE_TYPE].includes(o.format)||o.version!==ENVELOPE_VERSION||o.cipher!=='AES-256-GCM'||o.kdf!=='PBKDF2-HMAC-SHA256'||o.iterations!==KDF_ITERATIONS)throw Error('対応する暗号化ファイルではありません。');
+ const salt=fromB64(o.salt,16),iv=fromB64(o.iv,12),cipher=fromB64(o.ciphertext,BACKUP_MAX_BYTES+4000);
+ if(salt.length!==16||iv.length!==12||cipher.length<17)throw Error('暗号データの長さが不正です。');
+ return {salt,iv,cipher,aad:o.format===LEGACY_ENVELOPE_TYPE?LEGACY_AAD_TEXT:AAD_TEXT};
+}
+async function makeEncryptedBackup(password){
+ const payload=backupPayload();const raw=JSON.stringify(payload);
+ if(UTF8.encode(raw).byteLength>BACKUP_MAX_BYTES)throw Error('データが大きすぎます（暗号化前1.2MB以下）。');
+ const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+ const key=await passwordKey(password,salt);
+ const cipher=new Uint8Array(await crypto.subtle.encrypt(aesParams(iv),key,UTF8.encode(raw)));
+ return {format:ENVELOPE_TYPE,version:ENVELOPE_VERSION,appVersion:'1.9',encryptedAt:nowISO(),cipher:'AES-256-GCM',kdf:'PBKDF2-HMAC-SHA256',iterations:KDF_ITERATIONS,salt:toB64(salt),iv:toB64(iv),ciphertext:toB64(cipher)};
+}
+async function decryptBackupEnvelope(envelope,password){
+ const {salt,iv,cipher,aad}=checkEncryptedEnvelope(envelope);
+ const key=await passwordKey(password,salt);
+ let plain;
+ try{plain=await crypto.subtle.decrypt(aesParams(iv,aad),key,cipher)}catch(_){throw Error('復号できません。パスワードの相違、またはファイル破損・改ざんの可能性があります。')}
+ const decoded=decodeUTF8.decode(plain);
+ return validateBackupObject(JSON.parse(decoded));
+}
+async function exportBackup(){
+ const btn=el('exportDemo'),box=el('cryptoExportStatus');
+ if(!cryptoReady()){box.textContent='暗号化APIが使えません。HTTPSで開いてください。';box.className='savestatus fail';return}
+  if(importedLegacyDemo){box.textContent='旧版の試験用バックアップを復元中です。本番用として保存せず、必要な試験後に初期化してください。';box.className='savestatus fail';return}
+ let password=el('exportPassword').value,confirmPassword=el('exportPasswordConfirm').value;
+ if(password.length<16||password.length>256){box.textContent='保存用パスワードは16〜256文字で入力してください。';box.className='savestatus fail';return}
+ if(password!==confirmPassword){box.textContent='確認用パスワードが一致しません。';box.className='savestatus fail';return}
+ // Save the exact business-data snapshot that this export is based on.
+ const expectedBusiness=businessKey(snapshotData());
+ btn.disabled=true;btn.textContent='暗号化中…';
+ box.textContent='暗号化しています。ファイルの保存先への書き込みは、この画面から確認できません。';box.className='savestatus warn';
+ try{
+   const envelope=await makeEncryptedBackup(password),encoded=JSON.stringify(envelope,null,2);
+   if(UTF8.encode(encoded).byteLength>ENC_FILE_MAX_BYTES)throw Error('暗号化ファイルが大きすぎます。');
+   const stamp=new Date().toISOString().replace(/[:.]/g,'-');
+   const random=Array.from(crypto.getRandomValues(new Uint8Array(4)),x=>x.toString(16).padStart(2,'0')).join('');
+   const filename='receipt-ENCRYPTED-v1.9-'+monthKey()+'-'+stamp+'-'+random+'.json';
+   downloadText(encoded,filename);
+   lastCreatedFileName=filename;
+   lastCreatedDataKey=expectedBusiness;
+   lastCreatedCipherId=await sha256Hex(UTF8.encode(envelope.ciphertext));
+   lastExportAt=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+   // Crucial: clicking Download does NOT imply that a file was saved or checked.
+   exportDirty=true;backupStage=businessKey(snapshotData())===expectedBusiness?'created':'changed';
+   backupSavedLabel='ファイル生成のみ（保存先未確認）';
+   box.textContent='⚠ 暗号化ファイルの作成を開始しました。iPadの「ファイル」に実際に保存されているか確認し、②で同じファイルを選んで復号・内容照合してください。';
+   box.className='savestatus warn';renderBackupStatus();
+ }catch(e){box.textContent='暗号化に失敗しました：'+(e?.message||'不明なエラー');box.className='savestatus fail';exportDirty=true;backupStage='changed';renderBackupStatus()}
+ finally{password='';confirmPassword='';el('exportPassword').value='';el('exportPasswordConfirm').value='';btn.textContent='暗号化JSONを作成する';btn.disabled=!cryptoReady()}
+}
+let encryptedInputData=null;
+function resetEncryptedPreview(message='暗号化ファイルを選んでからパスワードを入力し、検査してください。'){
+ encryptedCheckToken++;pendingImport=null;pendingImportMode='';encryptedInputData=null;
+ pendingFileId='';pendingFileName='';pendingFileMeta=null;
+ el('importEncryptedCommit').disabled=true;
+ const box=el('encryptedImportPreview');box.textContent=message;box.className='savestatus warn';
+}
+async function prepareEncryptedImport(){
+ const file=el('encryptedFile').files?.[0],box=el('encryptedImportPreview'),btn=el('decryptCheckBtn');
+ resetEncryptedPreview();const checkToken=encryptedCheckToken;
+ let password=el('decryptPassword').value;
+ if(!cryptoReady()){box.textContent='ブラウザーの暗号化機能が使えません。';box.className='savestatus fail';return}
+ if(!file){box.textContent='暗号化ファイルを選んでください。';box.className='savestatus fail';return}
+ if(file.size>ENC_FILE_MAX_BYTES||file.size<100){box.textContent='暗号化ファイルのサイズが不正です。';box.className='savestatus fail';return}
+ if(!password){box.textContent='保存時のパスワードを入力してください。';box.className='savestatus fail';return}
+ btn.disabled=true;btn.textContent='復号・検査中…';box.textContent='復号し、全データの形式と照合を検査しています。現在の入力内容は変更しません。';box.className='savestatus warn';
+ try{
+  const raw=await file.text(),envelope=JSON.parse(raw);
+  const imported=await decryptBackupEnvelope(envelope,password);
+  const data=imported.data, legacyDemo=imported.legacyDemo;
+  const fileId=await sha256Hex(UTF8.encode(envelope.ciphertext));
+  const businessId=await sha256Hex(UTF8.encode(businessKey(data)));
+  // Ignore stale async results if the user selected another file while processing.
+  if(checkToken!==encryptedCheckToken||file!==el('encryptedFile').files?.[0])return;
+  pendingImport=data;pendingImportMode='encrypted';pendingImportIsDemo=legacyDemo;encryptedInputData=envelope;
+  pendingFileId=fileId;pendingFileName=file.name;
+  pendingFileMeta={encryptedAt:envelope.encryptedAt||'',appVersion:envelope.appVersion||'1.4'};
+  const exact=stableJSON(data)===stableJSON(snapshotData());
+  const same=businessKey(data)===businessKey(snapshotData());
+  const isCreatedArchive=!!lastCreatedCipherId&&lastCreatedCipherId===fileId;
+  if(!verifiedGenerations.some(x=>x.id===fileId)){
+   verifiedGenerations.push({id:fileId,businessId,name:file.name,at:new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})});
+   if(verifiedGenerations.length>12)verifiedGenerations.shift();
+  }
+  if(same){
+   backupStage='verified';exportDirty=false;lastVerifiedBusinessKey=businessKey(data);lastVerifiedFileName=file.name;
+   backupSavedLabel='保存先の選択ファイルと業務データを照合済み';
+  }else if(backupStage==='created'){
+   backupStage='changed';exportDirty=true;
+  }
+  const n=Object.keys(data.records).length,profiles=Object.keys(data.monthlyProfiles).length;
+  const summary=exact?'完全一致（選択中の年月と確認状態を含む）':same?'業務データ一致（画面の選択状態・復元時に解除する確認チェック等は別）':'現在の入力内容とは異なります（古い世代なら正常）';
+  box.textContent=`✓ 保存先から選んだファイルの復号・形式検査が成功しました。施術記録 ${n}件、月別患者情報 ${profiles}件。照合結果：${summary}。${legacyDemo?'【旧Ver.1.8試験専用ファイル：復元後も正式PDFは出力不可】':''}${isCreatedArchive?'今回作成したファイルと識別情報も一致。':'今回この起動で作成したファイルとは別の世代です。'} 復元するまでは入力内容は変更しません。`;
+  box.className='savestatus';el('importEncryptedCommit').disabled=false;
+  renderBackupStatus();
+ }catch(e){if(checkToken===encryptedCheckToken){box.textContent='復号・検査に失敗：'+(e?.message||'暗号化ファイルを確認できません');box.className='savestatus fail';}}
+ finally{password='';if(checkToken===encryptedCheckToken){el('decryptPassword').value='';btn.textContent='ファイルを復号して内容を検査';btn.disabled=!cryptoReady()}}
+}
+function validateBackupObject(o){
+ const legacyDemo=!!o&&o.type===LEGACY_BACKUP_TYPE&&[13,14].includes(o.schemaVersion)&&o.demoOnly===true;
+ const newBackup=!!o&&o.type===BACKUP_TYPE&&o.schemaVersion===BACKUP_VERSION&&o.demoOnly===false;
+ if(!legacyDemo&&!newBackup)throw Error('対応する暗号化バックアップ形式ではありません。');
+ if(!o.data||typeof o.data!=='object')throw Error('バックアップの内容が不正です。');
+ const d=o.data,records=d.records,profiles=d.monthlyProfiles,clinics=d.monthlyClinics,certs=d.certificates,locks=d.monthLocks,history=d.archivedRevisions;
+ if(!validSaved({version:10,year:d.year,month:d.month,selectedId:d.selectedId,records}))throw Error('施術日のデータが不正です。');
+ const isMap=x=>x&&typeof x==='object'&&!Array.isArray(x);
+ if(![profiles,clinics,certs,locks].every(isMap)||!Array.isArray(history))throw Error('保存ファイルの構造が不正です。');
+ const profEntries=Object.entries(profiles);if(profEntries.length>198)throw Error('患者データが多すぎます。');
+ for(const [k,p] of profEntries){
+  if(!validRecordKey(k)||!isMap(p))throw Error('患者データの月または形式が不正です。');
+  const expected=DEMO_DEFAULTS[k.slice(-1)];
+  if(!Object.keys(expected).every(f=>Object.hasOwn(p,f)))throw Error('患者項目が欠けています。');
+  if(!Array.isArray(p.sites)||p.sites.length>5||new Set(p.sites).size!==p.sites.length||p.sites.some(z=>!SITE_NAMES.includes(z)))throw Error('同意部位が不正です。');
+  for(const f of formFieldNames){if(f==='sites')continue;if(typeof p[f]!=='string'||p[f].length>220)throw Error('入力項目の長さまたは型が不正です：'+f)}
+ }
+ if(Object.entries(clinics).length>66)throw Error('月別共通情報が多すぎます。');
+ for(const [k,c] of Object.entries(clinics)){
+  if(!validMonthCode(k)||!isMap(c)||!clinicFieldNames.every(f=>typeof c[f]==='string'&&c[f].length<=100))throw Error('共通施術者情報が不正です。');
+ }
+ if(Object.entries(certs).length>198)throw Error('月別日付が多すぎます。');
+ for(const [k,c] of Object.entries(certs)){
+  if(!validRecordKey(k)||!isMap(c)||!['month','actual'].includes(c.periodMode)||!['date','applicationDate','delegationDate'].every(f=>typeof c[f]==='string'&&validCertificateDate(c[f]))||typeof c.received!=='boolean'||typeof c.datesConfirmed!=='boolean')throw Error('証明日付データが不正です。');
+ }
+ if(Object.entries(locks).length>66)throw Error('編集保護データが多すぎます。');
+ for(const [k,v] of Object.entries(locks))if(!validMonthCode(k)||!isMap(v)||typeof v.locked!=='boolean'||!Number.isInteger(v.revision)||v.revision<1||v.revision>99)throw Error('編集保護データが不正です。');
+ if(history.length>24)throw Error('旧版の履歴が多すぎます。');
+ for(const h of history)if(!isMap(h)||!validMonthCode(h.month)||!Number.isInteger(h.revision)||h.revision<1||h.revision>99||typeof h.archivedAt!=='string'||!isMap(h.snapshot)||!isMap(h.snapshot.records)||!isMap(h.snapshot.profiles)||!isMap(h.snapshot.certificates)||!isMap(h.snapshot.clinic))throw Error('履歴の形式が不正です。');
+ // Return a sanitized deep copy; no prototype-sensitive merge or eval is used.
+ return {data:deepClone(d),legacyDemo};
+}
+async function prepareBackupImport(file){
+ legacyCheckToken++;const token=legacyCheckToken;pendingImport=null;pendingImportMode='';el('importEncryptedCommit').disabled=true;el('importDemoCommit').disabled=true;
+ const box=el('importPreview');
+ if(!file){box.textContent='ファイルを選択してください。';box.className='savestatus warn';return}
+ if(file.size>BACKUP_MAX_BYTES){box.textContent='ファイルが大きすぎます（1.2MB以下）。';box.className='savestatus fail';return}
+ try{
+  const raw=await file.text();const checked=validateBackupObject(JSON.parse(raw));const data=checked.data;
+  if(token!==legacyCheckToken||file!==el('importDemoFile').files?.[0])return;
+  pendingImport=data;pendingImportMode='legacy';pendingImportIsDemo=true;
+  const count=Object.keys(data.records).length,profilesCount=Object.keys(data.monthlyProfiles).length;
+  box.textContent=`✓ 旧JSONの内容を検査しました。施術記録 ${count}件、月別患者情報 ${profilesCount}件、旧版履歴 ${data.archivedRevisions.length}件。読み込むと今の画面内容と入れ替わります。`;
+  box.className='savestatus';el('importDemoCommit').disabled=false;
+ }catch(e){box.textContent='読み込み不可：'+(e?.message||'不正なJSON');box.className='savestatus fail'}
+}
+function applyBackupData(d){
+ // Prevalidated, cloned structures are installed as a group. This routine is also used for rollback.
+ records=Object.assign(Object.create(null),deepClone(d.records));
+ for(const r of Object.values(records))r.checks=[false,false,false];
+ for(const k of Object.keys(monthlyProfiles))delete monthlyProfiles[k];
+ for(const [k,v] of Object.entries(d.monthlyProfiles))monthlyProfiles[k]=cloneDemo(v);
+ for(const k of Object.keys(monthlyClinics))delete monthlyClinics[k];
+ for(const [k,v] of Object.entries(d.monthlyClinics))monthlyClinics[k]={...v};
+ for(const k of Object.keys(certificates))delete certificates[k];
+ for(const [k,v] of Object.entries(d.certificates))certificates[k]={...v,received:false,datesConfirmed:false};
+ for(const k of Object.keys(monthLocks))delete monthLocks[k];
+ for(const [k,v] of Object.entries(d.monthLocks))monthLocks[k]={...v};
+ archivedRevisions=deepClone(d.archivedRevisions);year=d.year;month=d.month;selectedId=d.selectedId;
+ clinic=clinicForMonth();screen='calendar';clearGeneratedPdf();
+}
+function importBackup(){
+ if(!pendingImport)return;
+ if(!confirm('現在の画面のデータを、検査済みバックアップで置き換えますか？ 未書き出しの変更は戻せません。'+(pendingImportIsDemo?'\n旧版の架空バックアップのため、本番候補PDFは出力できません。':'')))return;
+ const d=deepClone(pendingImport),mode=pendingImportMode;
+ const original=snapshotData(),originalSession=sessionRestored,oldStage=backupStage,oldDirty=exportDirty,oldDemo=importedLegacyDemo;
+ try{
+   applyBackupData(d);
+   // v1.9: never write any patient or treatment data into browser storage.
+   importedLegacyDemo=pendingImportIsDemo;pendingImportIsDemo=false;storageLocked=false;saveDemo(false);
+   sessionRestored=true;backupStage=mode==='encrypted'?'restored':'legacy';exportDirty=mode!=='encrypted';
+   lastVerifiedBusinessKey=mode==='encrypted'?businessKey(d):'';lastVerifiedFileName=mode==='encrypted'?(pendingFileName||'読み込んだ暗号化ファイル'):'';
+   lastExportAt=mode==='encrypted'?'暗号化バックアップから復元':'旧JSONから読み込み';
+   backupSavedLabel=mode==='encrypted'?'読み込んだ暗号化ファイルから復元':'旧JSONは未暗号化・試験データです。本番用には移行できません';
+   pendingImport=null;pendingImportMode='';encryptedInputData=null;pendingFileId='';pendingFileName='';pendingFileMeta=null;
+   el('importDemoFile').value='';el('importDemoCommit').disabled=true;el('encryptedFile').value='';el('importEncryptedCommit').disabled=true;
+   for(const k of Object.keys(sameBuildingReview))delete sameBuildingReview[k];
+   el('encryptedImportPreview').textContent='✓ 検査済みデータを復元しました。'+(importedLegacyDemo?' 旧版の架空試験データのためPDFは出力できません。':'');
+   el('importPreview').textContent='✓ 復元しました。確認チェックは解除しています。元PDFは必要に応じて再選択してください。';
+   render();
+ }catch(e){
+   try{applyBackupData(original);sessionRestored=originalSession;backupStage=oldStage;exportDirty=oldDirty;importedLegacyDemo=oldDemo;render()}catch(_){}
+   const box=el('encryptedImportPreview');box.textContent='復元に失敗しました。元の入力内容への復旧を試みました：'+(e?.message||'不明なエラー');box.className='savestatus fail';
+ }
+}
+el('templateFile').addEventListener('change',e=>loadPdfFile(e.target.files?.[0]));
+function render(){const p=patient(),r=record(p);renderSidebar();el('patientTitle').textContent=p.label;el('patientCaption').textContent=year+'年'+(month+1)+'月分 ／ 定期訪問：'+p.days.map(d=>DOW[d]+'曜').join('・');for(const x of ['calendar','review','profile','settings','print']){const id=x==='calendar'?'Calendar':x==='review'?'Review':x==='profile'?'Profile':x==='settings'?'Settings':'Print';el('tab'+id).classList.toggle('active',screen===x);el('tab'+id).setAttribute('aria-selected',String(screen===x));el(x==='print'?'printPanel':x+'Panel').classList.toggle('screenhide',screen!==x)}renderCalendar(p,r);renderReview(p,r);renderProfile(p);renderClinic(r);renderPrintPanel(p,r);renderBackupStatus();renderMonthLock()}
+function setMonth(yy,mm){const next=yy*12+(mm-1);if(!Number.isInteger(yy)||!Number.isInteger(mm)||mm<1||mm>12||next<MIN||next>MAX)return false;year=yy;month=mm-1;clinic=clinicForMonth();screen='calendar';clearGeneratedPdf();saveDemo();render();return true}
+function changeMonth(delta){const next=year*12+month+delta;if(next<MIN||next>MAX)return;setMonth(Math.floor(next/12),next%12+1)}
+function setScreen(value){screen=value;render()}
+for(let y=2026;y<=2031;y++){const opt=document.createElement('option');opt.value=String(y);opt.textContent=y+'年';el('jumpYear').appendChild(opt)}for(let m=1;m<=12;m++){const opt=document.createElement('option');opt.value=String(m);opt.textContent=m+'月';el('jumpMonth').appendChild(opt)}
+el('jumpYear').addEventListener('change',()=>{const earliest=el('jumpYear').value==='2026';el('jumpMonth').querySelectorAll('option').forEach(o=>{o.disabled=earliest&&Number(o.value)<7});if(earliest&&Number(el('jumpMonth').value)<7)el('jumpMonth').value='7';});
+el('jumpGo').addEventListener('click',()=>{if(!setMonth(Number(el('jumpYear').value),Number(el('jumpMonth').value)))alert('試験用の対象年月は2026年7月〜2031年12月です。')});
+el('prevMonth').addEventListener('click',()=>changeMonth(-1));el('nextMonth').addEventListener('click',()=>changeMonth(1));el('tabCalendar').addEventListener('click',()=>setScreen('calendar'));el('tabReview').addEventListener('click',()=>setScreen('review'));el('tabPrint').addEventListener('click',()=>setScreen('print'));el('tabSettings').addEventListener('click',()=>setScreen('settings'));el('tabProfile').addEventListener('click',()=>setScreen('profile'));el('goReview').addEventListener('click',()=>setScreen('review'));el('backCalendar').addEventListener('click',()=>setScreen('calendar'));el('goPrint').addEventListener('click',()=>setScreen('print'));el('backReview').addEventListener('click',()=>setScreen('review'));el('profileToPrint').addEventListener('click',()=>setScreen('print'));el('clinicToPrint').addEventListener('click',()=>setScreen('print'));
+['profileName','profileKana','profileBirth','applicantPostal','applicantAddress','applicantPhone','insurerNumber','insuredNumber','insuredSymbol','treatmentDiseases','treatmentSymptoms','firstTreatment','consentDoctor','consentAddress','consentDate','consentPeriod'].concat(ADDITIONAL_FIELDS.map(pair=>pair[1])).forEach(id=>el(id).addEventListener('input',updateProfile));
+ document.querySelectorAll('[data-consent-site]').forEach(e=>e.addEventListener('change',updateProfile));
+el('burdenRate').addEventListener('change',updateProfile);
+ for(const id of ['onsetKind','relationship','workType','claimType','outcome','visitReason'])el(id).addEventListener('change',updateProfile);
+for(const id of ['clinicRegisterNo','clinicPostal','clinicAddress','clinicName','clinicManager','clinicPhone'])el(id).addEventListener('input',updateClinic);
+el('clinicRegistrationType').addEventListener('change',updateClinic);
+for(const id of ['certificateDate','applicationDate','delegationDate'])el(id).addEventListener('change',()=>{el('documentDatesConfirmed').checked=false;updateCertificate()});
+document.querySelectorAll('input[name="periodMode"]').forEach(e=>e.addEventListener('change',()=>{el('documentDatesConfirmed').checked=false;updateCertificate()}));
+el('certificateReceipt').addEventListener('change',updateCertificate);
+el('documentDatesConfirmed').addEventListener('change',updateCertificate);
+el('monthEndSuggestion').addEventListener('click',()=>{if(isMonthLocked())return;for(const id of ['certificateDate','applicationDate','delegationDate'])el(id).value=monthEndDate();el('documentDatesConfirmed').checked=false;updateCertificate();renderClinic(record(patient()))});
+el('resetClinic').addEventListener('click',()=>{if(isMonthLocked())return;Object.assign(clinic,CLINIC_DEFAULT);clearConfirmationAll();clearBuildingForCurrentMonth();for(const [k,c] of Object.entries(certificates))if(k.startsWith(monthKey()+':'))c.datesConfirmed=false;saveDemo();clearGeneratedPdf();render()});
+el('resetProfile').addEventListener('click',()=>{if(isMonthLocked())return;monthlyProfiles[key(selectedId)]=cloneDemo(DEMO_DEFAULTS[selectedId]);record(patient()).checks=[false,false,false];delete sameBuildingReview[key(selectedId)];saveDemo();clearGeneratedPdf();render()});
+el('restoreDates').addEventListener('click',()=>{if(isMonthLocked())return;const r=record(patient());r.days=schedule(patient());r.checks=[false,false,false];invalidateAfterVisitEdit();saveDemo();render()});el('clearDates').addEventListener('click',()=>{if(isMonthLocked())return;const r=record(patient());r.days=[];r.checks=[false,false,false];invalidateAfterVisitEdit();saveDemo();render()});
+['checkActual','checkInsurance','checkConsent'].forEach((id,i)=>el(id).addEventListener('change',e=>{const r=record(patient());r.checks[i]=e.target.checked;saveDemo();render()}));
+ el('checkBuilding').addEventListener('change',e=>{const p=patient(),r=record(p);if(e.target.checked)sameBuildingReview[key(p.id)]=buildingAuditSignature(p,r);else delete sameBuildingReview[key(p.id)];clearGeneratedPdf();renderReview(p,r);renderPrintPanel(p,r);});
+el('reset').addEventListener('click',()=>{
+ if(!confirm('この画面内の患者情報・施術日・履歴をすべて初期化しますか？ 暗号化JSONに保存していない変更は戻せません。Ver.1.8の保存データは削除しません。'))return;
+ storageLocked=false;storage=null;records=Object.create(null);year=2026;month=10;selectedId='A';screen='calendar';exportDirty=true;importedLegacyDemo=false;pendingImportIsDemo=false;
+ for(const k of Object.keys(sameBuildingReview))delete sameBuildingReview[k];
+ backupStage='never';sessionRestored=false;lastCreatedDataKey='';lastCreatedCipherId='';lastCreatedFileName='';lastVerifiedBusinessKey='';lastVerifiedFileName='';
+ verifiedGenerations.length=0;encryptedCheckToken++;legacyCheckToken++;
+ lastExportAt='';backupSavedLabel='';pendingImport=null;pendingImportMode='';encryptedInputData=null;
+ el('encryptedFile').value='';el('decryptPassword').value='';el('exportPassword').value='';el('exportPasswordConfirm').value='';
+ el('importEncryptedCommit').disabled=true;el('importDemoCommit').disabled=true;resetEncryptedPreview('初期化しました。暗号化ファイルを復元する場合は選び直してください。');
+ for(const k of Object.keys(monthlyProfiles))delete monthlyProfiles[k];for(const k of Object.keys(monthlyClinics))delete monthlyClinics[k];
+ clinic=clinicForMonth();for(const k of Object.keys(certificates))delete certificates[k];for(const k of Object.keys(monthLocks))delete monthLocks[k];archivedRevisions=[];
+ clearGeneratedPdf();saveDemo(false);render();
+});
+el('printBtn').addEventListener('click',generatePdf);
+el('exportDemo').addEventListener('click',exportBackup);
+el('encryptedFile').addEventListener('change',()=>{el('decryptPassword').value='';resetEncryptedPreview()});
+el('decryptPassword').addEventListener('input',()=>resetEncryptedPreview('パスワードを入力したら「ファイルを復号して内容を検査」を押してください。'));
+el('decryptCheckBtn').addEventListener('click',prepareEncryptedImport);
+el('importEncryptedCommit').addEventListener('click',importBackup);
+el('importDemoFile').addEventListener('change',e=>prepareBackupImport(e.target.files?.[0]));
+el('importDemoCommit').addEventListener('click',importBackup);
+el('lockMonthBtn').addEventListener('click',lockMonth);
+el('reviseMonthBtn').addEventListener('click',reviseMonth);
+el('revisionSelect').addEventListener('change',renderRevisionHistory);
+el('revisionPatientSelect').addEventListener('change',renderRevisionHistory);
+el('revisionDiffOnly').addEventListener('change',renderRevisionHistory);
+window.addEventListener('beforeunload',e=>{if(exportDirty&&Object.keys(monthlyProfiles).length){e.preventDefault();e.returnValue='';}});
+initializeStorage();clinic=clinicForMonth();render();updateCryptoSupport();
+})();
+</script>
+</body>
+</html>
